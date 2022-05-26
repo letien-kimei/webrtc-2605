@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  <script defer src="https://unpkg.com/peerjs@1.2.0/dist/peerjs.min.js"></script>
+  <link rel="stylesheet" href="../../css/style.css" >
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>Call</title>
+</head>
+<body style="background: #383838;">
+  <div class="container">
+    <div id="video-grid" class="row">
+      <input type="hidden" id="my-peer" value="">
+      <div class="col-md-9" id="client_can_change">
+          <div id="video_client_can_change"></div>
+          <div class="groupBtn" style="display: none;">
+              <button type="button" class="btn btnAccess openvoice" onclick="onOffVoice(this)"><i data-audio="true" class="fas fa-microphone"></i></button>
+              <button type="button" class="btn btnAccess sharescreen"><i class="fas fa-desktop"></i></button>
+              <button type="button" class="btn btnAccess closestream"><i class="fas fa-sign-out-alt"></i></button>
+          </div>          
+      </div>
+      <div class="col-md-3"  id="remote_client">
+
+      </div>
+    </div>
+  </div>
+</body>
+<% var tempuserid = 0 %>
+<%if (user) { %>
+  <% var tempuserid = user['id'] %>
+<% }%>
+
+<script> 
+let user_id  = parseInt("<%= tempuserid %>"); 
+let remoteId = "<%= call_to_room %>"; 
+</script> 
+<link rel="stylesheet" href="../../lib/advanced-bootstrap-toast/css/bs4Toast.css" >
+<script src="../../lib/advanced-bootstrap-toast/js/bs4-toast.js" defer></script>
+<script src="/socket.io/socket.io.js" defer></script>
+<script src="../../socket-global.js" defer></script>
+<script src="../../script.js" defer></script> 
+<script src="../../commingcall.js" defer></script>
+<!-- <script src="../../global-oncall.js" defer></script> -->
+</html>
