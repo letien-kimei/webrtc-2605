@@ -3,8 +3,6 @@ const videoGrid = document.getElementById('video-grid')
 const client_can_change = document.getElementById('client_can_change')
 const remote_client = document.getElementById('remote_client')
 const video_client_can_change = document.getElementById('video_client_can_change')
-const myVideo = document.createElement('video')
-myVideo.muted = true
 let Globalclients = {}
 let currentPeerID = remotePeerID =""
 let stream = {}
@@ -17,62 +15,85 @@ peer.on('open', peer_id => {
 
 function startJoinCall(user_id,peer_id) { 
   let peerid_current_user = peer_id;
-  socket.emit('get_users', user_id, peerid_current_user, remoteId)
+  socket.emit('get_myinfo', user_id, peerid_current_user, roomId)
 }
 
-socket.on('receive_users',  async (clients,current_or_remote_user_id) => {
-    await getGlobalClients(clients,current_or_remote_user_id)
+socket.on('receive_myinfo',  async (clients) => {
+    await createMyVideo(clients)
+    socket.emit('get_users_in_room', user_id, roomId)
+})
+
+socket.on('test',  async (clients) => {
+  console.log("================== test ===================");
+  console.log(clients);  
+})
+
+socket.on('receive_user_in_room',  async (clients) => {
+  console.log("================== receive_user_in_room ===================");
+  console.log(clients);  
+  await createMyVideo(clients)
 })
 
 // GLOBAL CLIENTS (thông tin client sẽ lưu vào đây)
-function getGlobalClients(clients, current_or_remote_user_id) {
+function createMyVideo(clients) {
   debugger;
   return new Promise((resolve, reject) => {
     openStream()
     .then(stream => {
-      Globalclients = Object.assign({}, Globalclients, clients);
-      debugger
-      if(current_or_remote_user_id != user_id){  // không phải current hiện tại
+      let firskey = Object.keys(clients)[0]
+      Globalclients = Object.assign({}, clients,Globalclients);
+      Globalclients[firskey].stream = stream;
+      debugger;
+      if(Globalclients[firskey].user_id != user_id) {
+        console.log("================== Globalclients[firskey].user_id != user_id ===================");
+        console.log(Globalclients[firskey]);  
         debugger
-        remotePeerID = clients[current_or_remote_user_id].peer_id
+        remotePeerID = Globalclients[firskey].peer_id
+        debugger
         const call = peer.call(remotePeerID, stream);
         debugger
          // tại B: lấy video của A
-        call.on('stream', function(remoteStream){
-          Globalclients[current_or_remote_user_id].stream = remoteStream ;
+          call.on('stream', function(remoteStream){
+          Globalclients[firskey].stream = remoteStream ;
           managementVideo()
         });
       }else{
-        debugger
-        Globalclients[current_or_remote_user_id].stream = stream;
-        debugger;
+        console.log("================== Globalclients[firskey].user_id == user_id ===================");
+        console.log(Globalclients[firskey]);  
         managementVideo()
       }
-       
-        resolve({ type: "success"})
+      debugger;
+     
+      resolve({ type: "success"})
     });
   });
 }
 
 //=========== MANAGEMENT LIST USER VIDEO ==========
 async function managementVideo(){
-  $("#remote_client").html("")
   for (var key in Globalclients) {
-      let stream         = Globalclients[key].stream;
-      let userid         = Globalclients[key].user_id;
-      let peerid         = Globalclients[key].peer_id;
-      let arrSocket      = Globalclients[key].socket_id;
-      let tempName       = Globalclients[key].fullname;
-      if(userid == user_id){
-          tempName       = "Bạn";
-      }
-      let fullname       = tempName;
-      let arSocketidStr  = arrSocket.toString();
-      let attributeData  = [{"key": "userid","value": `${userid}`},{"key": "peerid","value": `${peerid}`},{"key": "socketid","value": `${arSocketidStr}`}]
-      let newVideo       = await createElVideo('divRemote',attributeData,fullname)
-      playStream(newVideo, stream)
+    let checkVideoExist = $(`.divRemote[data-userid="${Globalclients[key].user_id}"]`);
+    debugger;
+    console.log("================== checkVideoExist  ===================");
+    console.log(checkVideoExist);  
+    if(checkVideoExist.length == 0){
+      console.log("================== checkVideoExist.length  ===================");
+      console.log(checkVideoExist.length); 
+        let stream         = Globalclients[key].stream;
+        let userid         = Globalclients[key].user_id;
+        let peerid         = Globalclients[key].peer_id;
+        let arrSocket      = Globalclients[key].socket_id;
+        let tempName       = Globalclients[key].fullname;
+        if(userid == user_id){
+            tempName       = "Bạn";
+        }
+        let fullname       = tempName;
+        let arSocketidStr  = arrSocket.toString();
+        let attributeData  = [{"key": "userid","value": `${userid}`},{"key": "peerid","value": `${peerid}`},{"key": "socketid","value": `${arSocketidStr}`}]
+        let newVideo       = await createElVideo('divRemote',attributeData,fullname)
+        playStream(newVideo, stream)      
+    }
   }
-     
       let keyFirstData   = Object.keys(Globalclients)[0]
       let firstData      = Globalclients[keyFirstData]
       let fUserid        = firstData.user_id;

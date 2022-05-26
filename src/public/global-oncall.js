@@ -9,10 +9,13 @@ peer.on('call', function(call){
           let tempRemoteClient = {}
               tempRemoteClient[remoteClientData.user_id] = remoteClientData
           call.answer(stream);
+          debugger
           // tại A: lấy video của B
           call.on('stream', function(remoteStream){
+            debugger
             tempRemoteClient[remoteClientData.user_id].stream = remoteStream;
             Globalclients = Object.assign({}, Globalclients, tempRemoteClient);
+            debugger
             console.log("================ on call =================")
             console.log(remoteClientData)
             managementVideo()

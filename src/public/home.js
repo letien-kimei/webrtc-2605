@@ -29,14 +29,15 @@ socket.on('comming_call',  async (remoteClient) => {
     debugger;
     $(".coomingcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
-    $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.user_id}`)
+    $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.callroom}`)
+    $(".coomingcall .acceptcall").attr("data-callroom", remoteClient.callroom)
 })
 
 socket.on('go_to_room',  async (remoteClient) => {
-    setTimeout(() => {
+    setTimeout(function () {
         $(".requestcall").hide();
         debugger
-        window.open(`/call/room/${remoteClient.user_id}`);
+        window.open(`/call/room/${remoteClient.callroom}`);        
     },10000)
 })
 

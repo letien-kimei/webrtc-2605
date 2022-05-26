@@ -28,10 +28,7 @@ module.exports.callSocket =  function(server){
             let tempUserId       = user_id.toString();
             let tempRemoteUserId = remoteUserId.toString();
            
-            console.log("================== REQUEST CALL ===================");
-            console.log(socket.rooms);
-            console.log("================== REQUEST CALL GLOBALCLIENT===================");
-            console.log(Globalclients[tempRemoteUserId]);
+           
             if(Globalclients[tempRemoteUserId] == undefined){ // user offline
                 let object_us = {
                     select:' id ,username, fullname ',
@@ -40,12 +37,14 @@ module.exports.callSocket =  function(server){
                 let rs = await userModel.get(object_us)
                 let resultArray = Object.values(JSON.parse(JSON.stringify(rs['data'])))
                 let dataArr = resultArray[0];
-                console.log("================== REQUEST CALL USER OFFLINE===================");
-                console.log(dataArr);
                 io.to(socket.id).emit("user_is_offline", dataArr)
             }else{ // user online
-                socket.join(tempUserId)
+                // socket.join(tempUserId)
                 socket.join(tempRemoteUserId)
+                let createRoom = uuid.v4()
+                socket.join(createRoom)
+                Globalclients[tempRemoteUserId].callroom = createRoom
+                Globalclients[tempUserId].callroom = createRoom      
                 // gửi thông tin của người B cho người A (A gọi tới B)
                 io.to(socket.id).emit("user_is_online", Globalclients[tempRemoteUserId])
                 // gửi thông báo có cuộc gọi đến cho người B kèm thông tin của người A (A gọi tới B)
@@ -54,51 +53,48 @@ module.exports.callSocket =  function(server){
         });
 
         // JOIN CALL: B JOIN REQUEST A VÀO (A gọi B)
-        socket.on("joincall",  async function (user_id) {
+        socket.on("joincall",  async function (user_id,roomId) {
             let Globalclients = cmClient.getClients()  
             let tempUserId    = user_id.toString();
-            console.log("================== JOIN CALL ADAPTER ROOMS===================");
-            console.log(io.sockets.adapter.rooms.get(tempUserId));
-            socket.join(tempUserId)
-            socket.to(tempUserId).emit("go_to_room",Globalclients[tempUserId]);
-            console.log("================== JOIN CALL SOCKET ROOMS===================");
-            console.log(socket.rooms);
-            console.log("================== JOIN CALL USERID===================");
-            console.log(Globalclients[tempUserId]);
-
+            socket.join(roomId)
+            Globalclients[tempUserId].callroom = roomId      
+            socket.broadcast.to(roomId).emit("go_to_room",Globalclients[tempUserId]);
         });    
 
-        socket.on("get_users",async function (user_id, peer_id,remoteId = '') {
-            let getCurrentclient = {}
+        // LẤY THÔNG TIN CÁ NHÂN KHI VÀO PAGE CALL
+        socket.on("get_myinfo",async function (user_id, peer_id,roomId) {
             let tempId = user_id.toString()
-            let tempRemoteId = remoteId.toString()
-            getCurrentclient[tempId] = getclient[tempId]
+            socket.join(roomId)
             await addUserOnline(socket.id,tempId,peer_id); 
-            checkGetClientByKey(socket,'user_id',tempRemoteId, function(dataClient,socket) {
-                let Globalclients = cmClient.getClients()  
-                console.log("================== GET USER (GLOBAL CLIENT)===================");
-                console.log(Globalclients);
-                console.log("================== GET USER===================");
-                console.log(dataClient);
-                if(dataClient == null){
-                    io.to(socket.id).emit('user_is_offline', {message:"user not online"});
-                    io.to(socket.id).emit('receive_users', getCurrentclient,tempId);
-                }else{
-                    // A gọi B: A join tới Room B => gọi tới Room của B
-                    socket.join(tempRemoteId)
-                    socket.join(tempId)
-                    console.log("================== GET USER (REMOTE ID)===================");
-                    console.log(tempRemoteId);
-                    console.log("================== GET USER (CURRENT SOCKET ROOM)===================");
-                    console.log(socket.rooms);
-                    console.log("================== GET USER (CURRENT USER)===================");
-                    console.log(Globalclients[tempId]);
-
-                    io.in([tempRemoteId,tempId]).emit('receive_users', getCurrentclient,tempId);
-                }
-            })
-            
+            let Globalclients = cmClient.getClients() 
+                Globalclients[tempId].callroom = roomId    
+            let tempData = {}
+                tempData[tempId] =  Globalclients[tempId]
+                console.log("================== MY INFO ===================");
+                console.log(Globalclients);               
+            io.to(tempData[tempId].socket_id).emit('receive_myinfo', tempData);
         });  
+
+        // LẤY DANH SÁCH USERS TRONG ROOM 
+        socket.on("get_users_in_room",async function (user_id,roomId){
+            let Globalclients = cmClient.getClients() 
+            console.log("================== USER IN ROOM 1===================");
+            console.log(Globalclients); 
+            checkGetClientByKey(socket,'callroom',roomId, function(dataClient,socket) {
+
+                console.log("================== USER IN ROOM 2===================");
+                console.log(dataClient);  
+                console.log("================== USER IN ROOM 2 ROOMID===================");
+                console.log(roomId);  
+                let tempData = {}
+                    tempData[dataClient.user_id] =  dataClient
+                // socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
+                socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
+            })
+            socket.broadcast.to(roomId).emit("test","TEST");
+
+
+        });
 
         socket.on("get_remoteclient_bypeerid",async function (peerId) {
             let Globalclients = cmClient.getClients()
@@ -140,32 +136,23 @@ module.exports.callSocket =  function(server){
         });
     }
 
-        // Check , get client by key object
-        function checkGetClientByKey(socket = null, fkey,fvalue, callback = null) {
-            let Globalclients = cmClient.getClients()
-            console.log("================== CHECK CLIENT BY KEY (GLOBAL CLIENT)===================");
-            console.log(Globalclients);
-            console.log("================== CHECK CLIENT BY KEY (fkey) ===================");
-            console.log(fkey);
-            console.log("================== CHECK CLIENT BY KEY (fvalue) ===================");
-            console.log(fvalue);
-            console.log("================== CHECK CLIENT BY KEY ===================");
-            console.log(Globalclients[fvalue]);
-            if(fkey == "user_id"){
-                if(Globalclients[fvalue] != undefined){
-                    callback(Globalclients[fvalue], socket)
-                }else{
-                    callback(null, socket)
-                }
+    // Check , get client by key object
+    function checkGetClientByKey(socket = null, fkey,fvalue, callback = null) {
+        let Globalclients = cmClient.getClients()
+        if(fkey == "user_id"){
+            if(Globalclients[fvalue] != undefined){
+                callback(Globalclients[fvalue], socket)
             }else{
-                for (var key in Globalclients) {
-                    if (Globalclients.hasOwnProperty(key) && Globalclients[key][fkey] == fvalue) {
-                        if (typeof callback === 'function') {
-                            callback(Globalclients[key], socket)
-                        }
-                        break;
-                    }
-                }            
+                callback(null, socket)
             }
+        }else{
+            for (var key in Globalclients) {
+                if (Globalclients.hasOwnProperty(key) && Globalclients[key][fkey] == fvalue) {
+                    if (typeof callback === 'function') {
+                        callback(Globalclients[key], socket)
+                    }
+                }
+            }            
         }
+    }
 }
