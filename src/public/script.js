@@ -8,7 +8,6 @@ myVideo.muted = true
 let Globalclients = {}
 let currentPeerID = remotePeerID =""
 let stream = {}
-
 //========================================================
             // A gọi tới B
 //========================================================
