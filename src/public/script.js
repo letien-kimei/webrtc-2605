@@ -10,7 +10,7 @@ let stream = {}
             // A gọi tới B
 //========================================================
 peer.on('open', peer_id => {
-    startJoinCall(user_id,peer_id)
+  startJoinCall(user_id,peer_id)
 });
 
 function startJoinCall(user_id,peer_id) { 
@@ -23,13 +23,8 @@ socket.on('receive_myinfo',  async (clients) => {
     socket.emit('get_users_in_room', user_id, roomId)
 })
 
-socket.on('test',  async (clients) => {
-  console.log("================== test ===================");
-  console.log(clients);  
-})
-
 socket.on('receive_user_in_room',  async (clients) => {
-  console.log("================== receive_user_in_room ===================");
+  console.log(`================== USERS IN ROOM ${user_id}===================`);
   console.log(clients);  
   await createMyVideo(clients)
 })
@@ -42,11 +37,8 @@ function createMyVideo(clients) {
     .then(stream => {
       let firskey = Object.keys(clients)[0]
       Globalclients = Object.assign({}, clients,Globalclients);
-      Globalclients[firskey].stream = stream;
       debugger;
       if(Globalclients[firskey].user_id != user_id) {
-        console.log("================== Globalclients[firskey].user_id != user_id ===================");
-        console.log(Globalclients[firskey]);  
         debugger
         remotePeerID = Globalclients[firskey].peer_id
         debugger
@@ -58,8 +50,8 @@ function createMyVideo(clients) {
           managementVideo()
         });
       }else{
-        console.log("================== Globalclients[firskey].user_id == user_id ===================");
-        console.log(Globalclients[firskey]);  
+        Globalclients[firskey].stream = stream;
+        debugger; 
         managementVideo()
       }
       debugger;
@@ -74,18 +66,14 @@ async function managementVideo(){
   for (var key in Globalclients) {
     let checkVideoExist = $(`.divRemote[data-userid="${Globalclients[key].user_id}"]`);
     debugger;
-    console.log("================== checkVideoExist  ===================");
-    console.log(checkVideoExist);  
     if(checkVideoExist.length == 0){
-      console.log("================== checkVideoExist.length  ===================");
-      console.log(checkVideoExist.length); 
         let stream         = Globalclients[key].stream;
         let userid         = Globalclients[key].user_id;
         let peerid         = Globalclients[key].peer_id;
         let arrSocket      = Globalclients[key].socket_id;
         let tempName       = Globalclients[key].fullname;
         if(userid == user_id){
-            tempName       = "Bạn";
+          tempName         = "Bạn";
         }
         let fullname       = tempName;
         let arSocketidStr  = arrSocket.toString();

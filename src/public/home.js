@@ -34,11 +34,11 @@ socket.on('comming_call',  async (remoteClient) => {
 })
 
 socket.on('go_to_room',  async (remoteClient) => {
-    setTimeout(function () {
+    // setTimeout(function () {
         $(".requestcall").hide();
         debugger
         window.open(`/call/room/${remoteClient.callroom}`);        
-    },10000)
+    // },20000)
 })
 
 

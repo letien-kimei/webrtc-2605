@@ -14,10 +14,6 @@ module.exports.callSocket =  function(server){
             socket.join(tempUserid)
             await addUserOnline(socket.id,tempUserid);   
             let Globalclients = cmClient.getClients()
-            console.log("================== USER LOGIN GLOBALCLIENT ===================");
-            console.log(Globalclients);
-            console.log("================== USER LOGIN ROOM ===================");
-            console.log(socket.rooms);
             // socket.rooms.has("room1");
             io.emit('get_user_online', Globalclients);
         });
@@ -27,8 +23,6 @@ module.exports.callSocket =  function(server){
             let Globalclients    = cmClient.getClients()  
             let tempUserId       = user_id.toString();
             let tempRemoteUserId = remoteUserId.toString();
-           
-           
             if(Globalclients[tempRemoteUserId] == undefined){ // user offline
                 let object_us = {
                     select:' id ,username, fullname ',
@@ -70,30 +64,30 @@ module.exports.callSocket =  function(server){
                 Globalclients[tempId].callroom = roomId    
             let tempData = {}
                 tempData[tempId] =  Globalclients[tempId]
-                console.log("================== MY INFO ===================");
-                console.log(Globalclients);               
             io.to(tempData[tempId].socket_id).emit('receive_myinfo', tempData);
+
+            // console.log("================== GET MY INFO (user_id)===================");
+            // console.log(user_id); 
+            // console.log("================== GET MY INFO (peer_id)===================");
+            // console.log(peer_id);  
+            // console.log("================== GET MY INFO (user_id)===================");
+            // console.log(roomId); 
+            // console.log("================== GET MY INFO (Globalclients)===================");
+            // console.log(Globalclients);   
         });  
 
         // LẤY DANH SÁCH USERS TRONG ROOM 
         socket.on("get_users_in_room",async function (user_id,roomId){
-            let Globalclients = cmClient.getClients() 
-            console.log("================== USER IN ROOM 1===================");
-            console.log(Globalclients); 
             checkGetClientByKey(socket,'callroom',roomId, function(dataClient,socket) {
 
-                console.log("================== USER IN ROOM 2===================");
+                console.log("================== USER IN ROOM ===================");
                 console.log(dataClient);  
-                console.log("================== USER IN ROOM 2 ROOMID===================");
-                console.log(roomId);  
                 let tempData = {}
+                if(dataClient.peer_id != ""){
                     tempData[dataClient.user_id] =  dataClient
-                // socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
-                socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
+                    io.in(roomId).emit("receive_user_in_room",tempData);
+                }
             })
-            socket.broadcast.to(roomId).emit("test","TEST");
-
-
         });
 
         socket.on("get_remoteclient_bypeerid",async function (peerId) {
@@ -101,7 +95,7 @@ module.exports.callSocket =  function(server){
             for (var key in Globalclients) {
                 if (Globalclients.hasOwnProperty(key) && Globalclients[key].peer_id == peerId) {
                     io.to(socket.id).emit('receive_remoteclient_bypeerid', Globalclients[key]);
-                    break;
+                    // break;
                 }
             }
         });
