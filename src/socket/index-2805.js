@@ -4,42 +4,19 @@ const uuid = require('uuid');
 module.exports.callSocket =  function(server){
     let io = require("socket.io")(server, {cors: { origin: '*'}});
     let cmClient = clients.clients;
-    //============= \ ACCESS DISCONNECT =============
-    let accessDisconnect = clients.accessDisconect;           // LƯU SOCKET CÓ KEY = SOCKET_ID VÀ VALUE = PRIVATE_ROOM
-    //============= / ACCESS DISCONNECT =============
     let getclient = null;
     io.on("connection", async function (socket) {
-      
+
         // GET USERS ONLINE PAGE HOME
         socket.on("userlogin",async function (user_id,peer_id){
-            console.log("================== CONNECT ===================");
-            console.log("CONNECT: "+ socket.id);
-            // Tạo private room
-            let private_room_socket = `private_room_${user_id}`
-            socket.join(private_room_socket)
-            
-            accessDisconnect.save(socket.id, private_room_socket)
-
-            // console.log(accessDisconnect.getObjSocket());
-            // console.log(accessDisconnect.getObjPrivateRoom());
-            // console.log(accessDisconnect.getObjSocket(socket.id));
-            // console.log(accessDisconnect.getObjPrivateRoom(private_room_socket));
-            // accessDisconnect.disconnectReset(socket.id)
-        
-
             // tạo room = user_id khi user login
             let tempUserid = user_id.toString()
             socket.join(tempUserid)
             await addUserOnline(socket.id,tempUserid,peer_id);   
             let Globalclients = cmClient.getClients()
+            console.log("================== USER LOGIN ===================");
+            console.log(Globalclients);  
             io.emit('get_user_online', Globalclients);
-        });
-
-        // KIỂM TRA SOCKET KHI 1 USER ĐĂNG NHẬP NHIỀU TRÌNH DUYỆT HOẶC MỞ NHIỀU TAB
-        socket.on("check_socket",async function (user_id){
-            let private_room_socket = `private_room_${user_id}`
-            socket.join(private_room_socket)
-            accessDisconnect.save(socket.id, private_room_socket)
         });
 
         // YÊU CẦU GỌI TỚI
@@ -79,38 +56,56 @@ module.exports.callSocket =  function(server){
             socket.broadcast.to(roomId).emit("go_to_room",Globalclients[tempUserId]);
         });    
 
+        // LẤY THÔNG TIN CÁ NHÂN KHI VÀO PAGE CALL
+        socket.on("get_myinfo",async function (user_id, peer_id,roomId) {
+            let tempId = user_id.toString()
+            socket.join(roomId)
+            await addUserOnline(socket.id,tempId,peer_id); 
+            let Globalclients = cmClient.getClients() 
+                Globalclients[tempId].callroom = roomId    
+            let tempData = {}
+                tempData[tempId] =  Globalclients[tempId]
+            io.to(tempData[tempId].socket_id).emit('receive_myinfo', tempData);
+
+            // console.log("================== GET MY INFO (user_id)===================");
+            // console.log(user_id); 
+            // console.log("================== GET MY INFO (peer_id)===================");
+            // console.log(peer_id);  
+            // console.log("================== GET MY INFO (user_id)===================");
+            // console.log(roomId); 
+            // console.log("================== GET MY INFO (Globalclients)===================");
+            // console.log(Globalclients);   
+        });  
 
         // LẤY DANH SÁCH USERS TRONG ROOM 
         socket.on("get_user_in_room",async function (user_id,roomId){
-            socket.join(roomId)
-            
             checkGetClientByKey(socket,'callroom',roomId, function(dataClient,socket) {
+
+                console.log("================== USER IN ROOM ===================");
+                console.log(dataClient);  
                 let tempData = {}
-                tempData[dataClient.user_id] =  dataClient
-                socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
+                if(dataClient.peer_id != ""){
+                    tempData[dataClient.user_id] =  dataClient
+                    io.in(roomId).emit("receive_user_in_room",tempData);
+                }
             })
         });
 
         socket.on("get_remoteclient_bypeerid",async function (peerId) {
             let Globalclients = cmClient.getClients()
-            let tempData = {};
             for (var key in Globalclients) {
                 if (Globalclients.hasOwnProperty(key) && Globalclients[key].peer_id == peerId) {
-                    tempData[key] = Globalclients[key]
-                    break;
+                    io.to(socket.id).emit('receive_remoteclient_bypeerid', Globalclients[key]);
+                    // break;
                 }
             }
-            console.log("================== GET REMOTE BY PEERID ===================");
-            console.log(tempData);
-            io.to(socket.id).emit('receive_remoteclient_bypeerid', tempData);
         });
 
         // DISCONNECT
         socket.on("disconnect",  async function (reason) {
             console.log("================== DISCONNECT ===================");
             console.log("Ngắt kết nối: "+ socket.id);
-            console.log("================== ACCESS DISCONNECT ===================");
-            console.log(accessDisconnect.disconnectReset(socket.id))
+           
         });
     });
 
@@ -156,4 +151,3 @@ module.exports.callSocket =  function(server){
         }
     }
 }
-//https://helpex.vn/question/socket-io-rooms-nhan-danh-sach-khach-hang-trong-phong-cu-the-60a6af2df31e29cf6faae2bd

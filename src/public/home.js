@@ -1,4 +1,5 @@
-socket.emit('userlogin', user_id)
+socket.emit('userlogin', user_id, peerId)
+// socket.emit('check_socket',user_id)
 socket.on("get_user_online",async function (addUsersOnl){
     detectOnlOff(addUsersOnl,'onl')           
 });

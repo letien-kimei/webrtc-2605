@@ -1,6 +1,17 @@
 
+body{
+    height:100vh;
+    position: relative;
+}
+
 #video-grid {
     padding: 20px 0px;
+    position: relative;
+    height: calc(100vh - 100px);
+}
+
+#video-grid > div{
+    height: 100%;
 }
 
 video {
@@ -9,20 +20,32 @@ video {
     object-fit: cover;
     border-radius: 20px;
     cursor: pointer;
+    filter: drop-shadow(6px 0px 5px rgba(0 0 0 / 56%));
 }
-
+#client_can_change,
+#remote_client{
+    transition: 0.5s;
+}
 #video_client_can_change video{
-    height: 624px;
-    filter: drop-shadow(0px 3px 3px rgba(0 0 0 / 83%));
+    height: calc(100vh - 122px);
 }
 .divRemote{
     position: relative;
     height: 200px;
     margin-bottom: 20px;
     cursor: pointer;
-    filter: drop-shadow(0px 3px 3px rgba(0 0 0 / 83%));
 }
-
+.scDiv{
+    position: relative;
+    height: 100%;
+}
+.callone{
+    position: absolute;
+    bottom: 46px;
+    right: 29px;
+    height: 200px !important;
+    z-index: 1000;
+}
 .offaudio{
     background: rgb(161, 98, 98) !important;
 }
@@ -99,4 +122,26 @@ video {
 
 .btnAccess:hover {
     background: rgb(137 69 69);
+}
+.loadingcall{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0 0 0 / 60%)
+}   
+.loadingcall img{
+    position: fixed;
+    width: 115px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+@media (min-width: 1400px){
+    .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+        max-width: calc(100% - 200px);
+    }
 }

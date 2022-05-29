@@ -1,29 +1,38 @@
+
 peer.on('call', function(call){
     let onRemotePeerID = call.peer
-    console.log("================ on call 1=================")
-    console.log(onRemotePeerID)
-    debugger
+    // onRemotePeerID: peer id của người muốn gọi tới
+    // currentUserId: user id của user hiện tại (lấy thêm thông tin từ server như socket id)
     socket.emit('get_remoteclient_bypeerid', onRemotePeerID)
-    socket.on('receive_remoteclient_bypeerid', function(remoteClientData){
-      console.log("================ on call 2=================")
-      console.log(remoteClientData)
-      debugger
+    socket.on('receive_remoteclient_bypeerid', async function(remoteClientData){
+    // CLIENT NHẬN DATA (remoteClientData):{
+    //                               'user id 1':{
+    //                                     socket_id: 'H1OQWqunBMZ3twsOAAAJ', 
+    //                                     peer_id: '55d07295-babe-4624-a017-fffde97a01ee',
+    //                                     user_id: 2, 
+    //                                     username: 'usm2', 
+    //                                     fullname: 'Nguyễn Văn B', 
+    //                                     stream: MediaStream
+    //                                }
+    //                            }
       openStream()
-      .then(stream => {
-          let tempRemoteClient = {}
-              tempRemoteClient[remoteClientData.user_id] = remoteClientData
-          call.answer(stream);
-          debugger
-          // tại A: lấy video của B
-          call.on('stream', function(remoteStream){
-            debugger
-            tempRemoteClient[remoteClientData.user_id].stream = remoteStream;
-            Globalclients = Object.assign({}, tempRemoteClient, Globalclients);
-            debugger
-            console.log("================ on call 3=================")
-            console.log(remoteClientData)
-            managementVideo()
-          });
+      .then(async stream => {
+        call.answer(stream);
+        // tại A: lấy video của B (xử lý chạy 2 lần trong call on stream)
+        await runOneTime(call,remoteClientData);
+        if(countKey() <= 2){
+          $(videoGrid).html("")
+          for (var key in Globalclients) {
+            if (Globalclients.hasOwnProperty(key)) {
+                if(Globalclients[key].user_id == user_id){
+                  CreatePlayVideo(Globalclients[key], 'col-md-2 callone')
+                }else{
+                  CreatePlayVideo(Globalclients[key], 'col-md-12')
+                }
+            }
+          }
+          $(".loadingcall").hide();
+        }
       });
     })
 })

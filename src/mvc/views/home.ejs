@@ -15,6 +15,7 @@
   <title>Home</title>
 </head>
 <body>
+ 
   <div class="container">
       <div class="boxHome">
         <div class="boxroom">
@@ -75,7 +76,7 @@
 <% }%>
 <script> 
 let user_id  = "<%= tempuserid %>"; 
-// let peerId = "<%= peerID %>"; 
+let peerId = "<%= peerID %>"; 
 </script> 
 <link rel="stylesheet" href="lib/advanced-bootstrap-toast/css/bs4Toast.css" >
 <script src="lib/advanced-bootstrap-toast/js/bs4-toast.js" defer></script>
@@ -83,5 +84,4 @@ let user_id  = "<%= tempuserid %>";
 <script src="socket-global.js" defer></script>
 <script src="home.js" defer></script>
 <script src="commingcall.js" defer></script>
-<!-- <script src="global-oncall.js" defer></script> -->
 </html>

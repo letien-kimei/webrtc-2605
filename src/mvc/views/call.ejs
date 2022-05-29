@@ -16,29 +16,28 @@
 <body style="background: #383838;">
   <div class="container">
     <div id="video-grid" class="row">
-      <input type="hidden" id="my-peer" value="">
-      <div class="col-md-9" id="client_can_change">
-          <div id="video_client_can_change"></div>
-          <div class="groupBtn" style="display: none;">
-              <button type="button" class="btn btnAccess openvoice" onclick="onOffVoice(this)"><i data-audio="true" class="fas fa-microphone"></i></button>
-              <button type="button" class="btn btnAccess sharescreen"><i class="fas fa-desktop"></i></button>
-              <button type="button" class="btn btnAccess closestream"><i class="fas fa-sign-out-alt"></i></button>
-          </div>          
-      </div>
-      <div class="col-md-3"  id="remote_client">
-
-      </div>
+      
     </div>
+    <div class="groupBtn" style="display: none;">
+      <button type="button" class="btn btnAccess openvoice" onclick="onOffVoice(this)"><i data-audio="true" class="fas fa-microphone"></i></button>
+      <button type="button" class="btn btnAccess sharescreen"><i class="fas fa-desktop"></i></button>
+      <button type="button" class="btn btnAccess closestream"><i class="fas fa-sign-out-alt"></i></button>
+    </div>
+  </div>
+  <div class="loadingcall">
+    <img src="../../image/loading-1.gif" alt="">
   </div>
 </body>
 <% var tempuserid = 0 %>
 <%if (user) { %>
   <% var tempuserid = user['id'] %>
 <% }%>
-
 <script> 
 let user_id  = "<%= tempuserid %>"; 
+let user_username  = "<%= user['username'] %>"; 
+let user_fullname  = "<%= user['fullname'] %>"; 
 let roomId = "<%= call_to_room %>"; 
+let peerId = "<%= peerID %>"; 
 </script> 
 <link rel="stylesheet" href="../../lib/advanced-bootstrap-toast/css/bs4Toast.css" >
 <script src="../../lib/advanced-bootstrap-toast/js/bs4-toast.js" defer></script>
