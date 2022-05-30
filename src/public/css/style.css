@@ -45,6 +45,7 @@ video {
     right: 29px;
     height: 200px !important;
     z-index: 1000;
+    width: 340px;
 }
 .offaudio{
     background: rgb(161, 98, 98) !important;

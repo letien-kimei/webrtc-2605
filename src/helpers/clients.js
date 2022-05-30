@@ -41,6 +41,7 @@ exports.clients = {
    },
    save_socket_and_private_room: function(obj){
       this.objSocket[obj.socket_id] = {user_id: obj.user_id, private_room_socket: obj.private_room_socket}
+
       if(Array.isArray(this.objPrivateRoom[obj.private_room_socket])){
           this.objPrivateRoom[obj.private_room_socket].push(obj.socket_id)
       }else{
@@ -55,8 +56,6 @@ exports.clients = {
       }else{
          data =  this.objSocket
       }
-      console.log(`"================== DATA ===================`);
-      console.log(data)
       return data
    },
    get_obj_private_room: function(private_room_socket){ 
@@ -90,22 +89,28 @@ exports.clients = {
    disconnectReset: function(socket_id){
       // lấy tên private_room
       let getRoom = this.get_object_socket(socket_id)
-      let roomName = getRoom.private_room_socket
-      console.log("========== ROOM NAME ===========")
-      console.log(roomName)
-      // // kiểm tra room 
-      // let checkPrivateRoom = this.get_obj_private_room(roomName)
-      // // XÓA SOCKET ID KHỎI ROOM
-      // if(checkPrivateRoom != undefined){
-      //    if(checkPrivateRoom.length > 0){
-      //       let tempData = this.objPrivateRoom[roomName]
-      //       this.objPrivateRoom[roomName] = tempData.filter(function(item) {
-      //          return item !== socket_id
-      //    })
-      //    }
-      //    // XÓA SCOKET ID
-      //    delete this.objSocket[socket_id]         
-      // }
-      return this.objPrivateRoom[roomName]
+      let roomName =  "";
+      let tempSocket = null;
+      if(typeof getRoom == "object"){
+         if(getRoom.hasOwnProperty('private_room_socket')){
+            roomName = getRoom.private_room_socket
+         }        
+         // // kiểm tra room 
+         let checkPrivateRoom = this.get_obj_private_room(roomName)
+         // XÓA SOCKET ID KHỎI ROOM
+         if(checkPrivateRoom != undefined){
+            if(checkPrivateRoom.length > 0){
+               let tempData = this.objPrivateRoom[roomName]
+               this.objPrivateRoom[roomName] = tempData.filter(function(item) {
+                  return item !== socket_id
+            })
+            }
+            // XÓA SCOKET ID
+            tempSocket = this.objSocket[socket_id]
+            delete this.objSocket[socket_id]         
+         }         
+      }
+
+      return { inroom: this.objPrivateRoom[roomName], user: tempSocket}
    }
 }

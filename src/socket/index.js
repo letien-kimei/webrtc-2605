@@ -24,7 +24,8 @@ module.exports.callSocket =  function(server){
             // tạo room = user_id khi user login
             let tempUserid = user_id.toString()
             socket.join(tempUserid)
-            socket.broadcast.emit('get_user_online', dataUser);
+            io.emit('user_login', Globalclients);
+            // socket.emit('user_login', Globalclients);
         });
 
         // KIỂM TRA SOCKET KHI 1 USER ĐĂNG NHẬP NHIỀU TRÌNH DUYỆT HOẶC MỞ NHIỀU TAB
@@ -98,18 +99,20 @@ module.exports.callSocket =  function(server){
             let itemObj = null;
             let tempUsersId = [];
             let tempData = {};
-            if(Globalclients[user_id] != undefined){
+            // if(Globalclients[user_id] != undefined){
                 objSockets.forEach(socket_id => {
                     itemObj = clients.get_object_socket(socket_id)
                     if(tempUsersId.includes(itemObj.user_id) == false){ 
                         tempUsersId.push(itemObj.user_id)
                         tempData[itemObj.user_id] =  Globalclients[itemObj.user_id]
+                        console.log(`================ USER IN ROOM ${user_id}`)
+                        console.log(tempData)
                         socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
                     }
                 });
-            }else{
-                io.to(socket.id).emit("NOT_REQUEST_CALL",tempData);
-            }
+            // }else{
+            //     io.to(socket.id).emit("NOT_REQUEST_CALL",tempData);
+            // }
         });
 
         // LẤY THÔNG TIN USER TỪ PEER_ID
@@ -128,6 +131,16 @@ module.exports.callSocket =  function(server){
         socket.on("disconnect",  async function (reason) {
             console.log("================== DISCONNECT ===================");
             console.log("Ngắt kết nối: "+ socket.id);
+            let dataUser = clients.disconnectReset(socket.id)
+            if(dataUser.inroom != undefined && dataUser.inroom != null) {
+                // USER HOÀN TOÀN DISCONNECT (TẮT TẤT CẢ TAB)
+                if(Object.keys(dataUser.inroom).length == 0){
+                    clients.delete_user(dataUser.user.user_id)
+                    socket.broadcast.emit('user_disconnect', dataUser.user);
+                }                
+            }
+  
+            
         });
     });
 

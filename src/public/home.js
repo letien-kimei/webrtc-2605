@@ -1,11 +1,14 @@
 socket.emit('userlogin', user_id, peerId)
 // socket.emit('check_socket',user_id)
-socket.on("get_user_online",async function (addUsersOnl){
+socket.on("user_login",async function (addUsersOnl){
+    console.log(addUsersOnl)
     detectOnlOff(addUsersOnl,'onl')           
 });
 
-socket.on("get_user_offline",async function (removeUseroff){
-    detectOnlOff(removeUseroff,'off')        
+socket.on("user_disconnect",async function (data){
+    let getState =  $(`div[data-userid="${data.user_id}"]`).find(".stateOnline");
+        $(getState).removeClass("onl");
+        $(getState).addClass("off");     
 });
 
 //=============\ CHECK LÚC CLICK GỌI THÌ USER CÓ ONLINE KHÔNG =================
@@ -21,7 +24,6 @@ socket.on('user_is_online',  async (remoteClient) => {
 
 // Người B nhận thông báo có cuộc gọi tới từ A
 socket.on('comming_call',  async (remoteClient) => {
-    debugger;
     $(".coomingcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
     $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.callroom}`)
@@ -30,7 +32,9 @@ socket.on('comming_call',  async (remoteClient) => {
 
 socket.on('go_to_room',  async (remoteClient) => {
     $(".requestcall").hide();
-    window.open(`/call/room/${remoteClient.callroom}`);        
+    setTimeout( function() {
+        window.open(`/call/room/${remoteClient.callroom}`);        
+    },2000)
 })
 
 
@@ -40,13 +44,8 @@ function detectOnlOff(usersState,type = 'off') {
     for (var key in usersState) {
         if (usersState.hasOwnProperty(key) ) {
             let getState =  $(`div[data-userid="${usersState[key].user_id}"]`).find(".stateOnline");
-            if(type == "off"){
-                $(getState).removeClass("onl");
-                $(getState).addClass("off");                  
-            }else{
-                $(getState).removeClass("off");
-                $(getState).addClass("onl");      
-            }
+            $(getState).removeClass("off");
+            $(getState).addClass("onl");      
         }
     }  
 }

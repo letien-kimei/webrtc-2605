@@ -63,6 +63,8 @@ $(document).ready(function(){
 
   // STEP 3
   socket.on('receive_user_in_room',  async (clients) => {
+    console.log("=================== clients ================")
+    console.log(clients)
     // SERVER LOOP CÁC USER TRONG ROOM VÀ EMIT LÊN CLIENTS
     // CLIENT NHẬN DATA (clients):{
     //                               'user id 1':{
@@ -103,6 +105,8 @@ $(document).ready(function(){
       let tempPeerId = clients[firstKey].peer_id
       openStream()
       .then(async stream => {
+          console.log(`=============== USER IN ROOM PEER ID ${user_id} ==================`)
+          console.log(Globalclients)
           const call = peer.call(tempPeerId, stream);
           // Người vào sau lấy video người vào trước 
           await runOneTime(call,clients);
@@ -124,10 +128,6 @@ $(document).ready(function(){
       });
     }
   })
-
-  
-
-
 
 });
 
