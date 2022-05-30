@@ -1,6 +1,7 @@
 const {clients} = require('../helpers/clients')
 const userModel = require('../mvc/models/userModel')
 const uuid = require('uuid');
+const { emit } = require('../config/connect');
 module.exports.callSocket =  function(server){
     let io = require("socket.io")(server, {cors: { origin: '*'}});
     let Globalclients = clients.get_users()
@@ -31,14 +32,18 @@ module.exports.callSocket =  function(server){
         socket.on("check_socket",async function (user_id,peer_id){
             let private_room_socket = `private_room_${user_id}`
             socket.join(private_room_socket)
-            let tempObj = {
-                            user_id: user_id, 
-                            private_room_socket: private_room_socket, 
-                            socket_id: socket.id,
-                            peer_id: peer_id
-                          }
-            clients.save_socket_and_private_room(tempObj)
-            clients.save_peerid_for_user(tempObj)
+            let tempAdd = {
+                socket_id: socket.id,  
+                user_id: user_id, 
+                peer_id: peer_id, 
+                private_room_socket: private_room_socket
+              }
+            if(Globalclients.hasOwnProperty(user_id) == false){
+                await clients.add_user(tempAdd)        
+                console.log(`"================== CHECK SOCKET ===================`);
+                console.log(Globalclients);        
+            }
+
         });
 
 
@@ -94,11 +99,13 @@ module.exports.callSocket =  function(server){
             //      1: lấy tất cả socket_id trong room 
             //      2: từ mỗi socket_id sẽ truy cập được user user_id
             //      3: từ user_id vừa lấy sẽ tiếp tục truy cập để lấy thông tin của user 
-            let objSockets = io.sockets.adapter.rooms.get(roomId) // lấy socket từ room
-            let itemObj = null;
-            let tempUsersId = [];
-            let tempData = {};
-            if(Globalclients[user_id] != undefined){
+            console.log(`"================== USER IN ROOM ===================`);
+            console.log(Globalclients);
+            if(Globalclients[user_id].callroom != ""){
+                let objSockets = io.sockets.adapter.rooms.get(roomId) // lấy socket từ room
+                let itemObj = null;
+                let tempUsersId = [];
+                let tempData = {};
                 objSockets.forEach(socket_id => {
                     itemObj = clients.get_object_socket(socket_id)
                     if(tempUsersId.includes(itemObj.user_id) == false){ 
@@ -106,10 +113,11 @@ module.exports.callSocket =  function(server){
                         tempData[itemObj.user_id] =  Globalclients[itemObj.user_id]
                         socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
                     }
-                });
+                });                
             }else{
                 io.to(socket.id).emit("NOT_REQUEST_CALL",tempData);
             }
+
         });
 
         // LẤY THÔNG TIN USER TỪ PEER_ID
@@ -117,8 +125,6 @@ module.exports.callSocket =  function(server){
             let user = clients.get_user_from_peerid(peerId)
             let tempData = {}
                 tempData[user.user_id] = user
-                console.log(`"================== PEER ID ${peerId}===================`);
-                console.log(user);
             io.to(socket.id).emit('receive_remoteclient_bypeerid', tempData);
         });
 

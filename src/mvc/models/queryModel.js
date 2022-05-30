@@ -65,7 +65,8 @@ var conn = require("../../config/connect");
                                         if (err) {
                                             resolve({ type: "error", data: "Mất kết nối" });
                                         } else {
-                                            resolve({ type: "success", data: res });
+                                            let resultArray = Object.values(JSON.parse(JSON.stringify(res)))
+                                            resolve({ type: "success", data: resultArray });
                                         }
                                     });
                                     connection.release();

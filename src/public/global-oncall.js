@@ -1,8 +1,9 @@
 
 peer.on('call', function(call){
     let onRemotePeerID = call.peer
+    console.log(`===============  ON CALL PEER ID ${user_id} ==================`)
+    console.log(onRemotePeerID)
     // onRemotePeerID: peer id của người muốn gọi tới
-    // currentUserId: user id của user hiện tại (lấy thêm thông tin từ server như socket id)
     socket.emit('get_remoteclient_bypeerid', onRemotePeerID)
     socket.on('receive_remoteclient_bypeerid', async function(remoteClientData){
     // CLIENT NHẬN DATA (remoteClientData):{
@@ -20,14 +21,28 @@ peer.on('call', function(call){
         call.answer(stream);
         // tại A: lấy video của B (xử lý chạy 2 lần trong call on stream)
         await runOneTime(call,remoteClientData);
+        console.log(`=============== GLOBAL ON CALL ${user_id} ==================`)
+        console.log(Globalclients)
         if(countKey() <= 2){
           $(videoGrid).html("")
           for (var key in Globalclients) {
             if (Globalclients.hasOwnProperty(key)) {
                 if(Globalclients[key].user_id == user_id){
-                  CreatePlayVideo(Globalclients[key], 'col-md-2 callone')
+                  CreatePlayVideo(Globalclients[key], 'col-md-3 callone')
                 }else{
                   CreatePlayVideo(Globalclients[key], 'col-md-12')
+                }
+            }
+          }
+          $(".loadingcall").hide();
+        }else{
+          $(videoGrid).html("")
+          for (var key in Globalclients) {
+            if (Globalclients.hasOwnProperty(key)) {
+                if(Globalclients[key].user_id == user_id){
+                  CreatePlayVideo(Globalclients[key], 'col-md-3')
+                }else{
+                  CreatePlayVideo(Globalclients[key], 'col-md-3')
                 }
             }
           }

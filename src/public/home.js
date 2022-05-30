@@ -8,12 +8,6 @@ socket.on("get_user_offline",async function (removeUseroff){
     detectOnlOff(removeUseroff,'off')        
 });
 
-socket.on('receive_users',  async (clients,current_or_remote_user_id) => {
-    debugger;
-    console.log("==================== RECEIV USERS ======================")
-    console.log(clients)
-})
-
 //=============\ CHECK LÚC CLICK GỌI THÌ USER CÓ ONLINE KHÔNG =================
 socket.on('user_is_offline',  async (remoteClient) => {
     bs4Toast.primary('Thông báo', `${remoteClient.fullname} không online`,{delay: 200});
@@ -35,11 +29,8 @@ socket.on('comming_call',  async (remoteClient) => {
 })
 
 socket.on('go_to_room',  async (remoteClient) => {
-    // setTimeout(function () {
-        $(".requestcall").hide();
-        debugger
-        window.open(`/call/room/${remoteClient.callroom}`);        
-    // },20000)
+    $(".requestcall").hide();
+    window.open(`/call/room/${remoteClient.callroom}`);        
 })
 
 
@@ -65,5 +56,4 @@ $(document).on("click",".phone",function(e){
     let getParents = $(this).closest(".item-user");
     let remoteUserId = $(getParents).attr("data-userid"); // id của người muốn gọi
     socket.emit('request_call', user_id, remoteUserId)
-    // window.open(`/call/room/${userid}`);
 });
