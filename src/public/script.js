@@ -130,9 +130,9 @@ $(document).ready(function(){
             for (var key in Globalclients) {
               if (Globalclients.hasOwnProperty(key)) {
                   if(Globalclients[key].user_id == user_id){
-                    CreatePlayVideo(Globalclients[key], 'col-md-3')
+                    CreatePlayVideo(Globalclients[key], 'col-md-3 gridSmall')
                   }else{
-                    CreatePlayVideo(Globalclients[key], 'col-md-3')
+                    CreatePlayVideo(Globalclients[key], 'col-md-3 gridSmall')
                   }
               }
             }

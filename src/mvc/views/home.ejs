@@ -15,7 +15,6 @@
   <title>Home</title>
 </head>
 <body>
-  <input type="hidden" name="" value="<%= peerID %>">
   <div class="container">
       <div class="boxHome">
         <div class="boxroom">
@@ -39,7 +38,7 @@
             <div class="row">
                 <% for (var i = 0; i < users.length; i++) { %>
                     <div class="col-md-3">
-                        <div data-userid="<%= users[i].id %>" data-peerid="<%= peerID %>" data-fullname="<%= users[i].fullname %>"  class="item-user">
+                        <div data-userid="<%= users[i].id %>" data-peerid="<%= user['peer_id'] %>" data-fullname="<%= users[i].fullname %>"  class="item-user">
                             <div class="row">
                                 <div class="col-md-3">
                                         <div class="boxavatar">
@@ -76,7 +75,7 @@
 <% }%>
 <script> 
 let user_id  = "<%= tempuserid %>"; 
-let peerId = "<%= peerID %>"; 
+let peerId = "<%= user['peer_id'] %>"; 
 </script> 
 <link rel="stylesheet" href="lib/advanced-bootstrap-toast/css/bs4Toast.css" >
 <script src="lib/advanced-bootstrap-toast/js/bs4-toast.js" defer></script>

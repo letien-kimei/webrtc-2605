@@ -1,5 +1,7 @@
 const {clients} = require('../helpers/clients')
 const userModel = require('../mvc/models/userModel')
+const roomsModel = require('../mvc/models/roomsModel')
+const roomsUsersModel = require('../mvc/models/roomsUsersModel')
 const uuid = require('uuid');
 module.exports.callSocket =  function(server){
     let io = require("socket.io")(server, {cors: { origin: '*'}});
@@ -31,8 +33,19 @@ module.exports.callSocket =  function(server){
                 io.to(socket.id).emit("user_is_offline", dataArr)
             }else{ // USER B CHẤP NHẬN CUỘC GỌI
                 socket.join(tempRemoteUserId)
-
-                let createRoom = uuid.v4()
+                let createRoom = ""
+                let checkRoom = await clients.check_room_exist_beetween_client(tempUserId, tempRemoteUserId)
+                if(checkRoom.data.length == 0){
+                    createRoom = uuid.v4()
+                    await roomsModel.add({room_id: createRoom})
+                    // A => B
+                    await roomsUsersModel.add({user_id: user_id, user_id_request: user_id, user_id_receive: tempRemoteUserId, room_id: createRoom})
+                    // B => A
+                    await roomsUsersModel.add({user_id: tempRemoteUserId, user_id_request: tempRemoteUserId, user_id_receive: user_id, room_id: createRoom})
+                }else{
+                    createRoom = checkRoom.data[0].room_id
+                }
+               
                 socket.join(createRoom)
    
                 // UPDATE USER A ĐANG TRONG CUỘC GỌI (callroom)
@@ -52,45 +65,31 @@ module.exports.callSocket =  function(server){
             clients.update_user({user_id: tempUserId, callroom: roomId})
             socket.broadcast.to(roomId).emit("go_to_room",Globalclients[tempUserId]);
             // HỦY JOIN CỦA SOCKET NHẬN CUỘC GỌI (B)...TẠI MÀN HÌNH HOME
-            socket.leave(roomId);
+            // socket.leave(roomId);
         });    
 
         // LẤY DANH SÁCH USERS TRONG ROOM 
         socket.on("get_user_in_room",async function (user_id, roomId){
             // await clients.when_user_change_socket(socket, user_id, peer_id)
             socket.join(roomId)
-            // case 1: A vào trước => A join room (roomId)
-            //          => lúc này B chưa Vào => A emit thì B cũng không nhận được dữ liệu
-            //          => sau đó B vào => B emit và A nhận được => lấy Video 
-            // case 2: B vào trước => B join room (roomId)    
-            //          => lúc này A chưa Vào => B emit thì A cũng không nhận được dữ liệu
-            //          => sau đó A vào => A emit và B nhận được => lấy Video      
-            // Flow:
-            //      1: lấy tất cả socket_id trong room 
-            //      2: từ mỗi socket_id sẽ truy cập được user user_id
-            //      3: từ user_id vừa lấy sẽ tiếp tục truy cập để lấy thông tin của user 
-            let objSockets = io.sockets.adapter.rooms.get(roomId) // lấy socket từ room
-            let itemObj = null;
-            let tempUsersId = [];
-            let tempData = {};
-            // if(Globalclients[user_id] != undefined){
-                objSockets.forEach(socket_id => {
-                    itemObj = clients.get_object_socket(socket_id)
-                    console.log(`================ ITEM OBJECT ${user_id} ====================`)
-                    console.log(itemObj)
-                    if(itemObj != undefined){
-                        if(tempUsersId.includes(itemObj.user_id) == false){ 
-                            tempUsersId.push(itemObj.user_id)
-                            tempData[itemObj.user_id] =  Globalclients[itemObj.user_id]
-                            console.log(`================ TEMP DATA ${user_id} ====================`)
+            let userid = await clients.get_users_in_room(roomId)
+            console.log(`================ USER IN ROOM ====================`)
+            console.log(userid)
+            let dataUsers = userid.data
+            let tempData = {}
+            if(dataUsers.length > 0){
+                dataUsers.forEach(item => {
+                    if( Globalclients[item.user_id] != undefined && 
+                        typeof Globalclients[item.user_id] == "object"){
+                            console.log(`================ tempData ====================`)
+                            tempData[item.user_id] =  Globalclients[item.user_id]    
                             console.log(tempData)
+
                             socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
-                        }                        
                     }
-                });
-            // }else{
-            //     io.to(socket.id).emit("NOT_REQUEST_CALL",tempData);
-            // }
+                });                
+            }
+
         });
 
         // LẤY THÔNG TIN USER TỪ PEER_ID

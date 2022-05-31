@@ -1,9 +1,36 @@
 const userModel = require('../mvc/models/userModel')
+const roomsModel = require('../mvc/models/roomsModel')
+const roomsUsersModel = require('../mvc/models/roomsUsersModel')
 exports.clients = {
    objUsers       :{},
    objSocket      :{},
    objPrivateRoom :{},
    objPeers       :{},
+   check_room_exist_beetween_client: async function(user_id_request, user_id_receive){
+      let objectQuery = {
+          select:'*',
+          join      : [
+                     {
+                         type : "INNER JOIN",
+                         table: "dtb_rooms_users",
+                         on   : "ON",
+                         condition: `dtb_rooms_users.room_id = dtb_rooms.room_id 
+                                    AND dtb_rooms_users.user_id_request = ${parseInt(user_id_request)} 
+                                    AND dtb_rooms_users.user_id_receive = ${parseInt(user_id_receive)}`
+                     }
+                 ]
+     }
+     let rs = await roomsModel.get(objectQuery)
+     return rs
+   },
+   get_users_in_room: async function(room_id){
+      let objectQuery = {
+         select:'user_id',
+         where:` room_id = '${room_id}'`
+      }
+    let rs = await roomsUsersModel.get(objectQuery)
+    return rs
+   },
    when_user_change_socket: async function(socket, user_id, peer_id) { 
       return new Promise(async (resolve, reject) => {
          // Tạo private room

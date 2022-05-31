@@ -5,7 +5,7 @@ class basicController{
     async login(req,res,next){
         let {username,password} = req.body;
         let object_us = {
-            select:'id,username, fullname',
+            select:'id,username, fullname, peer_id',
             where:`username = '${username}' and password = '${password}'`
         }
         var rs = await userModel.get(object_us)
@@ -16,7 +16,6 @@ class basicController{
                 ),
                 httpOnly:true
             };
-            res.cookie('peerID', uuid.v4(),CookieOptions);
             res.cookie('user',rs.data[0],CookieOptions);
             res.redirect('home')
         }else{
@@ -39,7 +38,8 @@ class basicController{
             let object_us = {
                 username: username,
                 password: password,
-                fullname: fullname
+                fullname: fullname,
+                peer_id : uuid.v4()
             }
             try {
                 var rs = await userModel.add(object_us)
