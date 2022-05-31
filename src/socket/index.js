@@ -9,39 +9,12 @@ module.exports.callSocket =  function(server){
         console.log("CONNECT: "+ socket.id);
         // GET USERS ONLINE PAGE HOME
         socket.on("userlogin",async function (user_id,peer_id){
-            // Tạo private room
-            let private_room_socket = `private_room_${user_id}`
-            socket.join(private_room_socket)
-
-            // THÊM USER VÀO OBJECT ĐỂ DỄ ACCESS KHÔNG CẦN QUERY DB
-            let tempAdd = {
-                            socket_id: socket.id,  
-                            user_id: user_id, 
-                            peer_id: peer_id, 
-                            private_room_socket: private_room_socket
-                          }
-            let dataUser = await clients.add_user(tempAdd)
-            // tạo room = user_id khi user login
-            let tempUserid = user_id.toString()
-            socket.join(tempUserid)
+            await clients.when_user_change_socket(socket, user_id, peer_id)
+            console.log("=============== USER LOGIN =================")
+            console.log(Globalclients)
             io.emit('user_login', Globalclients);
             // socket.emit('user_login', Globalclients);
         });
-
-        // KIỂM TRA SOCKET KHI 1 USER ĐĂNG NHẬP NHIỀU TRÌNH DUYỆT HOẶC MỞ NHIỀU TAB
-        socket.on("check_socket",async function (user_id,peer_id){
-            let private_room_socket = `private_room_${user_id}`
-            socket.join(private_room_socket)
-            let tempObj = {
-                            user_id: user_id, 
-                            private_room_socket: private_room_socket, 
-                            socket_id: socket.id,
-                            peer_id: peer_id
-                          }
-            clients.save_socket_and_private_room(tempObj)
-            clients.save_peerid_for_user(tempObj)
-        });
-
 
         // A YÊU CẦU GỌI TỚI B
         socket.on("request_call",async function (user_id, remoteUserId){
@@ -84,6 +57,7 @@ module.exports.callSocket =  function(server){
 
         // LẤY DANH SÁCH USERS TRONG ROOM 
         socket.on("get_user_in_room",async function (user_id, roomId){
+            // await clients.when_user_change_socket(socket, user_id, peer_id)
             socket.join(roomId)
             // case 1: A vào trước => A join room (roomId)
             //          => lúc này B chưa Vào => A emit thì B cũng không nhận được dữ liệu
@@ -102,12 +76,16 @@ module.exports.callSocket =  function(server){
             // if(Globalclients[user_id] != undefined){
                 objSockets.forEach(socket_id => {
                     itemObj = clients.get_object_socket(socket_id)
-                    if(tempUsersId.includes(itemObj.user_id) == false){ 
-                        tempUsersId.push(itemObj.user_id)
-                        tempData[itemObj.user_id] =  Globalclients[itemObj.user_id]
-                        console.log(`================ USER IN ROOM ${user_id}`)
-                        console.log(tempData)
-                        socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
+                    console.log(`================ ITEM OBJECT ${user_id} ====================`)
+                    console.log(itemObj)
+                    if(itemObj != undefined){
+                        if(tempUsersId.includes(itemObj.user_id) == false){ 
+                            tempUsersId.push(itemObj.user_id)
+                            tempData[itemObj.user_id] =  Globalclients[itemObj.user_id]
+                            console.log(`================ TEMP DATA ${user_id} ====================`)
+                            console.log(tempData)
+                            socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
+                        }                        
                     }
                 });
             // }else{

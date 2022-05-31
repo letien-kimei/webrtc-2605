@@ -99,7 +99,8 @@ $(document).ready(function(){
       clients[user_id].stream = tempStream
       Globalclients = Object.assign({}, clients,Globalclients);
     }
-
+    console.log(`=============== USER IN ROOM PEER ID ${user_id} clients[user_id] == undefined ==================`)
+    console.log(clients[user_id])
     if(clients[user_id] == undefined){
       let firstKey = Object.keys(clients)[0]
       let tempPeerId = clients[firstKey].peer_id
@@ -120,6 +121,18 @@ $(document).ready(function(){
                     CreatePlayVideo(Globalclients[key], 'col-md-3 callone')
                   }else{
                     CreatePlayVideo(Globalclients[key], 'col-md-12')
+                  }
+              }
+            }
+            $(".loadingcall").hide();
+          }else{
+            $(videoGrid).html("")
+            for (var key in Globalclients) {
+              if (Globalclients.hasOwnProperty(key)) {
+                  if(Globalclients[key].user_id == user_id){
+                    CreatePlayVideo(Globalclients[key], 'col-md-3')
+                  }else{
+                    CreatePlayVideo(Globalclients[key], 'col-md-3')
                   }
               }
             }
@@ -192,6 +205,8 @@ function createElVideo(assignClass = '',attr = null, fullname = ''){
 function runOneTime(call,clientData){ 
   return new Promise(async (resolve, reject) => {
     try {
+      console.log(`================ RUN ONE TIME CLIENT DATA ${user_id}=================`)
+      console.log(clientData)
       call.on('stream',async function(remoteStream){
         let firstKey = Object.keys(clientData)[0]
         clientData[firstKey].stream = remoteStream;
