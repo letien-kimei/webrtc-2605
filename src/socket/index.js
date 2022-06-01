@@ -15,7 +15,6 @@ module.exports.callSocket =  function(server){
             console.log("=============== USER LOGIN =================")
             console.log(Globalclients)
             io.emit('user_login', Globalclients);
-            // socket.emit('user_login', Globalclients);
         });
 
         // A YÊU CẦU GỌI TỚI B
@@ -79,9 +78,11 @@ module.exports.callSocket =  function(server){
             let tempData = {}
             if(dataUsers.length > 0){
                 dataUsers.forEach(item => {
+                    console.log(`================ DATA LOOP ====================`)
+                    console.log(Globalclients[item.user_id])
                     if( Globalclients[item.user_id] != undefined && 
                         typeof Globalclients[item.user_id] == "object"){
-                            console.log(`================ tempData ====================`)
+                            console.log(`================ TEMP DATA ====================`)
                             tempData[item.user_id] =  Globalclients[item.user_id]    
                             console.log(tempData)
 

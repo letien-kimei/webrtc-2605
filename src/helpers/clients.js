@@ -87,16 +87,12 @@ exports.clients = {
    },
    save_socket_and_private_room: function(obj){
       this.objSocket[obj.socket_id] = {user_id: obj.user_id, private_room_socket: obj.private_room_socket}
-      console.log(`================ save_socket_and_private_room objSocket ${obj.user_id} ====================`)
-      console.log(this.objSocket)
       if(Array.isArray(this.objPrivateRoom[obj.private_room_socket])){
           this.objPrivateRoom[obj.private_room_socket].push(obj.socket_id)
       }else{
           this.objPrivateRoom[obj.private_room_socket] = []
           this.objPrivateRoom[obj.private_room_socket].push(obj.socket_id)
       }
-      console.log(`================ save_socket_and_private_room objPrivateRoom ${obj.user_id} ====================`)
-      console.log(this.objPrivateRoom)
    },
    get_object_socket: function(socket_id = ""){ 
       let data = null;
@@ -129,8 +125,6 @@ exports.clients = {
    },
    save_peerid_for_user: function(obj){ 
       this.objPeers[obj.peer_id] = {user_id: obj.user_id} 
-      console.log(`================ save_peerid_for_user ${obj.user_id} ====================`)
-      console.log(this.objPeers)
    },
    get_user_from_peerid: function(peer_id){
       let data = this.objPeers[peer_id]
@@ -146,7 +140,7 @@ exports.clients = {
          if(getRoom.hasOwnProperty('private_room_socket')){
             roomName = getRoom.private_room_socket
          }        
-         // // kiểm tra room 
+         // kiểm tra room 
          let checkPrivateRoom = this.get_obj_private_room(roomName)
          // XÓA SOCKET ID KHỎI ROOM
          if(checkPrivateRoom != undefined){
@@ -156,7 +150,7 @@ exports.clients = {
                   return item !== socket_id
             })
             }
-            // XÓA SCOKET ID
+            // XÓA SOCKET ID
             tempSocket = this.objSocket[socket_id]
             delete this.objSocket[socket_id]         
          }         

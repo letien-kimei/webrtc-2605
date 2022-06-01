@@ -99,19 +99,15 @@ $(document).ready(function(){
       clients[user_id].stream = tempStream
       Globalclients = Object.assign({}, clients,Globalclients);
     }
-    console.log(`=============== USER IN ROOM PEER ID ${user_id} clients[user_id] == undefined ==================`)
-    console.log(clients[user_id])
     if(clients[user_id] == undefined){
       let firstKey = Object.keys(clients)[0]
       let tempPeerId = clients[firstKey].peer_id
       openStream()
       .then(async stream => {
-          console.log(`=============== USER IN ROOM PEER ID ${user_id} ==================`)
-          console.log(Globalclients)
           const call = peer.call(tempPeerId, stream);
           // Người vào sau lấy video người vào trước 
           await runOneTime(call,clients);
-          console.log(`=============== USER IN ROOM ${user_id} ==================`)
+          console.log(`=============== GLOBAL CLIENT AFTER RUN ONE TIME ==================`)
           console.log(Globalclients)
           if(countKey() <= 2){
             $(videoGrid).html("")
@@ -205,16 +201,14 @@ function createElVideo(assignClass = '',attr = null, fullname = ''){
 function runOneTime(call,clientData){ 
   return new Promise(async (resolve, reject) => {
     try {
-      console.log(`================ RUN ONE TIME CLIENT DATA ${user_id}=================`)
-      console.log(clientData)
       call.on('stream',async function(remoteStream){
         let firstKey = Object.keys(clientData)[0]
         clientData[firstKey].stream = remoteStream;
         delete Globalclients[firstKey]
         Globalclients = Object.assign({}, clientData, Globalclients);
-        console.log(`================ CLIENT DATA ${user_id}=================`)
+        console.log(`================ IN RUN ONE TIME (CLIENT) =================`)
         console.log(clientData)
-        console.log(`================ GLOBAL CLIENT ${user_id}=================`)
+        console.log(`============ IN RUN ONE TIME (GLOBAL CLIENT)===============`)
         console.log(Globalclients)
         resolve(Globalclients)
     });
