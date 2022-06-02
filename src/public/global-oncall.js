@@ -4,6 +4,9 @@ peer.on('call', function(call){
     // onRemotePeerID: peer id của người muốn gọi tới
     socket.emit('get_remoteclient_bypeerid', onRemotePeerID)
     socket.on('receive_remoteclient_bypeerid', async function(remoteClientData){
+      let firstKey = Object.keys(remoteClientData)[0]
+      console.log(`================= RECEIVE BY PEERID ${remoteClientData[firstKey].user_id} ==================`)
+      console.log(remoteClientData)
     // CLIENT NHẬN DATA (remoteClientData):{
     //                               'user id 1':{
     //                                     socket_id: 'H1OQWqunBMZ3twsOAAAJ', 
@@ -18,6 +21,8 @@ peer.on('call', function(call){
       .then(async stream => {
         call.answer(stream);
         // tại A: lấy video của B (xử lý chạy 2 lần trong call on stream)
+        console.log(`================= CALL ANSWER ${remoteClientData[firstKey].user_id} ==================`)
+        console.log(remoteClientData)
         await runOneTime(call,remoteClientData);
         if(countKey() <= 2){
           $(videoGrid).html("")

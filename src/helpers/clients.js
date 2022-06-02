@@ -112,8 +112,6 @@ exports.clients = {
       }
       return data
    },
-   // KHI CLIENT MỞ NHIỀU TAB => SOCKET SẼ THAY ĐỔI 
-   // XÁC ĐỊNH KHI CLIENT HOÀN TOÀN KHÔNG ONLINE (TẮT TẤT CẢ TAB)
    check_room_empty_or_not: function(private_room_socket){ 
       let data = null;
       if(private_room_socket != ""){

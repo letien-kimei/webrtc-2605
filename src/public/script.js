@@ -105,6 +105,8 @@ $(document).ready(function(){
       openStream()
       .then(async stream => {
           const call = peer.call(tempPeerId, stream);
+          console.log(`=============== USER CALL ==================`)
+          console.log(clients)
           // Người vào sau lấy video người vào trước 
           await runOneTime(call,clients);
           console.log(`=============== GLOBAL CLIENT AFTER RUN ONE TIME ==================`)
@@ -228,13 +230,16 @@ function playStream(video, stream) {
   return new Promise((resolve, reject) => {
     try {
       video.srcObject = stream;
-      debugger;
-      $(video).on("loadstart", function () {
-        setTimeout( function() {
-            video.play();
-            resolve(video)
-        }, 1);
-      });
+      video.addEventListener('loadedmetadata', () => {
+        video.play()
+      })
+      // $(video).on("loadstart", function () {
+      //   setTimeout( function() {
+      //       video.pause();
+      //       video.play();
+      //       resolve(video)
+      //   }, 150);
+      // });
     } catch (error) {
       console.log(error)
     }
