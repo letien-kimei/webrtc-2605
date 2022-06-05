@@ -63,45 +63,36 @@ module.exports.callSocket =  function(server){
             // UPDATE USER B ĐANG TRONG CUỘC GỌI (callroom)
             clients.update_user({user_id: tempUserId, callroom: roomId})
             socket.broadcast.to(roomId).emit("go_to_room",Globalclients[tempUserId]);
-            // HỦY JOIN CỦA SOCKET NHẬN CUỘC GỌI (B)...TẠI MÀN HÌNH HOME
-            // socket.leave(roomId);
         });    
 
         // LẤY DANH SÁCH USERS TRONG ROOM 
-        socket.on("get_user_in_room",async function (user_id, roomId){
-            // await clients.when_user_change_socket(socket, user_id, peer_id)
+        socket.on("get_users_in_room",async function (user_id, roomId, peer_id){
+            clients.update_rooms(roomId, user_id)
+            await clients.when_user_change_socket(socket, user_id, peer_id)
             socket.join(roomId)
-            let userid = await clients.get_users_in_room(roomId)
-            let dataUsers = userid.data
-            let tempData = {}
-            if(dataUsers.length > 0){
-                dataUsers.forEach(item => {
-                    console.log(`================ DATA LOOP ====================`)
-                    console.log(Globalclients[item.user_id])
-                    if( Globalclients[item.user_id] != undefined && 
-                        typeof Globalclients[item.user_id] == "object"){
-                            console.log(`================ TEMP DATA ====================`)
-                            tempData[item.user_id] =  Globalclients[item.user_id]    
-                            console.log(tempData)
-
-                            socket.broadcast.to(roomId).emit("receive_user_in_room",tempData);
-                    }
-                });                
-            }
-
+            let getObjPeers = clients.get_peer_ids()
+            let getUsers = clients.get_users_in_room(roomId)
+            let tempData = null;
+                if(Object.keys(getUsers).length > 0){
+                    tempData = getUsers
+                }
+            let locate = user_id
+            console.log(`==================== SERVER NEW USER IN ROOM (Globalclients)==================`)
+            console.log(tempData)
+            clients.overView()
+            io.in(roomId).emit('new_list_users_in_room', tempData, getObjPeers, locate);
+            socket.broadcast.to(roomId).emit('ready_join', {status: "success"})
         });
 
-        // LẤY THÔNG TIN USER TỪ PEER_ID
-        socket.on("get_remoteclient_bypeerid",async function (peerId) {
-            let user = clients.get_user_from_peerid(peerId)
+        // USER THAM GIA ROOM
+        socket.on("me_join",async function (user_id,roomId){
             let tempData = {}
-                tempData[user.user_id] = user
-                console.log(`"================== PEER ID ${peerId}===================`);
-                console.log(user);
-            io.to(socket.id).emit('receive_remoteclient_bypeerid', tempData);
+                tempData[user_id] =  Globalclients[user_id]    
+            // Gửi thông tin của người gửi tới tất cả client trong room trừ người gửi 
+            socket.broadcast.to(roomId).emit("new_user_join",tempData);
+          
         });
 
-        
 
         // DISCONNECT
         socket.on("disconnect",  async function (reason) {
@@ -115,8 +106,6 @@ module.exports.callSocket =  function(server){
                     socket.broadcast.emit('user_disconnect', dataUser.user);
                 }                
             }
-  
-            
         });
     });
 

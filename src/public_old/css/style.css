@@ -8,15 +8,10 @@ body{
     padding: 20px 0px;
     position: relative;
     height: calc(100vh - 100px);
-    display: flex;
-    justify-content: center;
 }
 
 #video-grid > div{
     height: 100%;
-}
-.default-height-boxvideos{
-    height:auto;
 }
 
 video {
@@ -51,9 +46,6 @@ video {
     height: 200px !important;
     z-index: 1000;
     width: 340px;
-}
-.default-col{
-    transition: 1s;
 }
 .offaudio{
     background: rgb(161, 98, 98) !important;
@@ -108,7 +100,6 @@ video {
 }
 .gridSmall{
     height: 300px !important; 
-    margin-bottom: 30px;
 }
 #remote_client video {
     height: 200px;

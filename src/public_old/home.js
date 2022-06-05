@@ -34,7 +34,7 @@ socket.on('go_to_room',  async (remoteClient) => {
     $(".requestcall").hide();
     setTimeout( function() {
         window.open(`/call/room/${remoteClient.callroom}`);        
-    },1000)
+    },2000)
 })
 
 

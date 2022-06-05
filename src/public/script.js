@@ -4,13 +4,14 @@ const client_can_change = document.getElementById('client_can_change')
 const remote_client = document.getElementById('remote_client')
 const video_client_can_change = document.getElementById('video_client_can_change')
 const peer = new Peer(peerId)
+let GlobalPeersIds = {}
 let Globalclients = {}
+let newUserJoin = {}
 //========================================================
             // A gọi tới B
 //========================================================
 $(document).ready(function(){
   socket.on('NOT_REQUEST_CALL',async () =>{
-    console.log('================ NOT_REQUEST_CALL ===============')
     window.location.href = "/home";
   });
   socket.emit('check_socket',user_id, peerId)
@@ -25,132 +26,57 @@ $(document).ready(function(){
             Globalclients = Object.assign({}, createCurrentClient,Globalclients);
             
             if(countKey() <= 1){
-              // Chuyển đổi dạng dữ liệu từ:                                                 
-              // {                                                                       
-              //   'user id 1':{
-              //         socket_id: 'H1OQWqunBMZ3twsOAAAJ', 
-              //         peer_id: '55d07295-babe-4624-a017-fffde97a01ee',
-              //         user_id: 2, 
-              //         username: 'usm2', 
-              //         fullname: 'Nguyễn Văn B', 
-              //         stream: MediaStream
-              //     }
-              // }
-              // thành
-              // {
-              //   socket_id: 'H1OQWqunBMZ3twsOAAAJ', 
-              //   peer_id: '55d07295-babe-4624-a017-fffde97a01ee',
-              //   user_id: 2, 
-              //   username: 'usm2', 
-              //   fullname: 'Nguyễn Văn B', 
-              //   stream: MediaStream
-              // }
               let tempCurrent = createCurrentClient[user_id]; 
               CreatePlayVideo(tempCurrent, 'col-md-12')    
             }
         
         // START CALL 
-        setTimeout( function() {
-            startJoinCall(user_id)
-        },1000)
+        startJoinCall()
     });
   }
 
-  // STEP 2
-  function startJoinCall(user_id) { 
-     socket.emit('get_user_in_room', user_id, roomId, peerId)
+  function startJoinCall() { 
+    // Người vào room trước sẽ emit 
+    socket.emit('get_users_in_room', user_id, roomId, peerId)
   }
 
-  // STEP 3
-  socket.on('receive_user_in_room',  async (clients) => {
-    console.log("=================== clients ================")
-    console.log(clients)
-    // SERVER LOOP CÁC USER TRONG ROOM VÀ EMIT LÊN CLIENTS
-    // CLIENT NHẬN DATA (clients):{
-    //                               'user id 1':{
-    //                                     peer_id: '55d07295-babe-4624-a017-fffde97a01ee',
-    //                                     user_id: 2, 
-    //                                     username: 'usm2', 
-    //                                     fullname: 'Nguyễn Văn B', 
-    //                                     stream: MediaStream
-    //                                }
-    //                            }
-    // BIẾN TOÀN CỤC LƯU TRỮ CÁC CLIENTS (Globalclients)
-    //                           {
-    //                               'user id 1':{
-    //                                     peer_id: '55d07295-babe-4624-a017-fffde97a01ee',
-    //                                     user_id: 2, 
-    //                                     username: 'usm2', 
-    //                                     fullname: 'Nguyễn Văn B', 
-    //                                     stream: MediaStream
-    //                                },
-    //                               'user id 2':{
-    //                                     peer_id: '55d07295-babe-4624-a017-fffde97a0313',
-    //                                     user_id: 1, 
-    //                                     username: 'usm1', 
-    //                                     fullname: 'Nguyễn Văn A', 
-    //                                     stream: MediaStream
-    //                                }
-    //                            }
+  socket.on('new_list_users_in_room',  async (getUsers, getObjPeers) => {
+      // Gộp user trong room
+      Globalclients = Object.assign({}, getUsers, Globalclients);
+      // Gộp peer_id của user
+      GlobalPeersIds = Object.assign({}, getObjPeers, GlobalPeersIds);
 
-    if(clients[user_id] != undefined) {
-      let tempStream = Globalclients[user_id].stream;
-      delete Globalclients[user_id];
-      clients[user_id].stream = tempStream
-      Globalclients = Object.assign({}, clients,Globalclients);
-    }
-    if(clients[user_id] == undefined){
-      let firstKey = Object.keys(clients)[0]
-      let tempPeerId = clients[firstKey].peer_id
+      socket.emit('me_join', user_id, roomId)  
+      debugger;
+  });
+
+  // Người vào trước room sẽ nhận được
+  socket.on('new_user_join',  async (getUsers, getObjPeers) => {
+
+      // Gộp user trong room
+      Globalclients = Object.assign({}, getUsers, Globalclients);
+      // Gộp peer_id của user
+      GlobalPeersIds = Object.assign({}, getObjPeers, GlobalPeersIds);
+      debugger;
+      let firstKey = Object.keys(getUsers)[0]
+      let tempPeerId = getUsers[firstKey].peer_id
+      debugger
       openStream()
       .then(async stream => {
-          const call = peer.call(tempPeerId, stream);
-          console.log(`=============== USER CALL ==================`)
-          console.log(clients)
-          // Người vào sau lấy video người vào trước 
-          await runOneTime(call,clients);
-          console.log(`=============== GLOBAL CLIENT AFTER RUN ONE TIME ==================`)
-          console.log(Globalclients)
-          if(countKey() <= 2){
-            $(videoGrid).html("")
-            for (var key in Globalclients) {
-              if (Globalclients.hasOwnProperty(key)) {
-                  if(Globalclients[key].user_id == user_id){
-                    CreatePlayVideo(Globalclients[key], 'col-md-3 callone')
-                  }else{
-                    CreatePlayVideo(Globalclients[key], 'col-md-12')
-                  }
-              }
-            }
-            $(".loadingcall").hide();
-          }else{
-            $(videoGrid).html("")
-            for (var key in Globalclients) {
-              if (Globalclients.hasOwnProperty(key)) {
-                  if(Globalclients[key].user_id == user_id){
-                    CreatePlayVideo(Globalclients[key], 'col-md-3 gridSmall')
-                  }else{
-                    CreatePlayVideo(Globalclients[key], 'col-md-3 gridSmall')
-                  }
-              }
-            }
-            $(".loadingcall").hide();
-          }
-      });
-    }
-  })
 
+          const call = peer.call(tempPeerId, stream);
+          await peerCallOn(call,getUsers, 'new_user_join')
+          call.on('close', () => {
+            
+          })
+        
+          // loop for video 
+          loopCreateVideo(getUsers)
+      });
+  })
 });
 
 async function CreatePlayVideo(tempData, aClass = ''){
-    // DATA:{
-    //         socket_id: 'H1OQWqunBMZ3twsOAAAJ', 
-    //         peer_id: '55d07295-babe-4624-a017-fffde97a01ee',
-    //         user_id: 2, 
-    //         username: 'usm2', 
-    //         fullname: 'Nguyễn Văn B', 
-    //         stream: MediaStream
-    //       }
     let stream         = tempData.stream;
     let userid         = tempData.user_id;
     let peerid         = tempData.peer_id;
@@ -160,14 +86,11 @@ async function CreatePlayVideo(tempData, aClass = ''){
     }
     let fullname       = tempName;
     let attributeData  = [{"key": "userid","value": `${userid}`},{"key": "peerid","value": `${peerid}`}]
-    let newVideo       = await createElVideo(aClass,attributeData,fullname)
+    let tempClass      = `default-col ${aClass}`;
+    let newVideo       = await createElVideo(tempClass,attributeData,fullname)
     await playStream(newVideo, stream)      
 }
 
-function countKey() { 
-   let getCount =  Object.keys(Globalclients).length;
-   return getCount;
- }
 
 function createElVideo(assignClass = '',attr = null, fullname = ''){
   return new Promise((resolve, reject) => {
@@ -200,23 +123,57 @@ function createElVideo(assignClass = '',attr = null, fullname = ''){
 }
 
 
-function runOneTime(call,clientData){ 
-  return new Promise(async (resolve, reject) => {
-    try {
-      call.on('stream',async function(remoteStream){
-        let firstKey = Object.keys(clientData)[0]
-        clientData[firstKey].stream = remoteStream;
-        delete Globalclients[firstKey]
-        Globalclients = Object.assign({}, clientData, Globalclients);
-        console.log(`================ IN RUN ONE TIME (CLIENT) =================`)
-        console.log(clientData)
-        console.log(`============ IN RUN ONE TIME (GLOBAL CLIENT)===============`)
-        console.log(Globalclients)
-        resolve(Globalclients)
-    });
-    } catch (error) {
-      console.log(error)
+function countKey() { 
+   let getCount =  Object.keys(Globalclients).length;
+   return getCount;
+}
+
+ 
+async function loopCreateVideo(tempObjuser) { 
+  let firstKey2 = Object.keys(tempObjuser)[0]
+  let Objuser = tempObjuser[firstKey2]
+  debugger;
+  if(countKey() <= 2){
+    debugger;
+    if(Objuser.user_id != user_id){
+      debugger;
+      CreatePlayVideo(Objuser, 'col-md-3 callone')
     }
+    $(".loadingcall").hide();
+  }else{
+    $('.default-col').removeAttr('class').attr('class', 'col-md-4 gridSmall');
+    let videoExists = $(`div[data-userid="${Objuser.user_id}"]`);
+    if(videoExists.length > 0){
+        let getVideo = $(videoExists).find('video')[0];
+        getVideo.srcObject = Objuser.stream;
+    }
+    else{
+        CreatePlayVideo(Objuser, 'col-md-4 gridSmall')
+    }
+    $(".loadingcall").hide();
+  }
+}
+  
+
+function peerCallOn(call, clientData, text){ 
+  return new Promise(async (resolve, reject) => {
+      try {
+          call.on('stream',async function(remoteStream){
+              let firstKey2 = Object.keys(clientData)[0]
+
+              clientData[firstKey2].stream = remoteStream;
+
+              newUserJoin = clientData[firstKey2];
+
+              delete Globalclients[firstKey2]
+
+              Globalclients = Object.assign({}, clientData, Globalclients);
+             debugger;
+              resolve(Globalclients)
+          });
+      } catch (error) {
+          console.log(error)
+      }
   });
 }
 
@@ -228,20 +185,14 @@ function openStream() {
 
 function playStream(video, stream) {
   return new Promise((resolve, reject) => {
-    try {
-      video.srcObject = stream;
-      video.addEventListener('loadedmetadata', () => {
-        video.play()
-      })
-      // $(video).on("loadstart", function () {
-      //   setTimeout( function() {
-      //       video.pause();
-      //       video.play();
-      //       resolve(video)
-      //   }, 150);
-      // });
-    } catch (error) {
-      console.log(error)
-    }
+      try {
+          video.srcObject = stream;
+          video.addEventListener('loadedmetadata', () => {
+            video.play()
+          })
+          resolve(video)
+      } catch (error) {
+          console.log(error)
+      }
   });
 }
