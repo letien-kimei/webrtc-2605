@@ -50,6 +50,15 @@ $(document).ready(function(){
       debugger;
   });
 
+  socket.on('user_leave_room',  async (data) => {
+    let firstKey2 = Object.keys(data)[0]
+     let Objuser = data[firstKey2]
+    $(`div[data-userid="${Objuser.user_id}"]`).remove()
+      console.log("=============== user_leave_room =============")
+      console.log(data)
+
+  });
+
   // Người vào trước room sẽ nhận được
   socket.on('new_user_join',  async (getUsers, getObjPeers) => {
 

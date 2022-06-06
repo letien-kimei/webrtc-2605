@@ -193,6 +193,12 @@ class Clients {
    get_private_room(roomName) { 
       return this.objPrivateRoom[roomName]
    }
+   
+   delete_user_in_room(room_id, user_id){
+      if(this.objRooms[room_id] != undefined){
+         delete this.objRooms[room_id][user_id]
+      }
+   }  
 
    delete_user(user_id){
       delete this.objUsers[user_id]
@@ -219,20 +225,22 @@ class Clients {
    // CHECK DISCONNECT
    disconnectReset(socket_id){
       // lấy tên private_room
-      let getRoom = this.get_object_socket(socket_id)
-      let roomName =  "";
-      let callRoom =  "";
+      let __this     = this
+      let getRoom    = __this.get_object_socket(socket_id)
+      let roomName   =  "";
       let tempSocket = null;
+          tempSocket = __this.objSocket[socket_id]
       if(typeof getRoom == "object"){
          if(getRoom.hasOwnProperty('private_room')){
             roomName = getRoom.private_room
-            console.log("================== DISCONNECT CALL ROOM ===================");
-            console.log(getRoom);
-            if(getRoom.callroom != undefined){
-                  callRoom = getRoom.callroom
-               
+
+            if(getRoom.another_rooms != undefined && Array.isArray(getRoom.another_rooms)){
+                  let arrRooms = getRoom.another_rooms
+                  arrRooms.map(function (roomValue, index, array) {  
+                     // remove socket - user khỏi room đang gọi
+                     __this.delete_user_in_room(roomValue,tempSocket.user_id)
+                  })
             }
-            // remove socket - user khỏi room đang gọi
          }        
          // kiểm tra room 
          let checkPrivateRoom = this.get_private_room(roomName)
@@ -245,12 +253,11 @@ class Clients {
             })
             }
             // XÓA SOCKET ID
-            tempSocket = this.objSocket[socket_id]
             delete this.objSocket[socket_id]         
          }         
       }
 
-      return { inroom: this.objPrivateRoom[roomName], user: tempSocket}
+      return { private_room: this.objPrivateRoom[roomName], user: tempSocket}
    }
 
    overView(){

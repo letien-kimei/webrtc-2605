@@ -26,6 +26,8 @@ module.exports.callSocket =  function(server){
                             room_id: '',
                         }
             await Clients.management(socket,sumObj)
+            console.log("================== LOGIN ===================")
+            console.log(Globalclients)
             io.emit('user_login', Globalclients);
         });
 
@@ -96,7 +98,6 @@ module.exports.callSocket =  function(server){
             if(Object.keys(getUsers).length > 0){
                 tempData = getUsers
             }
-        Clients.overView()
         io.to(socket.id).emit('new_list_users_in_room', tempData, getObjPeers);
     });
 
@@ -117,13 +118,25 @@ module.exports.callSocket =  function(server){
         let dataUser = Clients.disconnectReset(socket.id)
         console.log("================== DATA DISCONNECT ===================")
         console.log(dataUser)
-        if(dataUser.inroom != undefined && dataUser.inroom != null) {
+        if(dataUser.private_room != undefined && dataUser.private_room != null) {
             // USER HOÀN TOÀN DISCONNECT (TẮT TẤT CẢ TAB)
-            if(Object.keys(dataUser.inroom).length == 0){
+            if(Object.keys(dataUser.private_room).length == 0){
                 Clients.delete_user(dataUser.user.user_id)
                 socket.broadcast.emit('user_disconnect', dataUser.user);
-            }                
+            }         
+            
+            // user rời khỏi phòng 
+            if(dataUser.user.another_rooms != undefined && Array.isArray(dataUser.user.another_rooms)){
+                let arrRooms = dataUser.user.another_rooms
+                arrRooms.map(function (roomValue, index, array) {  
+                    // remove socket - user khỏi room đang gọi
+                    let tempUser = {}
+                        tempUser[dataUser.user.user_id] = dataUser.user
+                    socket.broadcast.to(roomValue).emit("user_leave_room",tempUser)
+                })
+            }
         }
+        Clients.overView()
     });
     // END IO
     });
