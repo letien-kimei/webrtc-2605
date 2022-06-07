@@ -56,7 +56,6 @@ module.exports.callSocket =  function(server){
                 // B => A
                 await roomsUsersModel.add({user_id: tempRemoteUserId, user_id_request: tempRemoteUserId, user_id_receive: user_id, room_id: createRoom})
             }else{
-                
                 createRoom = checkRoom.data[0].room_id
             }
             socket.join(createRoom)
@@ -110,14 +109,20 @@ module.exports.callSocket =  function(server){
         socket.broadcast.to(roomId).emit("new_user_join", tempData, getObjPeers);
     });
 
+    // VIDEO OPTION
+    socket.on("call_options", async function(data){
+        // update call opton 
+        let user = await Clients.update_user_in_room(data);
+        socket.broadcast.to(data.room_id).emit('change_state_call', user);
+    })
+
     // DISCONNECT
     socket.on("disconnect",  async function (reason) {
         console.log("================== DISCONNECT ===================");
         console.log("Ngắt kết nối: "+ socket.id);
 
         let dataUser = Clients.disconnectReset(socket.id)
-        console.log("================== DATA DISCONNECT ===================")
-        console.log(dataUser)
+
         if(dataUser.private_room != undefined && dataUser.private_room != null) {
             // USER HOÀN TOÀN DISCONNECT (TẮT TẤT CẢ TAB)
             if(Object.keys(dataUser.private_room).length == 0){
@@ -132,11 +137,11 @@ module.exports.callSocket =  function(server){
                     // remove socket - user khỏi room đang gọi
                     let tempUser = {}
                         tempUser[dataUser.user.user_id] = dataUser.user
-                    socket.broadcast.to(roomValue).emit("user_leave_room",tempUser)
+                    let usersInRoom = Clients.get_user_in_room(roomValue)
+                    socket.broadcast.to(roomValue).emit("user_leave_room",tempUser, usersInRoom)
                 })
             }
         }
-        Clients.overView()
     });
     // END IO
     });

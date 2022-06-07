@@ -12,7 +12,8 @@ class Clients {
       //                         fullname: 'Nguyễn Văn A',
       //                         peer_id: 'FWRERWERRGYE-ERDFSDF-ERQERER',
       //                         private_room: 'private_room_1',
-      //                         callroom: ''
+      //                         callroom: '',
+      //                         options: {camera: true || false, voice: true || false }
       //                       }
       //                      2:{
       //                         user_id: '2',
@@ -21,6 +22,7 @@ class Clients {
       //                         peer_id: 'FWRERWERRGYE-ERDFSDF-ERQERER',
       //                         private_room: 'private_room_2',
       //                         callroom: ''
+      //                         options: {camera: true || false, voice: true || false }
       //                       }
       //                   },
       this.objSocket      = {}  //parameter: user_id, room_id
@@ -89,7 +91,8 @@ class Clients {
                         user_id: obj.user_id, 
                         peer_id: obj.peer_id, 
                         private_room: obj.private_room,
-                        callroom: obj.callroom
+                        callroom: obj.callroom,
+                        options: {camera: true, voice: true}
                     }
       let object_us = {
          select:' id ,username, fullname ',
@@ -105,7 +108,8 @@ class Clients {
             this.objUsers[tempAdd.user_id]['username'] = dataArr.username
             this.objUsers[tempAdd.user_id]['fullname'] = dataArr.fullname
             this.objUsers[tempAdd.user_id]['private_room'] = tempAdd.private_room    
-            this.objUsers[tempAdd.user_id]['callroom'] = ''      
+            this.objUsers[tempAdd.user_id]['callroom'] = ''     
+            this.objUsers[tempAdd.user_id]['options'] = tempAdd.options     
          }else{
             if(tempAdd.room_id != "" && tempAdd.room_id != undefined){
                this.objUsers[tempAdd.user_id]['callroom'] = tempAdd.room_id    
@@ -119,7 +123,9 @@ class Clients {
    }
 
    async update_user(user_id, key, value){
-      this.objUsers[user_id][key] = value
+      if(this.objUsers[user_id] != undefined){
+         this.objUsers[user_id][key] = value
+      }
    }
 
    // Lưu socket chưa thông tin user 
@@ -192,6 +198,19 @@ class Clients {
 
    get_private_room(roomName) { 
       return this.objPrivateRoom[roomName]
+   }
+
+   get_user(user_id){
+      return this.objUser[user_id]
+   }
+
+   update_user_in_room(obj){ // {user_id: user_id, room_id: room_id, type: type, off: typeOff}
+      return new Promise((resolve, reject) => {
+         if(this.objRooms[obj.room_id] != undefined && this.objRooms[obj.room_id][obj.user_id] != undefined){
+            this.objRooms[obj.room_id][obj.user_id]['options'][obj.options.type] = obj.options.value
+            resolve(this.objRooms[obj.room_id][obj.user_id])
+         }  
+      });
    }
    
    delete_user_in_room(room_id, user_id){
