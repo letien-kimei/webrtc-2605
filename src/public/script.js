@@ -7,6 +7,7 @@ const peer                    = new Peer(peerId)
 let GlobalPeersIds  = {}
 let Globalclients   = {}
 let newUserJoin     = {}
+let myStream = null;
 //========================================================
             // A gọi tới B
 //========================================================
@@ -20,15 +21,10 @@ $(document).ready(function(){
   function create_video_current_user(){
     openStream()
     .then(async stream => {
-        let createCurrentClient = {}
-            createCurrentClient[user_id] = {user_id: user_id, username: user_username, peer_id: peerId, fullname: user_fullname, stream: stream}
-            Globalclients = Object.assign({}, createCurrentClient,Globalclients);
+            myStream = stream
             if(countKey() <= 1){
-              let tempCurrent = createCurrentClient[user_id]; 
-              CreatePlayVideo(tempCurrent, 'col-md-12')   
               $(".groupBtn").show() 
             }
-        
         // START CALL 
         startJoinCall()
     });
@@ -45,6 +41,17 @@ $(document).ready(function(){
       // Gộp peer_id của user
       GlobalPeersIds = Object.assign({}, getObjPeers, GlobalPeersIds);
 
+      Globalclients[user_id].stream = myStream
+      let tempCurrent = Globalclients[user_id]; 
+        if(tempCurrent.options != undefined){
+            if(tempCurrent.options.camera == false){
+              $(".btnAccess.camera").addClass("offBtn")
+            }else{
+              $(".btnAccess.camera").removeClass("offBtn")
+            }
+        }
+        CreatePlayVideo(tempCurrent, 'col-md-12')   
+
       socket.emit('me_join', user_id, roomId)  
       
   });
@@ -55,12 +62,11 @@ $(document).ready(function(){
 
   // Người vào trước room sẽ nhận được
   socket.on('new_user_join',  async (getUsers, getObjPeers) => {
-
+      Globalclients[user_id].stream = myStream
       // Gộp user trong room
       Globalclients = Object.assign({}, getUsers, Globalclients);
       // Gộp peer_id của user
       GlobalPeersIds = Object.assign({}, getObjPeers, GlobalPeersIds);
-      
       let firstKey = Object.keys(getUsers)[0]
       let tempPeerId = getUsers[firstKey].peer_id
       
@@ -89,12 +95,12 @@ async function CreatePlayVideo(tempData, aClass = ''){
     let attributeData  = [{"key": "userid","value": `${userid}`},{"key": "peerid","value": `${peerid}`}]
     let tempClass      = `default-col ${aClass}`;
     let newVideo       = await createElVideo(tempClass,attributeData,fullname)
-    await playStream(newVideo, stream)      
+    await playStream(newVideo, stream, tempData)      
 }
 
 
 function createElVideo(assignClass = '',attr = null, fullname = ''){
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
         let newDivRemote = document.createElement('div')
             newDivRemote.className = `${assignClass}`
             if(attr != null){
@@ -103,10 +109,10 @@ function createElVideo(assignClass = '',attr = null, fullname = ''){
               });
             }
         
-        
         let scDiv = document.createElement('div')
             scDiv.className = `scDiv`
 
+          
         let newVideo = document.createElement('video')
         let divFullName = document.createElement('div')
         if(fullname != ''){
@@ -117,11 +123,36 @@ function createElVideo(assignClass = '',attr = null, fullname = ''){
             scDiv.append(divFullName)
             $(scDiv).append(`<div class="boxForAnyMore"><i class="fas fa-external-link-alt iconChangeStream"></i></div>`)
 
+            let defaultAvatar = document.createElement('div')
+                defaultAvatar.className = "default-avatar"
+            let boxParent = document.createElement('div')
+                boxParent.className = "boxParent"
+            let boxAvatar = document.createElement('div')
+                boxAvatar.className = "box-avatar"
+            let elImg = document.createElement('img')
+                elImg.src = "../../image/images.png"
+      
+            let boxName = document.createElement('div')
+                boxName.className = "box-name"
+            let spName = document.createElement('span')
+                spName.innerText = fullname
+      
+            boxAvatar.append(elImg)
+            boxName.append(spName)
+      
+            boxParent.append(boxAvatar)
+            boxParent.append(boxName)
+      
+            defaultAvatar.append(boxParent)
+
+            scDiv.append(defaultAvatar)
+     
             newDivRemote.append(scDiv)
             videoGrid.append(newDivRemote)  
         resolve(newVideo)
   });
 }
+
 
 async function loopCreateVideo(tempObjuser) { 
   let firstKey2 = Object.keys(tempObjuser)[0]
@@ -166,11 +197,6 @@ function refreshListVideo(user, usersInRoom){
 }
 
 
-// Thay đổi trạng thái video (tắt bật micro, camera)
-function refreshStateVideo(userVideoState){
-
-}
-
 function countKey() { 
    let getCount =  Object.keys(Globalclients).length;
    return getCount;
@@ -183,13 +209,13 @@ function peerCallOn(call, clientData, text){
               let firstKey2 = Object.keys(clientData)[0]
 
               clientData[firstKey2].stream = remoteStream;
-
+              
               newUserJoin = clientData[firstKey2];
-
+              
               delete Globalclients[firstKey2]
 
               Globalclients = Object.assign({}, clientData, Globalclients);
-             
+              
               resolve(Globalclients)
           });
       } catch (error) {
@@ -200,6 +226,7 @@ function peerCallOn(call, clientData, text){
 
 // =================== STREAM ======================
 function btnOff(_this, type){
+  let dfParent = $(`div[data-userid="${user_id}"]`)
   let defaultOption = { 
                         user_id: user_id, room_id: roomId, 
                         options: {}
@@ -214,6 +241,13 @@ function btnOff(_this, type){
     Globalclients[user_id].stream.getTracks()[0].enabled = false;
   }
   
+  if(type == "camera"){
+      if(typeOn == true){
+        $(dfParent).find(".default-avatar").hide()
+      }else{
+        $(dfParent).find(".default-avatar").show()
+      } 
+  }
   defaultOption.options['type']  = type
   defaultOption.options['value'] = typeOn
   socket.emit("call_options", defaultOption)
@@ -226,20 +260,35 @@ function openStream() {
 }
 
 socket.on('change_state_call',  function (userState) {
-  console.log("============ change_state_call ===========")
   Globalclients[userState.user_id]['options'] = userState.options
-
-  let getVideo = $(`div[data-userid="${userState.user_id}"]`).find('video')[0]
+  let dfParent = $(`div[data-userid="${userState.user_id}"]`)
+  let getVideo = $(dfParent).find('video')[0]
   //getVideo.srcObject.getTracks()[0].stop();
+  if(userState.options.camera == true){
+    $(dfParent).find(".default-avatar").hide()
+  }else{
+    $(dfParent).find(".default-avatar").show()
+  } 
   getVideo.srcObject.getTracks()[0].enabled = userState.options.camera;
-  debugger
+  
   console.log(getVideo.srcObject.getTracks()[0])
 })
 
-function playStream(video, stream) {
+function playStream(video, stream, tempData) {
+  
   return new Promise((resolve, reject) => {
       try {
+        let dfParent = $(`div[data-userid="${tempData.user_id}"]`)
           video.srcObject = stream;
+          if(tempData.options != undefined){
+            video.srcObject.getTracks()[0].enabled = tempData.options.camera
+            
+            if(tempData.options.camera == false){
+              $(dfParent).find(".default-avatar").show()
+            }else{
+              $(dfParent).find(".default-avatar").hide()
+            }
+          }
           video.addEventListener('loadedmetadata', () => {
             video.play()
           })
