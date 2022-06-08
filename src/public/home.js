@@ -56,3 +56,19 @@ $(document).on("click",".phone",function(e){
     let remoteUserId = $(getParents).attr("data-userid"); // id của người muốn gọi
     socket.emit('request_call', user_id, remoteUserId)
 });
+
+
+// Tạo phòng
+function createRoom() { 
+    let roomName = $("#ip_createroom").val()
+    socket.emit('create_room', user_id, roomName)
+}
+
+// Nhận dữ liệu phòng mới
+socket.on('new_room',function(dataRoom){
+    $(".rowRoom").append(`<div data-roomid="${dataRoom.room_id}" class="col-auto col-md-2">
+        <div class="room_num">
+            ${dataRoom.room_name}
+        </div>
+    </div>`)
+});    

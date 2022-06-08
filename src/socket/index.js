@@ -36,6 +36,12 @@ module.exports.callSocket =  function(server){
         let tempUserId       = user_id.toString();
         let tempRemoteUserId = remoteUserId.toString();
 
+        // if(){ // nếu remoteUserId là room
+
+        // }else{ // nếu remoteUserId là user id
+
+        // }
+
         if(Globalclients[tempRemoteUserId] == undefined){ // user offline
             let object_us = {
                 select:' id ,username, fullname ',
@@ -47,7 +53,7 @@ module.exports.callSocket =  function(server){
         }else{ // USER B CHẤP NHẬN CUỘC GỌI
             socket.join(tempRemoteUserId)
             let createRoom = ""
-            let checkRoom = await Clients.check_room_exist_beetween_client(tempUserId, tempRemoteUserId)
+            let checkRoom = await Clients.check_room_exist_beetween_client(tempUserId, tempRemoteUserId) // GỌI 1:1
             if(checkRoom.data.length == 0){
                 createRoom = uuid.v4()
                 await roomsModel.add({room_id: createRoom})
@@ -115,6 +121,17 @@ module.exports.callSocket =  function(server){
         let user = await Clients.update_user_in_room(data);
         socket.broadcast.to(data.room_id).emit('change_state_call', user);
     })
+
+
+    // TẠO PHÒNG
+    socket.on('create_room', async function(boss_user_id, roomName){
+       
+        let create_room_id = uuid.v4()
+        let objRoom = {room_id: create_room_id, room_name: roomName, user_id: boss_user_id }
+        let rs = await roomsModel.add(objRoom)
+        let rsGet = await roomsModel.get({where: `id = ${rs.insertId}`})
+        io.emit("new_room", rsGet.data[0])
+    });
 
     // DISCONNECT
     socket.on("disconnect",  async function (reason) {

@@ -26,7 +26,7 @@ var conn = require("../../config/connect");
            // }
             if(typeof object === 'object' )
             {
-                if(Object.keys(object).length === 0 )
+                if(Object.keys(object).length === 0 ||  object.select == undefined || object.select == "")
                 {
                     object.select = "*";
                 }

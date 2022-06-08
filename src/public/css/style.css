@@ -109,6 +109,17 @@ video {
     font-weight: bold;
     font-size: 14px;
 }
+.rowRoom > div{
+    position: relative;
+}
+.rowRoom > div i{
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    filter: drop-shadow(0px 1px 0px rgba(0 0 0 / 60%));
+    font-size: 19px;
+}
 .gridSmall{
     height: 300px !important; 
     margin-bottom: 30px;
@@ -121,6 +132,10 @@ video {
     display: flex;
     justify-content: center;
     margin-top: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 16px;
+    z-index: 1000;
 }
 
 .btnAccess i {
@@ -173,9 +188,17 @@ video {
     text-align: center;
     font-weight: bold;
 }
-.default-avatar .box-name span{
-    
+.box_another_Microphone{
+    position: absolute;
+    z-index: 999;
+    top: 8px;
+    right: 8px;
 }
+.box_another_Microphone .microphone_another{
+    border: none;
+    height: 42px;
+}
+
 @media (min-width: 1400px){
     .container, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
         max-width: calc(100% - 200px);
