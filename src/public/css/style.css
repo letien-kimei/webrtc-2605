@@ -18,7 +18,31 @@ body{
 .default-height-boxvideos{
     height:auto;
 }
-
+.roomMenu i{
+    cursor: pointer;
+}
+.roomMenu .iMenu, .iJoin{
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.roomMenu .iMenu:hover > .listAction{
+    display: flex;
+}
+.roomMenu .listAction{
+    display: none;
+    top: 5px;
+    position: absolute;
+    background: #e3e3e3;
+    padding: 9px;
+    border-radius: 5px;
+    right: -3px;
+}
+.roomMenu .listAction i{
+    padding: 0px 12px;
+    filter: drop-shadow(2px 1px 0px rgba(0 0 0 / 46%));
+}
 video {
     width: 100%;
     height: 100%;
@@ -112,13 +136,23 @@ video {
 .rowRoom > div{
     position: relative;
 }
-.rowRoom > div i{
+.rowRoom .roomMenu {
     position: absolute;
     top: 50%;
     right: 16px;
     transform: translateY(-50%);
-    filter: drop-shadow(0px 1px 0px rgba(0 0 0 / 60%));
+    filter: drop-shadow(1px 1px 1px rgba(0 0 0 / 60%));
     font-size: 19px;
+}
+.rowRoom .roomMenu .iMenu {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+.rowRoom .roomMenu i{
+
 }
 .gridSmall{
     height: 300px !important; 

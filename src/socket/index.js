@@ -26,7 +26,7 @@ module.exports.callSocket =  function(server){
                             room_id: '',
                         }
             await Clients.management(socket,sumObj)
-            console.log("================== LOGIN ===================")
+            console.log("================== USER LOGIN ===================")
             console.log(Globalclients)
             io.emit('user_login', Globalclients);
         });
@@ -130,7 +130,16 @@ module.exports.callSocket =  function(server){
         let objRoom = {room_id: create_room_id, room_name: roomName, user_id: boss_user_id }
         let rs = await roomsModel.add(objRoom)
         let rsGet = await roomsModel.get({where: `id = ${rs.insertId}`})
-        io.emit("new_room", rsGet.data[0])
+        Clients.add_socket({socket_id: socket.id, user_id: boss_user_id, room_id: create_room_id})
+        Clients.add_rooms({room_id: create_room_id, user_id: boss_user_id })
+        Clients.overView()
+        socket.join(create_room_id)
+        io.emit("new_room", rsGet.data[0], boss_user_id)
+    });
+
+    socket.on("disconnect",  async function (user_id, roomId) {
+        const my_socket = io.sockets.sockets.get(socket.id);
+        console.log(my_socket)
     });
 
     // DISCONNECT

@@ -30,9 +30,20 @@
                             <div class="room_num">
                                 <%= rooms[i]['room_name'] %>
                             </div>
-                            <% if(rooms[i]['user_id_join'] == null && rooms[i]['boss_room_user_id'] != user['id']){ %>
-                                <i class="fa-solid fa-circle-plus"></i>
-                            <% } %>  
+                            <div class="roomMenu">
+                                <% if(rooms[i]['user_id_join'] == null && rooms[i]['boss_room_user_id'] != user['id']){ %>
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                <% }else{%>      
+                                <i class="iMenu fa-solid fa-ellipsis-vertical">
+                                    <div class="listAction">
+                                        <i class="fa-solid fa-right-to-bracket"></i>
+                                        <i class="fa-solid fa-phone"></i>
+                                        <i class="fa-brands fa-facebook-messenger"></i>
+                                    </div>
+                                </i>
+                                <% } %>    
+                            </div>
+                           
                         </div>
                     <% } %>
                 </div>

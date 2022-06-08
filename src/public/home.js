@@ -65,10 +65,25 @@ function createRoom() {
 }
 
 // Nhận dữ liệu phòng mới
-socket.on('new_room',function(dataRoom){
+socket.on('new_room',function(dataRoom, userid){
+    let tempHtml = '';
+    if(userid == user_id){
+        tempHtml = `<i class="iMenu fa-solid fa-ellipsis-vertical">
+                        <div class="listAction">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-brands fa-facebook-messenger"></i>
+                        </div>
+                    </i>`;
+    }else{
+        tempHtml =  `<i class="fa-solid fa-circle-plus"></i>`;
+    }
     $(".rowRoom").append(`<div data-roomid="${dataRoom.room_id}" class="col-auto col-md-2">
         <div class="room_num">
             ${dataRoom.room_name}
+        </div>
+        <div class="roomMenu">
+            ${tempHtml}
         </div>
     </div>`)
 });    
