@@ -22,19 +22,41 @@ socket.on('user_is_offline',  async (remoteClient) => {
     bs4Toast.primary('Thông báo', `${remoteClient.fullname} không online`,{delay: 200});
 })
 
-socket.on('user_is_online',  async (remoteClient) => {
+socket.on('data_call',  async (remoteClient) => {
+    debugger;
     $(".requestcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
+    debugger;
 })
+
+socket.on('data_call_group',  async (remoteClient) => {
+    debugger;
+    $(".requestcall").show();
+    $(".sp-callname").text(`${remoteClient.room_name}`,{delay: 200});
+    debugger;
+})
+
 //=============/ CHECK LÚC CLICK GỌI THÌ USER CÓ ONLINE KHÔNG =================
 
 // Người B nhận thông báo có cuộc gọi tới từ A
 socket.on('comming_call',  async (remoteClient) => {
+    debugger;
     $(".coomingcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
     $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.callroom}`)
     $(".coomingcall .acceptcall").attr("data-callroom", remoteClient.callroom)
+    debugger;
 })
+// Nhóm
+socket.on('comming_call_group',  async (remoteClient) => {
+    debugger;
+    $(".coomingcall").show();
+    $(".sp-callname").text(`Phòng ${remoteClient.fullname}`,{delay: 200});
+    $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.room_id}`)
+    $(".coomingcall .acceptcall").attr("data-callroom", remoteClient.room_id)
+    debugger;
+})
+
 
 socket.on('go_to_room',  async (remoteClient) => {
     $(".requestcall").hide();
@@ -58,13 +80,17 @@ function detectOnlOff(usersState,type = 'off') {
     }  
 }
 
-
+// gọi 1:1
 $(document).on("click",".phone",function(e){
     let getParents = $(this).closest(".item-user");
-    let remoteUserId = $(getParents).attr("data-userid"); // id của người muốn gọi
-    socket.emit('request_call', user_id, remoteUserId)
+    let remoteId = $(getParents).attr("data-userid"); // id của người muốn gọi
+    socket.emit('request_call', user_id, remoteId)
 });
-
+// gọi nhóm
+$(document).on("click",".phone_group",function(e){
+    let remoteId = $(this).closest(".colRoom").attr("data-roomid"); // id của người muốn gọi
+    socket.emit('request_call', user_id, remoteId)
+});
 
 // Tạo phòng
 function createRoom() { 
@@ -79,6 +105,7 @@ socket.on('new_room',function(dataRoom, userid){
 
 
 socket.on('accept_join_room',function(data){
+    debugger;
     $(`div.colRoom[data-roomid="${data.room_id}"]`).remove()
     add_update_room(data, '')
 });   
@@ -95,14 +122,14 @@ function add_update_room(dataRoom, userid) {
         tempHtml = `<i class="iMenu fa-solid fa-ellipsis-vertical">
                         <div class="listAction">
                             <i class="fa-solid fa-right-to-bracket"></i>
-                            <i class="fa-solid fa-phone"></i>
+                            <i class="fa-solid fa-phone phone_group"></i>
                             <i class="fa-brands fa-facebook-messenger"></i>
                         </div>
                     </i>`;
     }else{
-        tempHtml =  `<i onclick="request_join_room(this, ${dataRoom.room_id})" class="fa-solid fa-circle-plus"></i>`;
+        tempHtml =  `<i onclick="request_join_room(this, '${dataRoom.room_id}')" class="fa-solid fa-circle-plus"></i>`;
     }
-    $(".rowRoom").append(`<div data-roomid="${dataRoom.room_id}" class="colRoom col-auto col-md-2">
+    $(".rowRoom").prepend(`<div data-roomid="${dataRoom.room_id}" class="colRoom col-auto col-md-2">
         <div class="room_num">
             ${dataRoom.room_name}
         </div>
@@ -114,6 +141,7 @@ function add_update_room(dataRoom, userid) {
 
 function request_join_room(_this, room_id) { 
     let request_user_id = user_id
+    debugger;
     socket.emit('request_join_room', request_user_id, room_id )
 }
 
@@ -128,8 +156,8 @@ socket.on('new_request_join_room', function(dataRequest){
                         ${dataRequest.message}
                     </div>
                     <div class="box_button_item">
-                        <button type="button" class="sameBtn accpept">Chấp nhận</button>
-                        <button type="button" class="sameBtn cancel">Hủy</button>
+                        <button type="button" onclick="fnBtnRequest(this, '${dataRequest.id}', '${dataRequest.request_user_id}', '${dataRequest.room_id}', 'accept')" class="sameBtn accpept">Chấp nhận <i class=""></i></button>
+                        <button type="button" onclick="fnBtnRequest(this, '${dataRequest.id}', '${dataRequest.request_user_id}', '${dataRequest.room_id}', 'cancel')" class="sameBtn cancel" <i class=""></i>>Hủy</button>
                     </div>
                 </div>
             </div>`)
@@ -152,6 +180,7 @@ function openAlert(_this) {
 
 // button chấp nhận, hủy tham gia nhóm
 function fnBtnRequest(_this, alertId, request_user_id, room_id, type) { 
+    debugger
     $(_this).find('i').addClass('fa-solid fa-circle-check')
     $(_this).closest('.box_button_item').find('button').not(_this).remove()
 

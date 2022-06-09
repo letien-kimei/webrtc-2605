@@ -87,19 +87,24 @@ class Clients {
       // Các nhóm mà chính user tạo
       let myRoom = await roomsModel.get({select: "*", where: ` user_id != 0 AND user_id = ${mObj.user_id}`})
           myRoom = myRoom.data
-          myRoom.map(function (data, index, array) {  
-            socket.join(data.room_id)
-            _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
-            _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
-          });
+          if(myRoom.length > 0){
+            myRoom.map(function (data, index, array) {  
+               socket.join(data.room_id)
+               _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
+               _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
+            });             
+          }
+
       // Các nhóm mà user tham gia
       let meJoinRooms = await roomsUsersModel.get({select: "*", where: ` user_id = ${mObj.user_id}`})
           meJoinRooms = meJoinRooms.data
-          meJoinRooms.map(function (data, index, array) {  
-            socket.join(data.room_id)
-            _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
-            _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
-          });
+          if(meJoinRooms.length > 0){
+            meJoinRooms.map(function (data, index, array) {  
+               socket.join(data.room_id)
+               _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
+               _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
+            });
+          }
    }
 
    // Lưu user 
@@ -265,47 +270,49 @@ class Clients {
 
    // CHECK DISCONNECT
    disconnectReset(socket_id){
-      // lấy tên private_room
-      let __this     = this
-      let getSocket  = __this.get_object_socket(socket_id)
-      let rsTemp = {}
-      if(getSocket != undefined){
-         let roomName   =  "";
-         let getUser    = __this.get_user(getSocket.user_id)
-      
-         if(typeof getSocket == "object"){
-            if(getSocket.hasOwnProperty('private_room')){
-               roomName = getSocket.private_room
+      return new Promise((resolve, reject) => {
+         // lấy tên private_room
+         let __this     = this
+         let getSocket  = __this.get_object_socket(socket_id)
+         let rsTemp = {}
+         if(getSocket != undefined){
+            let roomName   =  "";
+            let getUser    = __this.get_user(getSocket.user_id)
+         
+            if(typeof getSocket == "object"){
+               if(getSocket.hasOwnProperty('private_room')){
+                  roomName = getSocket.private_room
 
-               if(getSocket.another_rooms != undefined && Array.isArray(getSocket.another_rooms)){
-                     let arrRooms = getSocket.another_rooms
-                     arrRooms.map(function (roomValue, index, array) {  
-                        // remove socket - user khỏi room đang gọi
-                        __this.delete_user_in_room(roomValue,getSocket.user_id)
-                        // user không còn trong cuộc gọi
-                        if(getUser.callroom == roomValue){
-                           __this.update_user(getSocket.user_id, 'callroom', '')
-                        }
+                  if(getSocket.another_rooms != undefined && Array.isArray(getSocket.another_rooms)){
+                        let arrRooms = getSocket.another_rooms
+                        arrRooms.map(function (roomValue, index, array) {  
+                           // remove socket - user khỏi room đang gọi
+                           __this.delete_user_in_room(roomValue,getSocket.user_id)
+                           // user không còn trong cuộc gọi
+                           if(getUser.callroom == roomValue){
+                              __this.update_user(getSocket.user_id, 'callroom', '')
+                           }
+                        })
+                  }
+               }        
+               // KIỂM TRA ROOM
+               let checkPrivateRoom = this.get_private_room(roomName)
+               // XÓA SOCKET ID KHỎI ROOM
+               if(checkPrivateRoom != undefined){
+                  if(checkPrivateRoom.length > 0){
+                     let tempData = this.objPrivateRoom[roomName]
+                     this.objPrivateRoom[roomName] = tempData.filter(function(item) {
+                        return item !== socket_id
                      })
-               }
-            }        
-            // KIỂM TRA ROOM
-            let checkPrivateRoom = this.get_private_room(roomName)
-            // XÓA SOCKET ID KHỎI ROOM
-            if(checkPrivateRoom != undefined){
-               if(checkPrivateRoom.length > 0){
-                  let tempData = this.objPrivateRoom[roomName]
-                  this.objPrivateRoom[roomName] = tempData.filter(function(item) {
-                     return item !== socket_id
-                  })
-               }
-               // XÓA SOCKET ID
-               delete this.objSocket[socket_id]         
+                  }
+                  // XÓA SOCKET ID
+                  delete this.objSocket[socket_id]         
+               }         
             }         
-         }         
-         rsTemp = { private_room: this.objPrivateRoom[roomName], user: getSocket}
-      }
-      return rsTemp
+            rsTemp = { private_room: this.objPrivateRoom[roomName], user: getSocket}
+            resolve(rsTemp)
+         }
+      });
    }
 
    overView(){
