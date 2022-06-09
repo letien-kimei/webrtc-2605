@@ -76,8 +76,30 @@ class Clients {
          this.add_private_room(mObj)
          this.add_peerid(mObj)
          this.add_rooms(mObj)
+         // tự join vào các room khi login
+         this.page_load_join_room(socket, mObj)
          resolve(this.objUsers)
       });
+   }
+
+   async page_load_join_room(socket, mObj){
+      let _this = this
+      // Các nhóm mà chính user tạo
+      let myRoom = await roomsModel.get({select: "*", where: ` user_id != 0 AND user_id = ${mObj.user_id}`})
+          myRoom = myRoom.data
+          myRoom.map(function (data, index, array) {  
+            socket.join(data.room_id)
+            _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
+            _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
+          });
+      // Các nhóm mà user tham gia
+      let meJoinRooms = await roomsUsersModel.get({select: "*", where: ` user_id = ${mObj.user_id}`})
+          meJoinRooms = meJoinRooms.data
+          meJoinRooms.map(function (data, index, array) {  
+            socket.join(data.room_id)
+            _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
+            _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
+          });
    }
 
    // Lưu user 

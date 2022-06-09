@@ -12,11 +12,20 @@
   <link rel="stylesheet" href="css/style.css" >
   <link rel="stylesheet" href="css/home.css" >
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons" media="all">
   <title>Home</title>
 </head>
 <body>
   <div class="container">
       <div class="boxHome">
+        <div class="boxAlert">
+            <div class="bell" id="bell-1" onclick="openAlert(this)">
+                <div class="anchor material-icons default">notifications_active</div>
+                <div class="anchor material-icons for_layer dl-none layer-1">notifications_active</div>
+                <div class="anchor material-icons for_layer dl-none layer-2">notifications</div>
+                <div class="anchor material-icons for_layer dl-none layer-3">notifications</div>
+            </div>
+        </div>
         <div class="boxroom">
             <div class="createroom">
                 <input type="text" id="ip_createroom" value="">
@@ -26,13 +35,13 @@
                 <h3>Phòng</h3>
                 <div class="row rowRoom">
                     <% for (var i = 0; i < rooms.length; i++) { %>
-                        <div data-roomid="<%= rooms[i]['room_id'] %>" class="col-auto col-md-2">
+                        <div data-roomid="<%= rooms[i]['room_id'] %>" class="colRoom col-auto col-md-2">
                             <div class="room_num">
                                 <%= rooms[i]['room_name'] %>
                             </div>
                             <div class="roomMenu">
                                 <% if(rooms[i]['user_id_join'] == null && rooms[i]['boss_room_user_id'] != user['id']){ %>
-                                    <i class="fa-solid fa-circle-plus"></i>
+                                    <i onclick="request_join_room(this, '<%= rooms[i].room_id  %>')" class="fa-solid fa-circle-plus"></i>
                                 <% }else{%>      
                                 <i class="iMenu fa-solid fa-ellipsis-vertical">
                                     <div class="listAction">
@@ -84,6 +93,44 @@
   </div>
   <%- include('commingcall'); %>
   <%- include('requestcall'); %>
+
+  <div class="formAlert">
+      <div class="wrapAlert">
+          <div class="headAlert">
+              <h2>Thông báo</h2>
+              <i onclick="openAlert(this)" class="closeAlert fa-solid fa-rectangle-xmark"></i>
+          </div>  
+          <div class="boxItemsAlert">
+                <% for (var i = 0; i < requestAlert.length; i++) { %>
+                    <div class="itemAlert" data-userrequest="<%= requestAlert[i].request_user_id %>">
+                        <div class="frameItem">
+                            <div class="message_item">
+                                <%= requestAlert[i].message %>
+                            </div>
+                            <% var isCheck = '' %>
+                            <% var pointer_events_none = '' %>
+                            <%if (requestAlert[i].accept == 1) { %>
+                                <% var isCheck = 'fa-solid fa-circle-check' %>
+                                <% var pointer_events_none = 'pointer_events_none' %>
+                            <% }%>
+                            <%if (requestAlert[i].cancel == 1) { %>
+                                <% var isCheck = 'fa-solid fa-circle-check' %>
+                                <% var pointer_events_none = 'pointer_events_none' %>
+                            <% }%>
+                            <div class="box_button_item">
+                                <%if (requestAlert[i].cancel != 1 &&  requestAlert[i].type == 'REQUEST_JOIN_ROOM') { %>
+                                    <button type="button" onclick="fnBtnRequest(this, '<%= requestAlert[i].id %>', '<%= requestAlert[i].request_user_id %>', '<%= requestAlert[i].room_id %>', 'accept')" class="sameBtn accept <%= pointer_events_none %>">Chấp nhận <i class="<%= isCheck %>"></i></button>
+                                <% }%>
+                                <%if (requestAlert[i].accept != 1 &&  requestAlert[i].type == 'REQUEST_JOIN_ROOM') { %>
+                                    <button type="button" onclick="fnBtnRequest(this, '<%= requestAlert[i].id %>', '<%= requestAlert[i].request_user_id %>', '<%= requestAlert[i].room_id %>', 'cancel')"  class="sameBtn cancel <%= pointer_events_none %>">Hủy <i class="<%= isCheck %>"></i></button>
+                                <% }%>
+                            </div>
+                        </div>
+                    </div>
+                <% } %>
+          </div>
+      </div>
+  </div>
 </body>
 <% var tempuserid = 0 %>
 <%if (user) { %>

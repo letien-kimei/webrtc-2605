@@ -1,11 +1,17 @@
 socket.emit('userlogin', user_id, peerId)
-// socket.emit('check_socket',user_id)
-socket.on("user_login",async function (addUsersOnl){
-    console.log(addUsersOnl)
-    detectOnlOff(addUsersOnl,'onl')           
+socket.on("user_login",async function (data, addUsersOnl){
+    bs4Toast.primary('Thông báo', `${data.fullname} vừa đăng nhập`,{delay: 200});
+    let getState =  $(`div[data-userid="${data.user_id}"]`).find(".stateOnline");
+        $(getState).removeClass("off");
+        $(getState).addClass("onl");     
 });
+// LẤY DANH SÁCH NGƯỜI DÙNG ONLINE
+socket.on('get_list_user_online', function(addUsersOnl){
+    detectOnlOff(addUsersOnl,'onl')    
+})
 
 socket.on("user_disconnect",async function (data){
+    bs4Toast.primary('Thông báo', `${data.fullname} vừa đăng xuất`,{delay: 200});
     let getState =  $(`div[data-userid="${data.user_id}"]`).find(".stateOnline");
         $(getState).removeClass("onl");
         $(getState).addClass("off");     
@@ -33,7 +39,9 @@ socket.on('comming_call',  async (remoteClient) => {
 socket.on('go_to_room',  async (remoteClient) => {
     $(".requestcall").hide();
     setTimeout( function() {
-        window.open(`/call/room/${remoteClient.callroom}`);        
+        let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+        width=${screen.width},height=${screen.height},left=-1000,top=-1000`;
+        window.open(`/call/room/${remoteClient.callroom}`, 'call', params);
     },1000)
 })
 
@@ -66,8 +74,24 @@ function createRoom() {
 
 // Nhận dữ liệu phòng mới
 socket.on('new_room',function(dataRoom, userid){
+    add_update_room(dataRoom, userid)
+});    
+
+
+socket.on('accept_join_room',function(data){
+    $(`div.colRoom[data-roomid="${data.room_id}"]`).remove()
+    add_update_room(data, '')
+});   
+
+function add_update_room(dataRoom, userid) { 
     let tempHtml = '';
-    if(userid == user_id){
+    let user_id_join = 0;
+    
+    if(dataRoom['user_id_join'] != undefined){
+        user_id_join = dataRoom['user_id_join']
+    }   
+
+    if(userid == user_id || user_id_join != 0){
         tempHtml = `<i class="iMenu fa-solid fa-ellipsis-vertical">
                         <div class="listAction">
                             <i class="fa-solid fa-right-to-bracket"></i>
@@ -76,9 +100,9 @@ socket.on('new_room',function(dataRoom, userid){
                         </div>
                     </i>`;
     }else{
-        tempHtml =  `<i class="fa-solid fa-circle-plus"></i>`;
+        tempHtml =  `<i onclick="request_join_room(this, ${dataRoom.room_id})" class="fa-solid fa-circle-plus"></i>`;
     }
-    $(".rowRoom").append(`<div data-roomid="${dataRoom.room_id}" class="col-auto col-md-2">
+    $(".rowRoom").append(`<div data-roomid="${dataRoom.room_id}" class="colRoom col-auto col-md-2">
         <div class="room_num">
             ${dataRoom.room_name}
         </div>
@@ -86,4 +110,54 @@ socket.on('new_room',function(dataRoom, userid){
             ${tempHtml}
         </div>
     </div>`)
-});    
+}
+
+function request_join_room(_this, room_id) { 
+    let request_user_id = user_id
+    socket.emit('request_join_room', request_user_id, room_id )
+}
+
+socket.on('new_request_join_room', function(dataRequest){
+
+    $(".boxAlert .default").addClass('dl-none')
+    $(".boxAlert .for_layer").removeClass('dl-none')
+
+    $(".formAlert .boxItemsAlert").append(`<div class="itemAlert" data-userrequest="${dataRequest.request_user_id}">
+                <div class="frameItem">
+                    <div class="message_item">
+                        ${dataRequest.message}
+                    </div>
+                    <div class="box_button_item">
+                        <button type="button" class="sameBtn accpept">Chấp nhận</button>
+                        <button type="button" class="sameBtn cancel">Hủy</button>
+                    </div>
+                </div>
+            </div>`)
+})
+
+function openAlert(_this) {  
+
+    if($("#bell-1").hasClass('open')){ // đóng
+        $("#bell-1").removeClass('open')
+        $(".formAlert").removeClass('openAlert')
+    }else{ // mở
+        $("#bell-1").addClass('open')
+        $(".formAlert").addClass('openAlert')
+
+        // tắt hiệu ứng thông báo
+        $(".boxAlert .default").removeClass('dl-none')
+        $(".boxAlert .for_layer").addClass('dl-none')
+    }
+}
+
+// button chấp nhận, hủy tham gia nhóm
+function fnBtnRequest(_this, alertId, request_user_id, room_id, type) { 
+    $(_this).find('i').addClass('fa-solid fa-circle-check')
+    $(_this).closest('.box_button_item').find('button').not(_this).remove()
+
+    socket.emit('btn_request_join_room', alertId,  request_user_id, room_id, type)
+}
+
+socket.on('pending_request_join_room', function(message){
+    bs4Toast.primary('Thông báo', message, {delay: 200});
+})
