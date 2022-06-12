@@ -1,7 +1,7 @@
 const userModel = require('../mvc/models/userModel')
 const roomsModel = require('../mvc/models/roomsModel')
 const roomsUsersModel = require('../mvc/models/roomsUsersModel')
-
+const logger = require('./logger');
 class Clients {
    constructor() {
       this.objUsers = {}
@@ -64,91 +64,74 @@ class Clients {
                                     fullname: '',
                                     peer_id: '',
                                     private_room: '',
-                                    callroom: ''
+                                    options: {camera: true, microphone: true}
                               }
    }
 
 
    async management(socket, mObj){
       return new Promise(async (resolve, reject) => {
-         await this.add_user(socket, mObj)
-         this.add_socket(mObj)
-         this.add_private_room(mObj)
-         this.add_peerid(mObj)
-         this.add_rooms(mObj)
-         // tự join vào các room khi login
+         let dataAfterAddUser              = await this.add_user(socket, mObj)
+             dataAfterAddUser['socket_id'] = socket.id
+
+         this.add_socket(dataAfterAddUser)
+         this.add_private_room(dataAfterAddUser)
+         this.add_peerid(dataAfterAddUser)
+         this.add_rooms(dataAfterAddUser)
+          // tự join vào các room khi login
          this.page_load_join_room(socket, mObj)
          resolve(this.objUsers)
       });
    }
 
-   async page_load_join_room(socket, mObj){
-      let _this = this
-      // Các nhóm mà chính user tạo
-      let myRoom = await roomsModel.get({select: "*", where: ` user_id != 0 AND user_id = ${mObj.user_id}`})
-          myRoom = myRoom.data
-          if(myRoom.length > 0){
-            myRoom.map(function (data, index, array) {  
-               socket.join(data.room_id)
-               _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
-               _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
-            });             
-          }
+   // Lưu user 
+   async add_user(socket, mObj){
+      let obj = Object.assign({}, this.defaulUsers, mObj);
+     
+      // THÊM USER VÀO OBJECT ĐỂ DỄ ACCESS KHÔNG CẦN QUERY DB
+      let tempAdd = {
+                        user_id: obj.user_id, 
+                        peer_id: obj.peer_id, 
+                        private_room: obj.private_room,
+                        options: obj.options
+                  }
+      let object_us = {
+         select:' id ,username, fullname, peer_id, private_room',
+         where:` id = '${obj.user_id}'`
+   }
+      let rs = await userModel.get(object_us)
+      return new Promise((resolve, reject) => {
+            let dataArr = rs.data[0];
+            if(this.objUsers[tempAdd.user_id] == undefined){
+               this.objUsers[tempAdd.user_id] = {}
+               this.objUsers[tempAdd.user_id]['peer_id']      = dataArr.peer_id
+               this.objUsers[tempAdd.user_id]['user_id']      = dataArr.id
+               this.objUsers[tempAdd.user_id]['username']     = dataArr.username
+               this.objUsers[tempAdd.user_id]['fullname']     = dataArr.fullname
+               this.objUsers[tempAdd.user_id]['private_room'] = dataArr.private_room    
+               this.objUsers[tempAdd.user_id]['room_id']      = dataArr.private_room    
+               this.objUsers[tempAdd.user_id]['options']      = tempAdd.options    
+               
+               socket.join(dataArr.private_room)
+             
+            }
+            resolve(this.objUsers[tempAdd.user_id]) 
+      });
+   }
 
+
+   async page_load_join_room(socket, mObj){
       // Các nhóm mà user tham gia
       let meJoinRooms = await roomsUsersModel.get({select: "*", where: ` user_id = ${mObj.user_id}`})
           meJoinRooms = meJoinRooms.data
           if(meJoinRooms.length > 0){
             meJoinRooms.map(function (data, index, array) {  
                socket.join(data.room_id)
-               _this.add_socket({socket_id: socket.id, room_id: data.room_id, user_id: data.user_id})
-               _this.add_rooms({room_id: data.room_id, user_id: data.user_id})
             });
           }
    }
 
-   // Lưu user 
-   async add_user(socket, mObj){
-      let obj = Object.assign({}, this.defaulUsers, mObj);
-      if(obj.user_id != "" && obj.user_id != undefined){
-         obj['private_room'] = `private_room_${obj.user_id}`
-      }
-      // THÊM USER VÀO OBJECT ĐỂ DỄ ACCESS KHÔNG CẦN QUERY DB
-      let tempAdd = {
-                        user_id: obj.user_id, 
-                        peer_id: obj.peer_id, 
-                        private_room: obj.private_room,
-                        callroom: obj.callroom,
-                        options: {camera: true, microphone: true}
-                    }
-      let object_us = {
-         select:' id ,username, fullname ',
-         where:` id = '${obj.user_id}'`
-     }
-     let rs = await userModel.get(object_us)
-     return new Promise((resolve, reject) => {
-         let dataArr = rs.data[0];
-         if(this.objUsers[tempAdd.user_id] == undefined){
-            this.objUsers[tempAdd.user_id] = {}
-            this.objUsers[tempAdd.user_id]['peer_id']  = tempAdd.peer_id
-            this.objUsers[tempAdd.user_id]['user_id']  = tempAdd.user_id
-            this.objUsers[tempAdd.user_id]['username'] = dataArr.username
-            this.objUsers[tempAdd.user_id]['fullname'] = dataArr.fullname
-            this.objUsers[tempAdd.user_id]['private_room'] = tempAdd.private_room    
-            this.objUsers[tempAdd.user_id]['callroom'] = ''     
-            this.objUsers[tempAdd.user_id]['options'] = tempAdd.options     
-         }else{
-            if(tempAdd.room_id != "" && tempAdd.room_id != undefined){
-               this.objUsers[tempAdd.user_id]['callroom'] = tempAdd.room_id    
-            }
-         }
-         
-         socket.join(tempAdd.private_room)
-         socket.join(tempAdd.user_id)
-         resolve(this.objUsers)
-      });
-   }
-
+   // Cập nhật user
    async update_user(user_id, key, value){
       if(this.objUsers[user_id] != undefined){
          this.objUsers[user_id][key] = value
@@ -162,30 +145,33 @@ class Clients {
          this.objSocket[obj.socket_id] = {}
       }
 
-      this.objSocket[obj.socket_id]['private_room'] = `private_room_${obj.user_id}`
+      this.objSocket[obj.socket_id]['private_room'] = obj.private_room
 
       if(obj.user_id != undefined && obj.user_id != ""){
          this.objSocket[obj.socket_id]['user_id'] = obj.user_id
       }
 
       if(obj.room_id != undefined && obj.room_id != ""){
-        if(Array.isArray(this.objSocket[obj.socket_id]['another_rooms'])) {
-            this.objSocket[obj.socket_id]['another_rooms'].push(obj.room_id)
-        }else{
-            this.objSocket[obj.socket_id]['another_rooms'] = [obj.room_id]
-        }
+         if(Array.isArray(this.objSocket[obj.socket_id]['another_rooms'])) {
+               this.objSocket[obj.socket_id]['another_rooms'].push(obj.room_id)
+         }else{
+               this.objSocket[obj.socket_id]['another_rooms'] = [obj.room_id]
+         }
       }
-   }
-   
 
+   }
+
+   
    // Lưu thông tin user trong private room 
-   add_private_room(obj = {socket_id: '', user_id: ''}){
-      let private_room = `private_room_${obj.user_id}`
-      if(Array.isArray(this.objPrivateRoom[private_room])){
-         this.objPrivateRoom[private_room].push(obj.socket_id)
+   add_private_room(obj = {socket_id: '', user_id: '', private_room: private_room}){
+      if(Array.isArray(this.objPrivateRoom[obj.private_room])){
+         logger.info(`============= ADD PRIVATE ROOM OBJECT 1============`)
+         logger.info(this.objPrivateRoom)
+         this.objPrivateRoom[obj.private_room].push(obj.socket_id)
      }else{
-         this.objPrivateRoom[private_room] = []
-         this.objPrivateRoom[private_room].push(obj.socket_id)
+         this.objPrivateRoom[obj.private_room] = [obj.socket_id]
+         logger.info(`============= ADD PRIVATE ROOM OBJECT 2============`)
+         logger.info(this.objPrivateRoom)
      }
    }
 
@@ -223,23 +209,14 @@ class Clients {
       return data
    }
 
-   get_private_room(roomName) { 
-      return this.objPrivateRoom[roomName]
+   get_private_room(roomId) { 
+      return this.objPrivateRoom[roomId]
    }
 
    get_user(user_id){
       return this.objUsers[user_id]
    }
 
-   update_user_in_room(obj){ // {user_id: user_id, room_id: room_id, type: type, off: typeOff}
-      return new Promise((resolve, reject) => {
-         if(this.objRooms[obj.room_id] != undefined && this.objRooms[obj.room_id][obj.user_id] != undefined){
-            this.objRooms[obj.room_id][obj.user_id]['options'][obj.options.type] = obj.options.value
-            resolve(this.objRooms[obj.room_id][obj.user_id])
-         }  
-      });
-   }
-   
    delete_user_in_room(room_id, user_id){
       if(this.objRooms[room_id] != undefined){
          delete this.objRooms[room_id][user_id]
@@ -250,70 +227,82 @@ class Clients {
       delete this.objUsers[user_id]
    }
 
-   async check_room_exist_beetween_client(user_id_request, user_id_receive) {
-      let objectQuery = {
-         select:'*',
-         join      : [
-                    {
-                        type : "INNER JOIN",
-                        table: "dtb_rooms_users",
-                        on   : "ON",
-                        condition: `dtb_rooms_users.room_id = dtb_rooms.room_id 
-                                   AND dtb_rooms_users.user_id_request = ${parseInt(user_id_request)} 
-                                   AND dtb_rooms_users.user_id_receive = ${parseInt(user_id_receive)}`
-                    }
-                ]
-         }
-      let rs = await roomsModel.get(objectQuery)
-      return rs
-   }
 
-   // CHECK DISCONNECT
-   disconnectReset(socket_id){
+   update_user_in_room(obj){ // {user_id: user_id, room_id: room_id, type: type, off: typeOff}
+      let _this = this
       return new Promise((resolve, reject) => {
-         // lấy tên private_room
-         let __this     = this
-         let getSocket  = __this.get_object_socket(socket_id)
-         let rsTemp = {}
-         if(getSocket != undefined){
-            let roomName   =  "";
-            let getUser    = __this.get_user(getSocket.user_id)
-         
-            if(typeof getSocket == "object"){
-               if(getSocket.hasOwnProperty('private_room')){
-                  roomName = getSocket.private_room
 
-                  if(getSocket.another_rooms != undefined && Array.isArray(getSocket.another_rooms)){
-                        let arrRooms = getSocket.another_rooms
-                        arrRooms.map(function (roomValue, index, array) {  
-                           // remove socket - user khỏi room đang gọi
-                           __this.delete_user_in_room(roomValue,getSocket.user_id)
-                           // user không còn trong cuộc gọi
-                           if(getUser.callroom == roomValue){
-                              __this.update_user(getSocket.user_id, 'callroom', '')
-                           }
-                        })
-                  }
-               }        
-               // KIỂM TRA ROOM
-               let checkPrivateRoom = this.get_private_room(roomName)
-               // XÓA SOCKET ID KHỎI ROOM
-               if(checkPrivateRoom != undefined){
-                  if(checkPrivateRoom.length > 0){
-                     let tempData = this.objPrivateRoom[roomName]
-                     this.objPrivateRoom[roomName] = tempData.filter(function(item) {
-                        return item !== socket_id
-                     })
-                  }
-                  // XÓA SOCKET ID
-                  delete this.objSocket[socket_id]         
-               }         
-            }         
-            rsTemp = { private_room: this.objPrivateRoom[roomName], user: getSocket}
-            resolve(rsTemp)
-         }
+         let user_id = obj.user_id
+         let opType  = obj.options.type
+         let opValue =  obj.options.value
+         let tempUserOption = _this.objUsers[user_id].options
+         let newOptions = {"camera": 1,"microphone": 1}
+             newOptions = Object.assign({}, newOptions, tempUserOption);
+             newOptions[opType] = opValue
+        
+         _this.objUsers[user_id].options = newOptions
+         _this.objRooms[obj.room_id][obj.user_id].options = newOptions
+
+         resolve(_this.objRooms[obj.room_id][obj.user_id])
       });
    }
+
+  // CHECK DISCONNECT
+  disconnectReset(socket_id){
+   return new Promise((resolve, reject) => {
+      // lấy tên private_room
+      let __this     = this
+      let getSocket  = __this.get_object_socket(socket_id)
+      let rsTemp = {}
+      if(getSocket != undefined){
+         let roomId   =  "";
+         let getUser    = __this.get_user(getSocket.user_id)
+      
+         if(typeof getSocket == "object"){
+            if(getSocket.hasOwnProperty('private_room')){
+               roomId = getSocket.private_room
+
+               if(getSocket.another_rooms != undefined && Array.isArray(getSocket.another_rooms)){
+                     let arrRooms = getSocket.another_rooms
+                     arrRooms.map(function (roomValue, index, array) {  
+                        // remove socket - user khỏi room đang gọi
+                        __this.delete_user_in_room(roomValue,getSocket.user_id)
+                        // user không còn trong cuộc gọi
+                        if(getUser.callroom == roomValue){
+                           //__this.update_user(getSocket.user_id, 'callroom', '')
+                        }
+                     })
+               }
+            }        
+            // KIỂM TRA ROOM
+            logger.info(`============= GET SOCKET ============`)
+            logger.info(getSocket)
+
+            logger.info(`============= ROOM NAME ============`)
+            logger.info(roomId)
+
+            let checkPrivateRoom = this.get_private_room(roomId)
+
+            logger.info(`======== CHECK PRIVATE ROOM =========`)
+            logger.info(checkPrivateRoom)
+            // XÓA SOCKET ID KHỎI ROOM
+            if(checkPrivateRoom != undefined){
+               if(checkPrivateRoom.length > 0){
+                  let tempData = this.objPrivateRoom[roomId]
+                  this.objPrivateRoom[roomId] = tempData.filter(function(item) {
+                     return item !== socket_id
+                  })
+               }
+               // XÓA SOCKET ID
+               delete this.objSocket[socket_id]         
+            }         
+         }         
+         rsTemp = { private_room: this.objPrivateRoom[roomId], user: getSocket}
+         resolve(rsTemp)
+      }
+   });
+  }
+
 
    overView(){
       console.log(`==================== objUsers ==================`)

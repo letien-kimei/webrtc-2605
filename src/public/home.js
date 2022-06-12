@@ -1,5 +1,7 @@
-socket.emit('userlogin', user_id, peerId)
-socket.on("user_login",async function (data, addUsersOnl){
+socket.emit('user_login', user_id, peerId)
+socket.on("get_user_login",async function (data){
+    console.log("============= DATA ===========")
+    console.log(data)
     bs4Toast.primary('Thông báo', `${data.fullname} vừa đăng nhập`,{delay: 200});
     let getState =  $(`div[data-userid="${data.user_id}"]`).find(".stateOnline");
         $(getState).removeClass("off");
@@ -23,48 +25,34 @@ socket.on('user_is_offline',  async (remoteClient) => {
 })
 
 socket.on('data_call',  async (remoteClient) => {
-    debugger;
     $(".requestcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
-    debugger;
 })
 
-socket.on('data_call_group',  async (remoteClient) => {
-    debugger;
-    $(".requestcall").show();
-    $(".sp-callname").text(`${remoteClient.room_name}`,{delay: 200});
-    debugger;
-})
 
 //=============/ CHECK LÚC CLICK GỌI THÌ USER CÓ ONLINE KHÔNG =================
 
 // Người B nhận thông báo có cuộc gọi tới từ A
-socket.on('comming_call',  async (remoteClient) => {
-    debugger;
+socket.on('comming_call',  async (remoteClient, callroom) => {
     $(".coomingcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
-    $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.callroom}`)
-    $(".coomingcall .acceptcall").attr("data-callroom", remoteClient.callroom)
+    $(".coomingcall").attr("data-request_user_id", remoteClient.user_id)
+    $(".coomingcall").attr("data-pagecall", `call/room/${callroom}`)
+    $(".coomingcall").attr("data-callroom", callroom)
     debugger;
 })
 // Nhóm
 socket.on('comming_call_group',  async (remoteClient) => {
-    debugger;
-    $(".coomingcall").show();
+    $(".coomingcall_group").show();
     $(".sp-callname").text(`Phòng ${remoteClient.fullname}`,{delay: 200});
-    $(".coomingcall .acceptcall").attr("data-pagecall", `call/room/${remoteClient.room_id}`)
-    $(".coomingcall .acceptcall").attr("data-callroom", remoteClient.room_id)
-    debugger;
+    $(".coomingcall_group").attr("data-pagecall", `call/room/${remoteClient.room_id}`)
+    $(".coomingcall_group").attr("data-callroom", remoteClient.room_id)
 })
 
 
-socket.on('go_to_room',  async (remoteClient) => {
+socket.on('go_to_room',  async (callroom) => {
     $(".requestcall").hide();
-    setTimeout( function() {
-        let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-        width=${screen.width},height=${screen.height},left=-1000,top=-1000`;
-        window.open(`/call/room/${remoteClient.callroom}`, 'call', params);
-    },1000)
+    window.open(`/call/room/${callroom}`,'call');
 })
 
 
@@ -82,15 +70,24 @@ function detectOnlOff(usersState,type = 'off') {
 
 // gọi 1:1
 $(document).on("click",".phone",function(e){
-    let getParents = $(this).closest(".item-user");
-    let remoteId = $(getParents).attr("data-userid"); // id của người muốn gọi
-    socket.emit('request_call', user_id, remoteId)
+    let getParents      = $(this).closest(".item-user");
+    let room_id         = $(getParents).attr("data-roomid"); // room id của người muốn gọi
+    let request_user_id = user_id
+    socket.emit('request_call', request_user_id, room_id);
+    $(".requestcall").hide();
 });
 // gọi nhóm
 $(document).on("click",".phone_group",function(e){
     let remoteId = $(this).closest(".colRoom").attr("data-roomid"); // id của người muốn gọi
-    socket.emit('request_call', user_id, remoteId)
+    socket.emit('request_call', user_id, remoteId);
+    window.open(`/call/room/${remoteId}`,'call');
+    $(".requestcallgroup").hide();
 });
+
+socket.on("cancel_call", function(data){
+    bs4Toast.primary('Thông báo', `${data.fullname} hiện đang bận`, {delay: 200});
+    $(".wrapcaller").hide();
+})
 
 // Tạo phòng
 function createRoom() { 
@@ -105,20 +102,19 @@ socket.on('new_room',function(dataRoom, userid){
 
 
 socket.on('accept_join_room',function(data){
-    debugger;
     $(`div.colRoom[data-roomid="${data.room_id}"]`).remove()
     add_update_room(data, '')
 });   
 
 function add_update_room(dataRoom, userid) { 
     let tempHtml = '';
-    let user_id_join = 0;
+    let room_join_user_id = 0;
     
-    if(dataRoom['user_id_join'] != undefined){
-        user_id_join = dataRoom['user_id_join']
+    if(dataRoom['room_join_user_id'] != undefined){
+        room_join_user_id = dataRoom['room_join_user_id']
     }   
 
-    if(userid == user_id || user_id_join != 0){
+    if(userid == user_id || room_join_user_id != 0){
         tempHtml = `<i class="iMenu fa-solid fa-ellipsis-vertical">
                         <div class="listAction">
                             <i class="fa-solid fa-right-to-bracket"></i>
@@ -141,6 +137,7 @@ function add_update_room(dataRoom, userid) {
 
 function request_join_room(_this, room_id) { 
     let request_user_id = user_id
+    $(_this).addClass("wait_accept")
     debugger;
     socket.emit('request_join_room', request_user_id, room_id )
 }
@@ -180,7 +177,6 @@ function openAlert(_this) {
 
 // button chấp nhận, hủy tham gia nhóm
 function fnBtnRequest(_this, alertId, request_user_id, room_id, type) { 
-    debugger
     $(_this).find('i').addClass('fa-solid fa-circle-check')
     $(_this).closest('.box_button_item').find('button').not(_this).remove()
 
@@ -190,3 +186,4 @@ function fnBtnRequest(_this, alertId, request_user_id, room_id, type) {
 socket.on('pending_request_join_room', function(message){
     bs4Toast.primary('Thông báo', message, {delay: 200});
 })
+

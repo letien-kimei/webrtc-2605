@@ -28,6 +28,7 @@ $(document).ready(function(){
   }
 
   function startJoinCall() { 
+    $(".loadingcall").show();
     // Người vào room trước sẽ emit 
     socket.emit('get_users_in_room', user_id, roomId, peerId)
   }
@@ -70,6 +71,7 @@ $(document).ready(function(){
       Globalclients = Object.assign({}, getUsers, Globalclients);
       // Gộp peer_id của user
       GlobalPeersIds = Object.assign({}, getObjPeers, GlobalPeersIds);
+
       let firstKey = Object.keys(getUsers)[0]
       let tempPeerId = getUsers[firstKey].peer_id
       
@@ -79,7 +81,10 @@ $(document).ready(function(){
           const call = peer.call(tempPeerId, stream);
           await peerCallOn(call,getUsers, 'new_user_join')
           // loop for video 
+          console.log("=========== NEW LOGIN =============")
+          console.log(getUsers)
           loopCreateVideo(getUsers)
+          bs4Toast.primary('Thông báo', `${getUsers[firstKey].fullname} vừa tham gia cuộc gọi`,{delay: 0.5});
       });
   })
 });
@@ -173,10 +178,18 @@ function createElVideo(assignClass = '',attr = null, fullname = '', userid = '')
 async function loopCreateVideo(tempObjuser) { 
   let firstKey2 = Object.keys(tempObjuser)[0]
   let Objuser = tempObjuser[firstKey2]
+  debugger;
    if(countKey() <= 2){
       $(`div[data-userid="${user_id}"]`).removeAttr('class').attr('class', 'default-col col-md-4 callone');
       if(Objuser.user_id != user_id){
-        CreatePlayVideo(Objuser, 'default-col col-md-12')
+        let checkExist = $(`div[data-userid="${Objuser.user_id}"]`)
+        debugger;
+        if(checkExist.length == 0){
+          CreatePlayVideo(Objuser, 'default-col col-md-12')          
+        }else{
+            let getElVideo = $(checkExist[0]).find('video')[0];
+                getElVideo.srcObject = Objuser.stream;
+        }
       }
       $(".loadingcall").hide();
   }else{
@@ -184,6 +197,7 @@ async function loopCreateVideo(tempObjuser) {
     let videoExists = $(`div[data-userid="${Objuser.user_id}"]`);
     if(videoExists.length > 0){
         let getVideo = $(videoExists).find('video')[0];
+        debugger;
         getVideo.srcObject = Objuser.stream;
     }
     else{
@@ -199,6 +213,7 @@ function refreshListVideo(user, usersInRoom){
     let Objuser   = user[firstKey2]
 
     $(`div[data-userid="${Objuser.user_id}"]`).remove()
+    bs4Toast.primary('Thông báo', `${Objuser.fullname} vừa rời khỏi cuộc gọi`,{delay: 0.5});
     Globalclients  = usersInRoom
 
     if(countKey() <= 2){
@@ -248,6 +263,10 @@ function peerCallOn(call, clientData, text){
 
 // =================== STREAM ======================
 function btnOff(_this, type){
+  if(Globalclients[user_id].stream == undefined){
+    Globalclients[user_id].stream = myStream;
+  }
+
   let dfParent = $(`div[data-userid="${user_id}"]`)
   let defaultOption = { 
                         user_id: user_id, room_id: roomId, 
@@ -283,6 +302,8 @@ function btnOff(_this, type){
 
   defaultOption.options['type']  = type
   defaultOption.options['value'] = typeOn
+  console.log("=========== EMIT OPTION =============")
+  console.log(defaultOption)
   socket.emit("call_options", defaultOption)
 }
 
@@ -293,6 +314,8 @@ function openStream() {
 
 socket.on('change_state_call',  function (userState) {
   Globalclients[userState.user_id]['options'] = userState.options
+  console.log("=========== CHANGE STATE CALL =============")
+  console.log(Globalclients)
   let dfParent = $(`div[data-userid="${userState.user_id}"]`)
   let getVideo = $(dfParent).find('video')[0]
 
@@ -314,6 +337,7 @@ socket.on('change_state_call',  function (userState) {
 })
 
 function playStream(video, stream, tempData) {
+  debugger;
   return new Promise((resolve, reject) => {
       try {
         let dfParent = $(`div[data-userid="${tempData.user_id}"]`)
@@ -343,3 +367,8 @@ function playStream(video, stream, tempData) {
       }
   });
 }
+
+
+$(document).on("click",".bs4ToastWrapper .close", function () { 
+      $(this).closest(".bs4ToastWrapper").remove();
+ })

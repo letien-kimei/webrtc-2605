@@ -1,4 +1,5 @@
 var conn = require("../../config/connect");
+const logger = require('../../helpers/logger');
     //*, DATE_FORMAT(created_at, '%d/%m/%Y') as created_at
     // const columns = set_is_object.keys(object);
     // const values = set_is_object .values(object);
@@ -45,6 +46,9 @@ var conn = require("../../config/connect");
                     {
                         query +=` WHERE ${object.where}`;
                     }
+                    if(object.groupby != undefined){
+                        query +=` GROUP BY ${object.groupby}`;
+                    }
                 // ORDER BY
                     if(object.orderby != undefined)
                     {
@@ -62,6 +66,8 @@ var conn = require("../../config/connect");
                         conn.getConnection(function (err,connection) { 
                                if (err) throw err;
                                     connection.query(query, (err, res) => {
+                                        logger.info(`========== GET QUERY  ============`)
+                                        logger.info(query)
                                         if (err) {
                                             resolve({ type: "error", data: err });
                                         } else {

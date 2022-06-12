@@ -3,7 +3,12 @@ body{
     height:100vh;
     position: relative;
 }
-
+.bs4ToastWrapper {
+    z-index: 2000 !important;
+}
+.wait_accept{
+    color: #bbbbbb;
+}
 #video-grid {
     padding: 20px 0px;
     position: relative;
@@ -180,6 +185,7 @@ video {
     background: rgb(137 69 69);
 }
 .loadingcall{
+    display: none;
     position: fixed;
     width: 100%;
     height: 100%;

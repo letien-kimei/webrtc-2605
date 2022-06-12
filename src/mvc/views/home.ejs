@@ -40,16 +40,21 @@
                                 <%= rooms[i]['room_name'] %>
                             </div>
                             <div class="roomMenu">
-                                <% if(rooms[i]['user_id_join'] == null && rooms[i]['boss_room_user_id'] != user['id']){ %>
-                                    <i onclick="request_join_room(this, '<%= rooms[i].room_id  %>')" class="fa-solid fa-circle-plus"></i>
+                                <% if( (rooms[i]['room_master_user_id'] == rooms[i]['room_join_user_id'] && rooms[i]['room_master_user_id'] == user['id']) ||
+                                        (rooms[i]['alert_request_user_id'] == user['id'] && rooms[i]['alert_waiting'] == 0 && rooms[i]['alert_accept'] == 1) ){ %>
+                                    <i class="iMenu fa-solid fa-ellipsis-vertical">
+                                        <div class="listAction">
+                                            <i class="fa-solid fa-right-to-bracket"></i>
+                                            <i class="fa-solid fa-phone phone_group"></i>
+                                            <i class="fa-brands fa-facebook-messenger"></i>
+                                        </div>
+                                    </i>
                                 <% }else{%>      
-                                <i class="iMenu fa-solid fa-ellipsis-vertical">
-                                    <div class="listAction">
-                                        <i class="fa-solid fa-right-to-bracket"></i>
-                                        <i class="fa-solid fa-phone phone_group"></i>
-                                        <i class="fa-brands fa-facebook-messenger"></i>
-                                    </div>
-                                </i>
+                                    <% var classWait = '' %>
+                                    <% if(rooms[i]['alert_waiting'] == 1){ %>
+                                        <% var classWait = 'wait_accept' %>
+                                    <% } %>    
+                                    <i onclick="request_join_room(this, '<%= rooms[i].room_id  %>')" class="fa-solid fa-circle-plus <%= classWait %>"></i>
                                 <% } %>    
                             </div>
                            
@@ -63,7 +68,7 @@
             <div class="row">
                 <% for (var i = 0; i < users.length; i++) { %>
                     <div class="col-md-3">
-                        <div data-userid="<%= users[i].id %>" data-peerid="<%= user['peer_id'] %>" data-fullname="<%= users[i].fullname %>"  class="item-user">
+                        <div data-roomid="<%= users[i].private_room %>" data-userid="<%= users[i].id %>" data-peerid="<%= user['peer_id'] %>" data-fullname="<%= users[i].fullname %>"  class="item-user">
                             <div class="row">
                                 <div class="col-md-3">
                                         <div class="boxavatar">

@@ -1,4 +1,7 @@
 const userModel = require('../models/userModel')
+const roomsModel = require('../models/roomsModel')
+const roomsUsersModel = require('../models/roomsUsersModel')
+const roomsSettingModel = require('../models/roomsSettingModel')
 const uuid = require('uuid');
 class basicController{
 
@@ -39,10 +42,15 @@ class basicController{
                 username: username,
                 password: password,
                 fullname: fullname,
-                peer_id : uuid.v4()
+                peer_id : uuid.v4(),
+                private_room: uuid.v4()
             }
             try {
-                var rs = await userModel.add(object_us)
+                let rsUser        = await userModel.add(object_us)
+                let rsRoom        = await roomsModel.add({room_id: object_us.private_room, room_name: '', user_id: rsUser.insertId, type: 'PRIVATE_ROOM'})
+                let rsRoomSetting = await roomsSettingModel.add({room_id: object_us.private_room, status: 'PRIVATE' })
+                let rsRoomUser    = await roomsUsersModel.add({room_id: object_us.private_room, user_id: rsUser.insertId})
+
                 res.redirect('login')
             } catch (error) {
                 console.log(error)
