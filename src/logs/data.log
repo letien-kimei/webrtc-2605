@@ -1,24 +1,279 @@
+============= GET SOCKET ============
+{
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "user_id": 23,
+   "another_rooms": [
+      "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+   ]
+}
+============= ROOM NAME ============
+62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
+======== CHECK PRIVATE ROOM =========
+[
+   "JNRVyZGJm_lc9INGAAAJ"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   }
+}
 ========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
+SELECT dtb_rooms.room_id, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
                      dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
                      dtb_alert.accept as alert_accept,
                      dtb_alert.cancel as alert_cancel,
                      dtb_alert.type as alert_type, 
                      dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = ${user.id} LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "SXCkW5vllYNlNxFjAAAL"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+============= GET SOCKET ============
+{
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "user_id": 23,
+   "another_rooms": [
+      "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+   ]
+}
+============= ROOM NAME ============
+62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
+======== CHECK PRIVATE ROOM =========
+[
+   "SXCkW5vllYNlNxFjAAAL"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = ${user.id} LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "1PsJ4AyikROZx3YbAAAN"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+============= GET SOCKET ============
+{
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "user_id": 23,
+   "another_rooms": [
+      "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+   ]
+}
+============= ROOM NAME ============
+62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
+======== CHECK PRIVATE ROOM =========
+[
+   "1PsJ4AyikROZx3YbAAAN"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = ${user.id} LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "FGySeWokf-16dx-tAAAP"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "sWcwPQ7i85Hn_0FkAAAH"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "sWcwPQ7i85Hn_0FkAAAH"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "cAipjBECa62p0CbnAAAH"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
 ========== GET QUERY  ============
 SELECT * FROM dtb_alert  WHERE request_user_id != '20'
 ========== GET QUERY  ============
 SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
 ============= ADD PRIVATE ROOM OBJECT 2============
 {
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "t3MyndEoC0V6139vAAAH"
+      "DC2-EjYG0CgipaFTAAAJ"
    ]
 }
 ============ USER LOGIN =============
@@ -33,10 +288,856 @@ SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id 
       "camera": true,
       "microphone": true
    },
-   "socket_id": "t3MyndEoC0V6139vAAAH"
+   "socket_id": "DC2-EjYG0CgipaFTAAAJ"
 }
 ========== GET QUERY  ============
 SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "bYmoOU9kDgbuYCm6AAAL"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "bYmoOU9kDgbuYCm6AAAL"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE id = 52
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id = '21' AND room_id = 'b536419a-340f-432e-ad20-9a3936203634'
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b536419a-340f-432e-ad20-9a3936203634'
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE id = '39'
+========== GET QUERY  ============
+SELECT  dtb_rooms.room_id, dtb_rooms.user_id as room_master_user_id, dtb_rooms.room_name, temp_dru.user_id as room_join_user_id  FROM dtb_rooms  LEFT JOIN  dtb_rooms_users  AS temp_dru  ON temp_dru.room_id = dtb_rooms.room_id WHERE  dtb_rooms.user_id != 0  AND temp_dru.id = 52
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": 21,
+   "another_rooms": [
+      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+   ]
+}
+============= ROOM NAME ============
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+======== CHECK PRIVATE ROOM =========
+[
+   "bYmoOU9kDgbuYCm6AAAL"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "_CmRhHLoVbGVfrbFAAAN"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b536419a-340f-432e-ad20-9a3936203634'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "_CmRhHLoVbGVfrbFAAAN"
+   ]
+}
+========== ME JOIN ============
+{
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b536419a-340f-432e-ad20-9a3936203634",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "_CmRhHLoVbGVfrbFAAAN",
+      "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "cAipjBECa62p0CbnAAAH"
+   }
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "_CmRhHLoVbGVfrbFAAAN",
+      "Txkw-9BykC-uVEATAAAP"
+   ]
+}
+========== ME JOIN ============
+{
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b536419a-340f-432e-ad20-9a3936203634",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "_CmRhHLoVbGVfrbFAAAN",
+      "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "cAipjBECa62p0CbnAAAH",
+      "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+   }
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id = '20' AND room_id = 'b536419a-340f-432e-ad20-9a3936203634'
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b536419a-340f-432e-ad20-9a3936203634'
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE id = '40'
+========== GET QUERY  ============
+SELECT  dtb_rooms.room_id, dtb_rooms.user_id as room_master_user_id, dtb_rooms.room_name, temp_dru.user_id as room_join_user_id  FROM dtb_rooms  LEFT JOIN  dtb_rooms_users  AS temp_dru  ON temp_dru.room_id = dtb_rooms.room_id WHERE  dtb_rooms.user_id != 0  AND temp_dru.id = 53
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b536419a-340f-432e-ad20-9a3936203634'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH",
+      "SF2-B8WYR8-aSxXSAAAR"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "_CmRhHLoVbGVfrbFAAAN",
+      "Txkw-9BykC-uVEATAAAP"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "b536419a-340f-432e-ad20-9a3936203634",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "DC2-EjYG0CgipaFTAAAJ",
+      "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b536419a-340f-432e-ad20-9a3936203634",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "_CmRhHLoVbGVfrbFAAAN",
+      "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "cAipjBECa62p0CbnAAAH",
+      "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "user_id": "23",
+   "another_rooms": [
+      "b536419a-340f-432e-ad20-9a3936203634"
+   ]
+}
+============= ROOM NAME ============
+62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
+======== CHECK PRIVATE ROOM =========
+[
+   "cAipjBECa62p0CbnAAAH",
+   "SF2-B8WYR8-aSxXSAAAR"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "b536419a-340f-432e-ad20-9a3936203634"
+      ]
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": "20",
+   "another_rooms": [
+      "b536419a-340f-432e-ad20-9a3936203634"
+   ]
+}
+============= ROOM NAME ============
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+======== CHECK PRIVATE ROOM =========
+[
+   "DC2-EjYG0CgipaFTAAAJ",
+   "RByawU3lEH42ev7UAAAT"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "b536419a-340f-432e-ad20-9a3936203634"
+      ]
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": "21",
+   "another_rooms": [
+      "b536419a-340f-432e-ad20-9a3936203634"
+   ]
+}
+============= ROOM NAME ============
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+======== CHECK PRIVATE ROOM =========
+[
+   "_CmRhHLoVbGVfrbFAAAN",
+   "Txkw-9BykC-uVEATAAAP"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "_CmRhHLoVbGVfrbFAAAN"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "b536419a-340f-432e-ad20-9a3936203634"
+      ]
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": 21,
+   "another_rooms": [
+      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+   ]
+}
+============= ROOM NAME ============
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+======== CHECK PRIVATE ROOM =========
+[
+   "_CmRhHLoVbGVfrbFAAAN"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "6DG8BBsYP50qFIwGAAAV"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+============= GET SOCKET ============
+{
+   "user_id": "23",
+   "another_rooms": [
+      "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "b536419a-340f-432e-ad20-9a3936203634"
+   ]
+}
+============= ROOM NAME ============
+undefined
+======== CHECK PRIVATE ROOM =========
+undefined
+============= DATA DISCONNECT TOP ============
+{
+   "user": {
+      "user_id": "23",
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "b536419a-340f-432e-ad20-9a3936203634"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "cAipjBECa62p0CbnAAAH"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "DC2-EjYG0CgipaFTAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "6DG8BBsYP50qFIwGAAAV"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "_K46KPNIWr-kaHlQAAAX",
+   "callroom": "b536419a-340f-432e-ad20-9a3936203634"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "qk9Z4dLG3k9_u39jAAAD"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "qk9Z4dLG3k9_u39jAAAD"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "TTwFgMF2D7yM8vmmAAAH"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "TTwFgMF2D7yM8vmmAAAH"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== GET QUERY  ============
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "TTwFgMF2D7yM8vmmAAAH"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ja16m9BI1BWDo_aAAAAJ"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "ja16m9BI1BWDo_aAAAAJ"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== GET QUERY  ============
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "TTwFgMF2D7yM8vmmAAAH"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ja16m9BI1BWDo_aAAAAJ"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "Sofc5XfgsEM5_svnAAAL"
+}
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b748b857-efd1-4afb-aaeb-12aec700afd0'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "TTwFgMF2D7yM8vmmAAAH"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ja16m9BI1BWDo_aAAAAJ"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "b748b857-efd1-4afb-aaeb-12aec700afd0",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "TTwFgMF2D7yM8vmmAAAH",
+      "callroom": "b748b857-efd1-4afb-aaeb-12aec700afd0"
+   }
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "TTwFgMF2D7yM8vmmAAAH",
+      "a0hr89ZVAHC2zF5NAAAN"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ja16m9BI1BWDo_aAAAAJ"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "b748b857-efd1-4afb-aaeb-12aec700afd0",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "TTwFgMF2D7yM8vmmAAAH",
+      "callroom": "b748b857-efd1-4afb-aaeb-12aec700afd0"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "ja16m9BI1BWDo_aAAAAJ",
+      "callroom": "b748b857-efd1-4afb-aaeb-12aec700afd0"
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": "20",
+   "another_rooms": [
+      "b748b857-efd1-4afb-aaeb-12aec700afd0"
+   ]
+}
+============= ROOM NAME ============
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+======== CHECK PRIVATE ROOM =========
+{
+   "private_room": [
+      "TTwFgMF2D7yM8vmmAAAH"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "b748b857-efd1-4afb-aaeb-12aec700afd0"
+      ]
+   }
+}
+[
+   "TTwFgMF2D7yM8vmmAAAH",
+   "a0hr89ZVAHC2zF5NAAAN"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": "21",
+   "another_rooms": [
+      "b748b857-efd1-4afb-aaeb-12aec700afd0"
+   ]
+}
+============= GET SOCKET ============
+============= ROOM NAME ============
+======== CHECK PRIVATE ROOM =========
+[
+   "ja16m9BI1BWDo_aAAAAJ",
+   "H4fTM-zdKgC4ZmWrAAAP"
+]
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "ja16m9BI1BWDo_aAAAAJ"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "b748b857-efd1-4afb-aaeb-12aec700afd0"
+      ]
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": 21,
+   "another_rooms": [
+      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+   ]
+}
+============= ROOM NAME ============
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+[
+   "ja16m9BI1BWDo_aAAAAJ"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+======== CHECK PRIVATE ROOM =========
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "TTwFgMF2D7yM8vmmAAAH"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "ZjQUuPd_adqXBQ7pAAAR"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
 ============= GET SOCKET ============
 {
    "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
@@ -49,7 +1150,7 @@ SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
 14011d49-3d2a-4a3a-93be-5a5e7ec26efa
 ======== CHECK PRIVATE ROOM =========
 [
-   "t3MyndEoC0V6139vAAAH"
+   "TTwFgMF2D7yM8vmmAAAH"
 ]
 ============= DATA DISCONNECT TOP ============
 {
@@ -65,23 +1166,27 @@ SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
 ========== GET QUERY  ============
 SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
                      dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
                      dtb_alert.accept as alert_accept,
                      dtb_alert.cancel as alert_cancel,
                      dtb_alert.type as alert_type, 
                      dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
 ========== GET QUERY  ============
 SELECT * FROM dtb_alert  WHERE request_user_id != '20'
 ========== GET QUERY  ============
 SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
 ============= ADD PRIVATE ROOM OBJECT 1============
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": []
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ZjQUuPd_adqXBQ7pAAAR"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
+   ]
 }
 ============ USER LOGIN =============
 {
@@ -95,381 +1200,24 @@ SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id 
       "camera": true,
       "microphone": true
    },
-   "socket_id": "tWEfhYvrLmmKBBr3AAAJ"
+   "socket_id": "O5MV18l0MS5JKWFNAAAT"
 }
-========== GET QUERY  ============
 SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
 ========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '21'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
-============= ADD PRIVATE ROOM OBJECT 2============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
 {
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "tWEfhYvrLmmKBBr3AAAJ"
+      "O5MV18l0MS5JKWFNAAAT"
    ],
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "n4Wj4_bM04q1Q5rXAAAL"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-   "user_id": 21,
-   "username": "usm2",
-   "fullname": "Nguyễn Văn B",
-   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "n4Wj4_bM04q1Q5rXAAAL"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
-========== CANCEL CALL ============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "tWEfhYvrLmmKBBr3AAAJ"
-}
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
-========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '20'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
-============= ADD PRIVATE ROOM OBJECT 2============
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "dEdXhbkfaLty4dmqAAAH"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "dEdXhbkfaLty4dmqAAAH"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
-========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '21'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
-============= ADD PRIVATE ROOM OBJECT 2============
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "dEdXhbkfaLty4dmqAAAH"
+      "ZjQUuPd_adqXBQ7pAAAR"
    ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "W3O4LLfHmDv-hpDeAAAJ"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-   "user_id": 21,
-   "username": "usm2",
-   "fullname": "Nguyễn Văn B",
-   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "W3O4LLfHmDv-hpDeAAAJ"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
-========== CANCEL CALL ============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "dEdXhbkfaLty4dmqAAAH"
-}
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
-========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '21'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
-============= ADD PRIVATE ROOM OBJECT 2============
-{
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "wx5hrNDzok0lLkDBAAAH"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-   "user_id": 21,
-   "username": "usm2",
-   "fullname": "Nguyễn Văn B",
-   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "wx5hrNDzok0lLkDBAAAH"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
-========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '20'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
-============= ADD PRIVATE ROOM OBJECT 2============
-{
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "wx5hrNDzok0lLkDBAAAH"
-   ],
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "BE544XklEKzzoRFGAAAJ"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "BE544XklEKzzoRFGAAAJ"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
-========== CANCEL CALL ============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "BE544XklEKzzoRFGAAAJ"
-}
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
-========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '20'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
-============= ADD PRIVATE ROOM OBJECT 2============
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "yba_bcvoZIdDTR0xAAAH"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
-========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
-========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '21'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
-============= ADD PRIVATE ROOM OBJECT 2============
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "Ug8DEiW0pVF9CczOAAAJ"
-   ]
-}
-============ USER LOGIN =============
-{
-   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-   "user_id": 21,
-   "username": "usm2",
-   "fullname": "Nguyễn Văn B",
-   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "Ug8DEiW0pVF9CczOAAAJ"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
-========== CANCEL CALL ============
-{
-   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-   "user_id": 20,
-   "username": "usm1",
-   "fullname": "Nguyễn Văn A",
-   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-   "options": {
-      "camera": true,
-      "microphone": true
-   },
-   "socket_id": "yba_bcvoZIdDTR0xAAAH"
-}
-========== GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
-============= ADD PRIVATE ROOM OBJECT 1============
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "Ug8DEiW0pVF9CczOAAAJ"
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
    ]
 }
 ============= ADD PRIVATE ROOM OBJECT 1============
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "Ug8DEiW0pVF9CczOAAAJ",
-      "h1whEUNs3vz3vukTAAAL"
-   ]
-}
-========== ME JOIN ============
 {
    "20": {
       "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
@@ -477,30 +1225,30 @@ SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
       "username": "usm1",
       "fullname": "Nguyễn Văn A",
       "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
       "options": {
          "camera": true,
          "microphone": true
       },
-      "socket_id": "yba_bcvoZIdDTR0xAAAH",
-      "callroom": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "Ug8DEiW0pVF9CczOAAAJ",
-      "callroom": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      "socket_id": "O5MV18l0MS5JKWFNAAAT",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
    }
 }
 ========== ME JOIN ============
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "O5MV18l0MS5JKWFNAAAT",
+      "AgWpJpppTqfruRIQAAAV"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ZjQUuPd_adqXBQ7pAAAR"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Sofc5XfgsEM5_svnAAAL"
+   ]
+}
+========== ME JOIN ============
 {
    "20": {
       "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
@@ -508,13 +1256,13 @@ SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
       "username": "usm1",
       "fullname": "Nguyễn Văn A",
       "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
       "options": {
          "camera": true,
          "microphone": true
       },
-      "socket_id": "yba_bcvoZIdDTR0xAAAH",
-      "callroom": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      "socket_id": "O5MV18l0MS5JKWFNAAAT",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
    },
    "21": {
       "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
@@ -527,8 +1275,137 @@ SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
          "camera": true,
          "microphone": true
       },
-      "socket_id": "Ug8DEiW0pVF9CczOAAAJ",
-      "callroom": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      "socket_id": "ZjQUuPd_adqXBQ7pAAAR",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "user_id": 23,
+   "another_rooms": [
+      "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+   ]
+}
+============= ROOM NAME ============
+62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
+======== CHECK PRIVATE ROOM =========
+============= DATA DISCONNECT TOP ============
+[
+   "Sofc5XfgsEM5_svnAAAL"
+]
+{
+   "private_room": [],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "O5MV18l0MS5JKWFNAAAT",
+      "AgWpJpppTqfruRIQAAAV"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ZjQUuPd_adqXBQ7pAAAR",
+      "rnxEsoJf2GlpDnCNAAAX"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "wzC97LxJPuWuNrftAAAZ"
+}
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== GET QUERY  ============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "O5MV18l0MS5JKWFNAAAT",
+      "AgWpJpppTqfruRIQAAAV"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "ZjQUuPd_adqXBQ7pAAAR",
+      "rnxEsoJf2GlpDnCNAAAX"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "wzC97LxJPuWuNrftAAAZ"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "O5MV18l0MS5JKWFNAAAT",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "ZjQUuPd_adqXBQ7pAAAR",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "wzC97LxJPuWuNrftAAAZ",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
    }
 }
 ============= GET SOCKET ============
@@ -536,103 +1413,295 @@ SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
    "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
    "user_id": "20",
    "another_rooms": [
-      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
    ]
 }
 ============= ROOM NAME ============
-14011d49-3d2a-4a3a-93be-5a5e7ec26efa
 ======== CHECK PRIVATE ROOM =========
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
 [
-   "yba_bcvoZIdDTR0xAAAH",
-   "Oq2c4WD17xg2HU_2AAAN"
+   "O5MV18l0MS5JKWFNAAAT",
+   "AgWpJpppTqfruRIQAAAV"
 ]
 ============= DATA DISCONNECT TOP ============
 {
    "private_room": [
-      "yba_bcvoZIdDTR0xAAAH"
+      "O5MV18l0MS5JKWFNAAAT"
    ],
    "user": {
       "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
       "user_id": "20",
       "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
       ]
    }
 }
 ============= GET SOCKET ============
-{
-   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-   "user_id": "21",
-   "another_rooms": [
-      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-   ]
-}
 ============= ROOM NAME ============
 b25b69b2-f526-43e6-8c12-6bb0c9760ae8
 ======== CHECK PRIVATE ROOM =========
 [
-   "Ug8DEiW0pVF9CczOAAAJ",
-   "h1whEUNs3vz3vukTAAAL"
+   "ZjQUuPd_adqXBQ7pAAAR",
+   "rnxEsoJf2GlpDnCNAAAX"
 ]
 ============= DATA DISCONNECT TOP ============
 {
    "private_room": [
-      "Ug8DEiW0pVF9CczOAAAJ"
+      "ZjQUuPd_adqXBQ7pAAAR"
    ],
    "user": {
       "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
       "user_id": "21",
       "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
       ]
    }
 }
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": "21",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
 ========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
                      dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
                      dtb_alert.accept as alert_accept,
                      dtb_alert.cancel as alert_cancel,
                      dtb_alert.type as alert_type, 
                      dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
 ========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
 ========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
 ============= ADD PRIVATE ROOM OBJECT 2============
 {
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "Ug8DEiW0pVF9CczOAAAJ"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "xVdERcDXnQ7GOj7zAAAP"
+      "-Mq14mmct2ysO6vqAAAJ"
    ]
 }
-============ USER LOGIN =============
 {
-   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-   "user_id": 23,
-   "username": "usm3",
-   "fullname": "Nguyễn Văn C",
-   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
    "options": {
       "camera": true,
       "microphone": true
    },
-   "socket_id": "xVdERcDXnQ7GOj7zAAAP"
+   "socket_id": "-Mq14mmct2ysO6vqAAAJ"
+}
+============ USER LOGIN =============
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== GET QUERY  ============
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "-Mq14mmct2ysO6vqAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "B1HIbYYp1QEwbWtXAAAL"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "B1HIbYYp1QEwbWtXAAAL"
 }
 ========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+SELECT * FROM dtb_rooms  WHERE room_id = 'd63d74b2-bf2c-464e-bae4-3561c683cbcf'
+========== GET QUERY  ============
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "-Mq14mmct2ysO6vqAAAJ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "B1HIbYYp1QEwbWtXAAAL"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "d63d74b2-bf2c-464e-bae4-3561c683cbcf",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "-Mq14mmct2ysO6vqAAAJ",
+      "callroom": "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "fTy2IYDmRrHf2vlmAAAL"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "fTy2IYDmRrHf2vlmAAAL"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "fTy2IYDmRrHf2vlmAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "N7qaVHiPtyJ4cDG9AAAN"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 2============
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "N7qaVHiPtyJ4cDG9AAAN"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'd63d74b2-bf2c-464e-bae4-3561c683cbcf'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "fTy2IYDmRrHf2vlmAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "N7qaVHiPtyJ4cDG9AAAN"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "d63d74b2-bf2c-464e-bae4-3561c683cbcf",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "fTy2IYDmRrHf2vlmAAAL",
+      "callroom": "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+   }
+}
 ============= GET SOCKET ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": "20",
+   "another_rooms": [
+      "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+   ]
+}
+============= ROOM NAME ============
+======== CHECK PRIVATE ROOM =========
+[
+   "fTy2IYDmRrHf2vlmAAAL",
+   "DFdCdtI9x5JJpYYpAAAP"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "fTy2IYDmRrHf2vlmAAAL"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+      ]
+   }
+}
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
 {
    "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
    "user_id": 21,
@@ -640,11 +1709,12 @@ SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
       "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
    ]
 }
+============= GET SOCKET ============
 ============= ROOM NAME ============
 b25b69b2-f526-43e6-8c12-6bb0c9760ae8
 ======== CHECK PRIVATE ROOM =========
 [
-   "Ug8DEiW0pVF9CczOAAAJ"
+   "N7qaVHiPtyJ4cDG9AAAN"
 ]
 ============= DATA DISCONNECT TOP ============
 {
@@ -660,16 +1730,14 @@ b25b69b2-f526-43e6-8c12-6bb0c9760ae8
 ========== GET QUERY  ============
 SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
                      dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
                      dtb_alert.accept as alert_accept,
                      dtb_alert.cancel as alert_cancel,
                      dtb_alert.type as alert_type, 
                      dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
 ========== GET QUERY  ============
 SELECT * FROM dtb_alert  WHERE request_user_id != '21'
 ========== GET QUERY  ============
@@ -677,11 +1745,219 @@ SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id 
 ============= ADD PRIVATE ROOM OBJECT 1============
 {
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
+      "fTy2IYDmRrHf2vlmAAAL"
    ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "xVdERcDXnQ7GOj7zAAAP"
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": []
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "5LrRfOGOtGQ7aTZPAAAR"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'd63d74b2-bf2c-464e-bae4-3561c683cbcf'
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "fTy2IYDmRrHf2vlmAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "5LrRfOGOtGQ7aTZPAAAR"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "d63d74b2-bf2c-464e-bae4-3561c683cbcf",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "fTy2IYDmRrHf2vlmAAAL",
+      "callroom": "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+   }
+}
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "fTy2IYDmRrHf2vlmAAAL",
+      "W3zxsgzXGciCjIFaAAAT"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "5LrRfOGOtGQ7aTZPAAAR"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "d63d74b2-bf2c-464e-bae4-3561c683cbcf",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "fTy2IYDmRrHf2vlmAAAL",
+      "callroom": "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "5LrRfOGOtGQ7aTZPAAAR",
+      "callroom": "d63d74b2-bf2c-464e-bae4-3561c683cbcf"
+   }
+}
+========== ME JOIN ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "gqD5iBfsrAHVMf4mAAAN"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "gqD5iBfsrAHVMf4mAAAN"
+}
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "gqD5iBfsrAHVMf4mAAAN"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "5SFjBrdDw0uvzs41AAAP"
+   ]
+}
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "5SFjBrdDw0uvzs41AAAP"
+}
+============ USER LOGIN =============
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== GET QUERY  ============
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "gqD5iBfsrAHVMf4mAAAN"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "5SFjBrdDw0uvzs41AAAP"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "gqD5iBfsrAHVMf4mAAAN",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "RJ_Blrvcg3PVuSRAAAAL"
    ]
 }
 ============ USER LOGIN =============
@@ -696,11 +1972,532 @@ SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id 
       "camera": true,
       "microphone": true
    },
-   "socket_id": "h0Y6rmBPgcvG_5ixAAAR"
+   "socket_id": "RJ_Blrvcg3PVuSRAAAAL"
 }
 ========== GET QUERY  ============
 SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "RJ_Blrvcg3PVuSRAAAAL"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FPH6bor8w3kwu2bbAAAN"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "FPH6bor8w3kwu2bbAAAN"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "RJ_Blrvcg3PVuSRAAAAL"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FPH6bor8w3kwu2bbAAAN"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FPH6bor8w3kwu2bbAAAN",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "YM9tVL3sq0urWiBuAAAL"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "YM9tVL3sq0urWiBuAAAL"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "YM9tVL3sq0urWiBuAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "yxKb0J3VxiNTTxLBAAAN"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "yxKb0J3VxiNTTxLBAAAN"
+}
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+============= ADD PRIVATE ROOM OBJECT 2============
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "h5dBpAuF1cgqLzqoAAAP"
+}
+============ USER LOGIN =============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "YM9tVL3sq0urWiBuAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "yxKb0J3VxiNTTxLBAAAN"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== GET QUERY  ============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "YM9tVL3sq0urWiBuAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "yxKb0J3VxiNTTxLBAAAN"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "YM9tVL3sq0urWiBuAAAL",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+============= ROOM NAME ============
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+[
+   "YM9tVL3sq0urWiBuAAAL",
+   "rNIeDNpKAc_VJdT5AAAR"
+]
 ============= GET SOCKET ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": "20",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "YM9tVL3sq0urWiBuAAAL"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ]
+   }
+}
+======== CHECK PRIVATE ROOM =========
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": 20,
+   "another_rooms": [
+      "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+   ]
+}
+============= ROOM NAME ============
+============= GET SOCKET ============
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+[
+   "YM9tVL3sq0urWiBuAAAL"
+]
+============= DATA DISCONNECT TOP ============
+======== CHECK PRIVATE ROOM =========
+{
+   "private_room": [],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   }
+}
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "yxKb0J3VxiNTTxLBAAAN"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== GET QUERY  ============
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "Mh5e_StG7YGjZ8tPAAAT"
+}
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== GET QUERY  ============
+============= GET SOCKET ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": 20,
+   "another_rooms": [
+      "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+   ]
+}
+============= ROOM NAME ============
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+======== CHECK PRIVATE ROOM =========
+[
+   "Mh5e_StG7YGjZ8tPAAAT"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   }
+}
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "yxKb0J3VxiNTTxLBAAAN"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "FJgmi7t1ZRAWTEyaAAAV"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": 21,
+   "another_rooms": [
+      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+   ]
+}
+============= ROOM NAME ============
+======== CHECK PRIVATE ROOM =========
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+[
+   "yxKb0J3VxiNTTxLBAAAN"
+]
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== GET QUERY  ============
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
+========== GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== GET QUERY  ============
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+============ USER LOGIN =============
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "oLC6A1IryI3jeg5vAAAX"
+}
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "oLC6A1IryI3jeg5vAAAX"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FJgmi7t1ZRAWTEyaAAAV",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV",
+      "nqhpp7nqa3LKcOz0AAAZ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "oLC6A1IryI3jeg5vAAAX"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "h5dBpAuF1cgqLzqoAAAP"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FJgmi7t1ZRAWTEyaAAAV",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "oLC6A1IryI3jeg5vAAAX",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+============= GET SOCKET ============
+============= ROOM NAME ============
 {
    "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
    "user_id": 23,
@@ -708,13 +2505,12 @@ SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
       "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
    ]
 }
-============= ROOM NAME ============
 62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
 ======== CHECK PRIVATE ROOM =========
-[
-   "xVdERcDXnQ7GOj7zAAAP"
-]
 ============= DATA DISCONNECT TOP ============
+[
+   "h5dBpAuF1cgqLzqoAAAP"
+]
 {
    "private_room": [],
    "user": {
@@ -728,27 +2524,27 @@ SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
 ========== GET QUERY  ============
 SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
                      dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
                      dtb_alert.accept as alert_accept,
                      dtb_alert.cancel as alert_cancel,
                      dtb_alert.type as alert_type, 
                      dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
 ========== GET QUERY  ============
 SELECT * FROM dtb_alert  WHERE request_user_id != '23'
-========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
 ============= ADD PRIVATE ROOM OBJECT 1============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== GET QUERY  ============
 {
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
+      "FJgmi7t1ZRAWTEyaAAAV",
+      "nqhpp7nqa3LKcOz0AAAZ"
    ],
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "h0Y6rmBPgcvG_5ixAAAR"
+      "oLC6A1IryI3jeg5vAAAX",
+      "olPORx7ZxbVm43hEAAAb"
    ],
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": []
 }
@@ -764,75 +2560,440 @@ SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id 
       "camera": true,
       "microphone": true
    },
-   "socket_id": "2_jEFmVWShOwRD8mAAAT"
+   "socket_id": "HyAOWvDV4YGo8-LUAAAd"
 }
 ========== GET QUERY  ============
 SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== GET QUERY  ============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV",
+      "nqhpp7nqa3LKcOz0AAAZ"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "oLC6A1IryI3jeg5vAAAX",
+      "olPORx7ZxbVm43hEAAAb"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "HyAOWvDV4YGo8-LUAAAd"
+   ]
+}
+============= ADD PRIVATE ROOM OBJECT 1============
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FJgmi7t1ZRAWTEyaAAAV",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "oLC6A1IryI3jeg5vAAAX",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "HyAOWvDV4YGo8-LUAAAd",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
 ============= GET SOCKET ============
 {
    "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-   "user_id": 23,
+   "user_id": "23",
    "another_rooms": [
-      "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
    ]
 }
 ============= ROOM NAME ============
 62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
 ======== CHECK PRIVATE ROOM =========
 [
-   "2_jEFmVWShOwRD8mAAAT"
+   "HyAOWvDV4YGo8-LUAAAd",
+   "YhXg8OvZH6I7NEnMAAAf"
 ]
 ============= DATA DISCONNECT TOP ============
 {
-   "private_room": [],
+   "private_room": [
+      "HyAOWvDV4YGo8-LUAAAd"
+   ],
    "user": {
       "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "user_id": 23,
+      "user_id": "23",
       "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
       ]
    }
 }
+============= GET SOCKET ============
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+======== CHECK PRIVATE ROOM =========
+[
+   "oLC6A1IryI3jeg5vAAAX",
+   "olPORx7ZxbVm43hEAAAb"
+]
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": "21",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+============= DATA DISCONNECT TOP ============
+============= ROOM NAME ============
+{
+   "private_room": [
+      "oLC6A1IryI3jeg5vAAAX"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ]
+   }
+}
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+============= GET SOCKET ============
+============= ROOM NAME ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": "20",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+[
+   "FJgmi7t1ZRAWTEyaAAAV",
+   "nqhpp7nqa3LKcOz0AAAZ"
+]
+======== CHECK PRIVATE ROOM =========
+{
+   "private_room": [
+      "FJgmi7t1ZRAWTEyaAAAV"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ]
+   }
+}
+============= DATA DISCONNECT TOP ============
 ========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "oLC6A1IryI3jeg5vAAAX"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "HyAOWvDV4YGo8-LUAAAd"
+   ]
+}
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FJgmi7t1ZRAWTEyaAAAV",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+========== ME JOIN ============
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV",
+      "NzqLCkCBC5j29Am-AAAh"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "oLC6A1IryI3jeg5vAAAX"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "HyAOWvDV4YGo8-LUAAAd"
+   ]
+}
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FJgmi7t1ZRAWTEyaAAAV",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "HyAOWvDV4YGo8-LUAAAd",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+========== ME JOIN ============
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": 21,
+   "another_rooms": [
+      "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+   ]
+}
+============= ROOM NAME ============
+======== CHECK PRIVATE ROOM =========
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+[
+   "oLC6A1IryI3jeg5vAAAX"
+]
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+============= DATA DISCONNECT TOP ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
 ========== GET QUERY  ============
-SELECT DISTINCT(dtb_rooms.room_id) as room_id, dtb_rooms.room_name, dtb_rooms.user_id as room_master_user_id, dtb_rooms.type, dtb_rooms.active, 
-                     dtb_rooms_setting.status , dtb_rooms_users.user_id as room_join_user_id,
+========== GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
                      dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.message as alert_message, 
                      dtb_alert.accept as alert_accept,
                      dtb_alert.cancel as alert_cancel,
                      dtb_alert.type as alert_type, 
                      dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting
-                         FROM dtb_rooms  RIGHT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id LEFT JOIN dtb_rooms_setting ON dtb_rooms_setting.room_id = dtb_rooms_users.room_id LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.room_id NOT IN  (SELECT room_id FROM dtb_rooms  WHERE dtb_rooms.type = "PRIVATE_ROOM" )  GROUP BY dtb_rooms.room_id
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM"   GROUP BY dtb_rooms.room_id
 ========== GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
 ========== GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
-============= ADD PRIVATE ROOM OBJECT 1============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
 {
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "yba_bcvoZIdDTR0xAAAH"
+      "FJgmi7t1ZRAWTEyaAAAV",
+      "NzqLCkCBC5j29Am-AAAh"
    ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "h0Y6rmBPgcvG_5ixAAAR"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": []
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "HyAOWvDV4YGo8-LUAAAd",
+      "md51gOZCb_Jv20-vAAAj"
+   ]
 }
+============= ADD PRIVATE ROOM OBJECT 1============
 ============ USER LOGIN =============
 {
-   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-   "user_id": 23,
-   "username": "usm3",
-   "fullname": "Nguyễn Văn C",
-   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
    "options": {
       "camera": true,
       "microphone": true
    },
-   "socket_id": "tDZ7WblLSoALgEU5AAAV"
+   "socket_id": "FLFtEI54sCmsFyxNAAAl"
 }
 ========== GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+============= ADD PRIVATE ROOM OBJECT 1============
+{
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "FJgmi7t1ZRAWTEyaAAAV",
+      "NzqLCkCBC5j29Am-AAAh"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "FLFtEI54sCmsFyxNAAAl"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "HyAOWvDV4YGo8-LUAAAd",
+      "md51gOZCb_Jv20-vAAAj"
+   ]
+}
+========== ME JOIN ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FJgmi7t1ZRAWTEyaAAAV",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "FLFtEI54sCmsFyxNAAAl",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "HyAOWvDV4YGo8-LUAAAd",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+============= GET SOCKET ============
+{
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "user_id": "21",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+b25b69b2-f526-43e6-8c12-6bb0c9760ae8
+============= ROOM NAME ============
+======== CHECK PRIVATE ROOM =========
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "FLFtEI54sCmsFyxNAAAl"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ]
+   }
+}
+[
+   "FLFtEI54sCmsFyxNAAAl",
+   "QP6peNE5ZwLpgpnuAAAn"
+]
+============= GET SOCKET ============
+{
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "user_id": "20",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+============= ROOM NAME ============
+14011d49-3d2a-4a3a-93be-5a5e7ec26efa
+[
+   "FJgmi7t1ZRAWTEyaAAAV",
+   "NzqLCkCBC5j29Am-AAAh"
+]
+======== CHECK PRIVATE ROOM =========
+============= DATA DISCONNECT TOP ============
+{
+   "private_room": [
+      "FJgmi7t1ZRAWTEyaAAAV"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ]
+   }
+}
+============= ROOM NAME ============
+62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f
+{
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "user_id": "23",
+   "another_rooms": [
+      "663a5517-46da-42f8-9081-65efb1fb2b49"
+   ]
+}
+============= GET SOCKET ============
+======== CHECK PRIVATE ROOM =========
+============= DATA DISCONNECT TOP ============
+[
+   "HyAOWvDV4YGo8-LUAAAd",
+   "md51gOZCb_Jv20-vAAAj"
+]
+{
+   "private_room": [
+      "HyAOWvDV4YGo8-LUAAAd"
+   ],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ]
+   }
+}

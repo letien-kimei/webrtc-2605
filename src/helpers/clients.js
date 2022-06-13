@@ -165,13 +165,13 @@ class Clients {
    // Lưu thông tin user trong private room 
    add_private_room(obj = {socket_id: '', user_id: '', private_room: private_room}){
       if(Array.isArray(this.objPrivateRoom[obj.private_room])){
-         logger.info(`============= ADD PRIVATE ROOM OBJECT 1============`)
-         logger.info(this.objPrivateRoom)
+         logger('data.log').info(`============= ADD PRIVATE ROOM OBJECT 1============`)
+         logger('data.log').info(this.objPrivateRoom)
          this.objPrivateRoom[obj.private_room].push(obj.socket_id)
      }else{
          this.objPrivateRoom[obj.private_room] = [obj.socket_id]
-         logger.info(`============= ADD PRIVATE ROOM OBJECT 2============`)
-         logger.info(this.objPrivateRoom)
+         logger('data.log').info(`============= ADD PRIVATE ROOM OBJECT 2============`)
+         logger('data.log').info(this.objPrivateRoom)
      }
    }
 
@@ -275,16 +275,16 @@ class Clients {
                }
             }        
             // KIỂM TRA ROOM
-            logger.info(`============= GET SOCKET ============`)
-            logger.info(getSocket)
+            logger('data.log').info(`============= GET SOCKET ============`)
+            logger('data.log').info(getSocket)
 
-            logger.info(`============= ROOM NAME ============`)
-            logger.info(roomId)
+            logger('data.log').info(`============= ROOM NAME ============`)
+            logger('data.log').info(roomId)
 
             let checkPrivateRoom = this.get_private_room(roomId)
 
-            logger.info(`======== CHECK PRIVATE ROOM =========`)
-            logger.info(checkPrivateRoom)
+            logger('data.log').info(`======== CHECK PRIVATE ROOM =========`)
+            logger('data.log').info(checkPrivateRoom)
             // XÓA SOCKET ID KHỎI ROOM
             if(checkPrivateRoom != undefined){
                if(checkPrivateRoom.length > 0){

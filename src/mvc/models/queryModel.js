@@ -66,8 +66,8 @@ const logger = require('../../helpers/logger');
                         conn.getConnection(function (err,connection) { 
                                if (err) throw err;
                                     connection.query(query, (err, res) => {
-                                        logger.info(`========== GET QUERY  ============`)
-                                        logger.info(query)
+                                        logger('data.log').info(`========== GET QUERY  ============`)
+                                        logger('data.log').info(query)
                                         if (err) {
                                             resolve({ type: "error", data: err });
                                         } else {

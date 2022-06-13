@@ -22,11 +22,20 @@ $(document).ready(function(){
     openStream()
     .then(async stream => {
             myStream = stream
+        wait_client_join()
         // START CALL 
         startJoinCall()
     });
   }
 
+  function wait_client_join(){
+    // check user in room
+      setTimeout(() => {
+        if(countKey() <= 1){
+            socket.emit("empty_room",roomId)
+        }
+      }, 50000);
+  }
   function startJoinCall() { 
     $(".loadingcall").show();
     // Người vào room trước sẽ emit 

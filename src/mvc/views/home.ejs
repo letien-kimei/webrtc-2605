@@ -40,8 +40,8 @@
                                 <%= rooms[i]['room_name'] %>
                             </div>
                             <div class="roomMenu">
-                                <% if( (rooms[i]['room_master_user_id'] == rooms[i]['room_join_user_id'] && rooms[i]['room_master_user_id'] == user['id']) ||
-                                        (rooms[i]['alert_request_user_id'] == user['id'] && rooms[i]['alert_waiting'] == 0 && rooms[i]['alert_accept'] == 1) ){ %>
+                                <% if( rooms[i]['master_room_user_id']  == user['id'] ||
+                                       rooms[i]['join_room_user_id'] == user['id']){ %>
                                     <i class="iMenu fa-solid fa-ellipsis-vertical">
                                         <div class="listAction">
                                             <i class="fa-solid fa-right-to-bracket"></i>

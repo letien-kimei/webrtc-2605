@@ -31,8 +31,8 @@ module.exports.callSocket =  function(server){
 
             io.to(socket.id).emit('get_list_user_online', Globalclients);
             socket.broadcast.emit('get_user_login', Globalclients[user_id]);
-            logger.info(`============ USER LOGIN =============`);
-            logger.info(Globalclients[user_id]);
+            logger('data.log').info(`============ USER LOGIN =============`);
+            logger('data.log').info(Globalclients[user_id]);
         });
 
         // A YÊU CẦU GỌI TỚI B
@@ -42,11 +42,21 @@ module.exports.callSocket =  function(server){
 
             let dataRooms   = await roomsModel.get({select: "*", where: `room_id = '${tempRoom_id}'`})
                 dataRooms   = dataRooms.data[0]
+
+            let getUserInroom = Clients.get_user_in_room(room_id)
+               
             socket.join(tempRoom_id)    
-            if(dataRooms.type == "CLIENT_ROOM"){ // nếu room_id là room
-                io.to(socket.id).emit("data_call_group", dataRooms[0])
+            logger('room.log').info(`============ CHECK USER IN ROOM  =============`);
+            logger('room.log').info(getUserInroom);
+            logger('room.log').info(`============     ROOM   =============`);
+            logger('room.log').info(dataRooms);
+            if(dataRooms.type == "CLIENT_ROOM"){ 
+                io.to(socket.id).emit("data_call_group", dataRooms)
                 Globalclients[tempUserId].room_id = room_id
-                socket.broadcast.to(tempRoom_id).emit('comming_call_group', Globalclients[tempUserId]);
+                if(dataRooms.active == "OFF"){
+                    socket.broadcast.to(tempRoom_id).emit('comming_call_group', Globalclients[tempUserId]);
+                }
+                await roomsModel.update({active: "ON"},`room_id = '${tempRoom_id}'`)
             }else{ // nếu room_id là user id
 
                 if(Globalclients[dataRooms.user_id] == undefined){ // user offline
@@ -72,6 +82,11 @@ module.exports.callSocket =  function(server){
                 }
             }
         });
+
+        // TẮT ACTIVE PHÒNG KHI KHÔNG CÓ AI THAM GIA
+        socket.on("empty_room", async function (room_id) { 
+            await roomsModel.update({active: "OFF"},`room_id = '${room_id}'`)   
+        });
         
         // Hủy cuộc gọi
         socket.on("cancel_join_call",  async function (request_user_id, user_id, roomId, type){
@@ -81,8 +96,8 @@ module.exports.callSocket =  function(server){
             await roomsModel.update({active: "OFF"}, ` room_id = '${roomId}'`)
 
             let getUserCancel = Clients.get_user(user_id)
-            logger.info(`========== CANCEL CALL ============`)
-            logger.info(getUserRequestCall)
+            logger('data.log').info(`========== CANCEL CALL ============`)
+            logger('data.log').info(getUserRequestCall)
             io.to(get_private_room_request).emit("cancel_call",getUserCancel)
         });
 
@@ -126,8 +141,8 @@ module.exports.callSocket =  function(server){
             let tempData = {}
                 tempData[user_id] =  getUsers[user_id]
             let getObjPeers = Clients.get_peers()
-            logger.info(`========== ME JOIN ============`)
-            logger.info(getUsers)
+            logger('data.log').info(`========== ME JOIN ============`)
+            logger('data.log').info(getUsers)
             // Gửi thông tin của người gửi tới tất cả client trong room trừ người gửi 
             socket.broadcast.to(roomId).emit("new_user_join", tempData, getObjPeers);
         });
@@ -200,8 +215,8 @@ module.exports.callSocket =  function(server){
             console.log("Ngắt kết nối: "+ socket.id);
 
             let dataUser = await Clients.disconnectReset(socket.id)
-                logger.info(`============= DATA DISCONNECT TOP ============`)
-                logger.info(dataUser)
+                logger('data.log').info(`============= DATA DISCONNECT TOP ============`)
+                logger('data.log').info(dataUser)
                 dataUser.user['fullname'] = Clients.get_user(dataUser.user.user_id)['fullname']
             if(dataUser.private_room != undefined && dataUser.private_room != null) {
                 // USER HOÀN TOÀN DISCONNECT (TẮT TẤT CẢ TAB)
