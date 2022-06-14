@@ -262,10 +262,10 @@ class Clients {
       // lấy tên private_room
       let __this     = this
       let getSocket  = __this.get_object_socket(socket_id)
-      let rsTemp = {}
-      if(getSocket != undefined){
-         let roomId   =  "";
-         let getUser    = __this.get_user(getSocket.user_id)
+      let rsTemp     = {}
+      if(getSocket  != undefined){
+         let roomId  =  "";
+         let getUser = __this.get_user(getSocket.user_id)
       
          if(typeof getSocket == "object"){
             if(getSocket.hasOwnProperty('private_room')){
