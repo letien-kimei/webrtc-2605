@@ -23,8 +23,12 @@ $(document).on("click",".coomingcall_group .acceptcall",function(){
 
 
 $(document).on("click",".coomingcall_group .closecall ",function(){
-    let callRoomId = $(this).closest(".coomingcall").attr("data-callroom");
+    let callRoomId = $(this).closest(".coomingcall_group").attr("data-callroom");
     $(".coomingcall_group").hide();
     socket.emit("cancel_join_call", '' , user_id, callRoomId, 'group')
 });
+
+
+
+
 

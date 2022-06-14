@@ -1,0 +1,264 @@
+============= DISCONNECT LEAVE ROOM ============
+{
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "PULjRh7IoS8CK46nAAAJ",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "ZpMLQM26MaVtycqrAAAL",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+=== LENGTH ===
+2
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "PULjRh7IoS8CK46nAAAJ",
+      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
+   }
+}
+=== LENGTH ===
+1
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+0
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+============= DISCONNECT LEAVE ROOM ============
+=============/ DISCONNECT LEAVE ROOM ============
+0
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+0
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+0
+{}
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+0
+{}
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+0
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+0
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+{}
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+{}
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+{}
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+0
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+{}
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+0
+{}
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+============= DISCONNECT LEAVE ROOM ============
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+0
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+0
+{}
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+{}
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+0
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+=============/ DISCONNECT LEAVE ROOM ============
+0
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "2g_Y8f2yzdr78lb4AAAL",
+      "callroom": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+   }
+}
+=== LENGTH ===
+1
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============
+============= DISCONNECT LEAVE ROOM ============
+{}
+0
+=============/ DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+{}
+============= DISCONNECT LEAVE ROOM ============
+=== LENGTH ===
+0
+=============/ DISCONNECT LEAVE ROOM ============

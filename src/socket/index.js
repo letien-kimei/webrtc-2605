@@ -38,27 +38,36 @@ module.exports.callSocket =  function(server){
         // A YÊU CẦU GỌI TỚI B
         socket.on("request_call",async function (request_user_id, room_id){
             let tempUserId  = request_user_id.toString();
-            let tempRoom_id = room_id.toString();
+            let tempRoom_id = room_id.toString(); // room id của người cần gọi tới
 
             let dataRooms   = await roomsModel.get({select: "*", where: `room_id = '${tempRoom_id}'`})
                 dataRooms   = dataRooms.data[0]
 
-            let getUserInroom = Clients.get_user_in_room(room_id)
-               
+            let getUserInroom = await roomsUsersModel.get({select: "*", where: `room_id = '${tempRoom_id}'`})
+            let getUserDb     = await userModel.get({select: "*", where: `id = ${dataRooms.user_id}`})
+                getUserDb     = getUserDb.data[0]
             socket.join(tempRoom_id)    
-            logger('room.log').info(`============ CHECK USER IN ROOM  =============`);
-            logger('room.log').info(getUserInroom);
-            logger('room.log').info(`============     ROOM   =============`);
-            logger('room.log').info(dataRooms);
+           
             if(dataRooms.type == "CLIENT_ROOM"){ 
                 io.to(socket.id).emit("data_call_group", dataRooms)
                 Globalclients[tempUserId].room_id = room_id
                 if(dataRooms.active == "OFF"){
-                    socket.broadcast.to(tempRoom_id).emit('comming_call_group', Globalclients[tempUserId]);
-                }
-                await roomsModel.update({active: "ON"},`room_id = '${tempRoom_id}'`)
-            }else{ // nếu room_id là user id
 
+                    let tempArr = getUserInroom.data;
+                    if(getUserInroom.data.length > 0){
+                        tempArr.map(async function (data, index, array) {  
+                            let getUser = Clients.get_user(data.user_id)
+                            if(getUser != undefined){
+                                Clients.updateRoomUserStatus(data.user_id, '', '', 1)
+                            }
+                        })
+                        Clients.updateRoomUserStatus('', tempRoom_id, "ON", 0)
+                        socket.broadcast.to(tempRoom_id).emit('comming_call_group', Globalclients[tempUserId]);
+                    }
+                }
+                
+            }else{ // nếu room_id PRIVATE (gọi 1:1)
+               
                 if(Globalclients[dataRooms.user_id] == undefined){ // user offline
                     let object_us = {
                         select:' id ,username, fullname ',
@@ -68,42 +77,66 @@ module.exports.callSocket =  function(server){
                     let dataArr = rs.data[0];
                     io.to(socket.id).emit("user_is_offline", dataArr)
                 }else{ // USER B CHẤP NHẬN CUỘC GỌI
-                   
-                    // Room đang hoạt động
-                    await roomsModel.update({active: "ON"},`room_id = '${tempRoom_id}'`)
-
                     let tempData = {}
-                        tempData[tempUserId] = Globalclients[dataRooms.user_id]
-                    let callroom = Globalclients[dataRooms.user_id].private_room;
-                    // gửi thông tin của người B cho người A (A gọi tới B)
-                    io.to(socket.id).emit("data_call", Globalclients[dataRooms.user_id], callroom)
-                    // gửi thông báo có cuộc gọi đến cho người B kèm thông tin của người A (A gọi tới B)
-                    socket.to(tempRoom_id).emit('comming_call', Globalclients[tempUserId], callroom);
+                        tempData[tempUserId] = Globalclients[dataRooms.user_id] // Thông tin của người cần gọi
+
+                    logger('busy_call.log').info(`============ CHECK BUSY CALL =============`);
+                    logger('busy_call.log').info(getUserDb);
+                    if(getUserDb.busy == 1){ // Đang có cuộc gọi khác
+                        io.to(socket.id).emit('user_busy', tempData[tempUserId])
+                    }else{
+
+                        Clients.updateRoomUserStatus(request_user_id, tempRoom_id, "ON", 1)
+                        Clients.updateRoomUserStatus(dataRooms.user_id, '', '', 1)
+                    
+                        let callroom = Globalclients[dataRooms.user_id].private_room;
+                        // gửi thông tin của người B cho người A (A gọi tới B)
+                        io.to(socket.id).emit("data_call", Globalclients[dataRooms.user_id], callroom)
+                        // gửi thông báo có cuộc gọi đến cho người B kèm thông tin của người A (A gọi tới B)
+                        socket.to(tempRoom_id).emit('comming_call', Globalclients[tempUserId], callroom);
+                    }
                 }
             }
         });
 
-        // TẮT ACTIVE PHÒNG KHI KHÔNG CÓ AI THAM GIA
-        socket.on("empty_room", async function (room_id) { 
-            await roomsModel.update({active: "OFF"},`room_id = '${room_id}'`)   
+        // TẮT ACTIVE PHÒNG VÀ BUSY USER KHI KHÔNG CÓ AI THAM GIA
+        socket.on("empty_room", async function (user_id, room_id) { 
+            Clients.updateRoomUserStatus(user_id, room_id, "OFF", 0)
         });
-        
+
+        // TẮT ACTIVE PHÒNG VÀ BUSY USER KHI NGƯỜI DÙNG HỦY CUỘC GỌI
+        socket.on("user_request_cancel_call", async function (user_id, call_to_user_id, callroom) { 
+            Clients.updateRoomUserStatus(user_id, '', '', 0)      
+            Clients.updateRoomUserStatus(call_to_user_id, '', '', 0)       
+            Clients.updateRoomUserStatus('', callroom, 'OFF', 0)
+
+            let tempUser = Clients.get_user(user_id)
+            logger('request_user_cancel.log').info(`============ REQUEST USER CANCEL =============`);
+            logger('request_user_cancel.log').info(tempUser);
+
+            socket.leave(callroom)
+            socket.broadcast.to(callroom).emit("user_request_call_is_cancel", tempUser)
+        });
+
         // Hủy cuộc gọi
         socket.on("cancel_join_call",  async function (request_user_id, user_id, roomId, type){
             // kích hoạt room
-            let getUserRequestCall = Clients.get_user(request_user_id) // thông tin của người request
-            let get_private_room_request = getUserRequestCall.private_room
-            await roomsModel.update({active: "OFF"}, ` room_id = '${roomId}'`)
+            let dataRooms   = await roomsModel.get({select: "*", where: `room_id = '${roomId}'`})
+                dataRooms   = dataRooms.data[0]
 
+            // Cập nhật trạng thái off và busy cho phòng và user
+            Clients.updateRoomUserStatus(user_id, '', '', 0)       
+            Clients.updateRoomUserStatus('', roomId, 'OFF', 0)
             let getUserCancel = Clients.get_user(user_id)
-            logger('data.log').info(`========== CANCEL CALL ============`)
-            logger('data.log').info(getUserRequestCall)
-            io.to(get_private_room_request).emit("cancel_call",getUserCancel)
+
+            if(dataRooms.type == "PRIVATE_ROOM"){
+                Clients.updateRoomUserStatus(request_user_id, '', '', 0)
+                socket.broadcast.to(roomId).emit("cancel_call",getUserCancel)
+            }
         });
 
         // JOIN CALL: B JOIN REQUEST A VÀO (A gọi B)
         socket.on("joincall",  async function (user_id, roomId, request_user_id) {
-            let tempUserId    = user_id.toString();
             let getUserRequestCall = Clients.get_user(request_user_id) // thông tin của người request
             let get_private_room_request = getUserRequestCall.private_room
             io.in(get_private_room_request).socketsJoin(roomId);
@@ -114,6 +147,9 @@ module.exports.callSocket =  function(server){
         // LẤY DANH SÁCH USERS TRONG ROOM 
         socket.on("get_users_in_room",async function (user_id, roomId){
 
+            // Cập nhật trạng thái off và busy cho phòng và user (room đã được active từ request call)
+            Clients.updateRoomUserStatus(user_id, '', '', 1)
+            
             // UPDATE USER A ĐANG TRONG CUỘC GỌI (callroom)
             let getUser =  Clients.get_user(user_id)
             Clients.update_user(user_id, 'callroom', roomId)
@@ -230,9 +266,21 @@ module.exports.callSocket =  function(server){
                 if(dataUser.user.another_rooms != undefined && Array.isArray(dataUser.user.another_rooms)){
                     let arrRooms = dataUser.user.another_rooms
                     arrRooms.map(async function (roomValue, index, array) {  
-                        
-                        await roomsModel.update({active: "OFF"}, ` room_id = '${roomValue}'`)
-                        // remove socket - user khỏi room đang gọi
+
+                        let userInRoom = Clients.get_user_in_room(roomValue)
+                        logger('disconnect_leave_room.log').info(`=============\ DISCONNECT LEAVE ROOM ============`)
+                        logger('disconnect_leave_room.log').info(userInRoom)
+                        logger('disconnect_leave_room.log').info(`=== LENGTH ===`)
+                        logger('disconnect_leave_room.log').info(Object.keys(userInRoom).length)
+                        logger('disconnect_leave_room.log').info(`=============/ DISCONNECT LEAVE ROOM ============`)
+                        Clients.updateRoomUserStatus(dataUser.user.user_id, '', '', 0)
+                        // Nếu không còn user nào thì sẽ update trạng thái của phòng là OFF (không hoạt động)
+                        // Trạng thái chỉ ON nếu có 1 request call (yêu cầu gọi)
+                        if(Object.keys(userInRoom).length == 0 ){
+                            // Cập nhật trạng thái off và busy cho phòng và user (room đã được active từ request call)
+                            Clients.updateRoomUserStatus('', roomValue, 'OFF', '')
+                        }
+                     
                         let tempUser = {}
                             tempUser[dataUser.user.user_id] = dataUser.user
                         let usersInRoom = Clients.get_user_in_room(roomValue)

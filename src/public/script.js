@@ -32,7 +32,7 @@ $(document).ready(function(){
     // check user in room
       setTimeout(() => {
         if(countKey() <= 1){
-            socket.emit("empty_room",roomId)
+          socket.emit("empty_room",user_id, roomId)
         }
       }, 50000);
   }

@@ -247,6 +247,15 @@ class Clients {
       });
    }
 
+   async updateRoomUserStatus(user_id = '', room_id = '', active = '', busy = 0){
+      if(user_id != ''){
+         await userModel.update({busy: busy}, `id = ${user_id}`)
+      }
+      if(room_id !== ''){
+         await roomsModel.update({active: active}, ` room_id = '${room_id}'`)
+      }
+   }
+
   // CHECK DISCONNECT
   disconnectReset(socket_id){
    return new Promise((resolve, reject) => {

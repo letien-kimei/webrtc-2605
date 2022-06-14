@@ -1,12 +1,17 @@
 socket.emit('user_login', user_id, peerId)
-socket.on("get_user_login",async function (data){
+socket.on("get_user_login",async function (user){
     console.log("============= DATA ===========")
-    console.log(data)
-    bs4Toast.primary('Thông báo', `${data.fullname} vừa đăng nhập`,{delay: 200});
-    let getState =  $(`div[data-userid="${data.user_id}"]`).find(".stateOnline");
+    console.log(user)
+    bs4Toast.primary('Thông báo', `${user.fullname} vừa đăng nhập`,{delay: 200});
+    let getState =  $(`div[data-userid="${user.user_id}"]`).find(".stateOnline");
         $(getState).removeClass("off");
         $(getState).addClass("onl");     
 });
+
+// Thông báo người dùng đang có cuộc gọi khác
+socket.on('user_busy', function(user){
+    bs4Toast.primary('Thông báo', `${user.fullname} đang bận`,{delay: 200});
+})
 // LẤY DANH SÁCH NGƯỜI DÙNG ONLINE
 socket.on('get_list_user_online', function(addUsersOnl){
     detectOnlOff(addUsersOnl,'onl')    
@@ -24,11 +29,25 @@ socket.on('user_is_offline',  async (remoteClient) => {
     bs4Toast.primary('Thông báo', `${remoteClient.fullname} không online`,{delay: 200});
 })
 
-socket.on('data_call',  async (remoteClient) => {
+socket.on('data_call',  async (remoteClient, callroom) => {
     $(".requestcall").show();
     $(".sp-callname").text(`${remoteClient.fullname}`,{delay: 200});
+
+    $(".requestcall").attr("data-call_to_user_id", remoteClient.user_id)
+    $(".requestcall").attr("data-callroom", callroom)
 })
 
+
+$(".requestcall .closecall").on("click", function(){
+    let call_to_user_id = $(".requestcall").attr("data-call_to_user_id")
+    let callroom = $(".requestcall").attr("data-callroom")
+    socket.emit("user_request_cancel_call", user_id, call_to_user_id, callroom)
+    $(".requestcall").hide()
+})
+
+socket.on("user_request_call_is_cancel", function(user){
+    $(".coomingcall").hide()
+});
 
 //=============/ CHECK LÚC CLICK GỌI THÌ USER CÓ ONLINE KHÔNG =================
 
@@ -39,7 +58,6 @@ socket.on('comming_call',  async (remoteClient, callroom) => {
     $(".coomingcall").attr("data-request_user_id", remoteClient.user_id)
     $(".coomingcall").attr("data-pagecall", `call/room/${callroom}`)
     $(".coomingcall").attr("data-callroom", callroom)
-    debugger;
 })
 // Nhóm
 socket.on('comming_call_group',  async (remoteClient) => {
