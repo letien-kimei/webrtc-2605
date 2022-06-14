@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3307
--- Generation Time: Jun 12, 2022 at 05:41 PM
+-- Generation Time: Jun 14, 2022 at 05:30 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -47,7 +47,9 @@ CREATE TABLE `dtb_alert` (
 INSERT INTO `dtb_alert` (`id`, `room_id`, `request_user_id`, `message`, `accept`, `cancel`, `type`, `active`, `waiting`) VALUES
 (36, 'd63d74b2-bf2c-464e-bae4-3561c683cbcf', 20, 'Nguyễn Văn A muốn tham gia nhóm Room B-2', 1, 0, 'REQUEST_JOIN_ROOM', 0, 0),
 (37, '663a5517-46da-42f8-9081-65efb1fb2b49', 20, 'Nguyễn Văn A muốn tham gia nhóm Room B-3', 1, 0, 'REQUEST_JOIN_ROOM', 0, 0),
-(38, '663a5517-46da-42f8-9081-65efb1fb2b49', 23, 'Nguyễn Văn C muốn tham gia nhóm Room B-3', 1, 0, 'REQUEST_JOIN_ROOM', 0, 0);
+(38, '663a5517-46da-42f8-9081-65efb1fb2b49', 23, 'Nguyễn Văn C muốn tham gia nhóm Room B-3', 1, 0, 'REQUEST_JOIN_ROOM', 0, 0),
+(39, 'b536419a-340f-432e-ad20-9a3936203634', 21, 'Nguyễn Văn B muốn tham gia nhóm Room C-1', 1, 0, 'REQUEST_JOIN_ROOM', 0, 0),
+(40, 'b536419a-340f-432e-ad20-9a3936203634', 20, 'Nguyễn Văn A muốn tham gia nhóm Room C-1', 1, 0, 'REQUEST_JOIN_ROOM', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -74,7 +76,8 @@ INSERT INTO `dtb_rooms` (`id`, `room_id`, `room_name`, `user_id`, `type`, `activ
 (47, 'b748b857-efd1-4afb-aaeb-12aec700afd0', 'Room A-1', 20, 'CLIENT_ROOM', 'OFF'),
 (48, 'd63d74b2-bf2c-464e-bae4-3561c683cbcf', 'Room B-2', 21, 'CLIENT_ROOM', 'OFF'),
 (49, '663a5517-46da-42f8-9081-65efb1fb2b49', 'Room B-3', 21, 'CLIENT_ROOM', 'OFF'),
-(51, '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f', '', 23, 'PRIVATE_ROOM', 'OFF');
+(51, '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f', '', 23, 'PRIVATE_ROOM', 'OFF'),
+(52, 'b536419a-340f-432e-ad20-9a3936203634', 'Room C-1', 23, 'CLIENT_ROOM', 'OFF');
 
 -- --------------------------------------------------------
 
@@ -98,7 +101,8 @@ INSERT INTO `dtb_rooms_setting` (`id`, `room_id`, `status`) VALUES
 (9, 'b748b857-efd1-4afb-aaeb-12aec700afd0', 'PUBLIC'),
 (10, 'd63d74b2-bf2c-464e-bae4-3561c683cbcf', 'PUBLIC'),
 (11, '663a5517-46da-42f8-9081-65efb1fb2b49', 'PUBLIC'),
-(13, '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f', 'PRIVATE');
+(13, '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f', 'PRIVATE'),
+(14, 'b536419a-340f-432e-ad20-9a3936203634', 'PUBLIC');
 
 -- --------------------------------------------------------
 
@@ -127,7 +131,10 @@ INSERT INTO `dtb_rooms_users` (`id`, `user_id`, `room_id`, `pending`) VALUES
 (46, 21, '663a5517-46da-42f8-9081-65efb1fb2b49', 0),
 (47, 20, '663a5517-46da-42f8-9081-65efb1fb2b49', 0),
 (49, 23, '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f', 0),
-(50, 23, '663a5517-46da-42f8-9081-65efb1fb2b49', 0);
+(50, 23, '663a5517-46da-42f8-9081-65efb1fb2b49', 0),
+(51, 23, 'b536419a-340f-432e-ad20-9a3936203634', 0),
+(52, 21, 'b536419a-340f-432e-ad20-9a3936203634', 0),
+(53, 20, 'b536419a-340f-432e-ad20-9a3936203634', 0);
 
 -- --------------------------------------------------------
 
@@ -195,25 +202,25 @@ ALTER TABLE `dtb_users`
 -- AUTO_INCREMENT for table `dtb_alert`
 --
 ALTER TABLE `dtb_alert`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `dtb_rooms`
 --
 ALTER TABLE `dtb_rooms`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT for table `dtb_rooms_setting`
 --
 ALTER TABLE `dtb_rooms_setting`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `dtb_rooms_users`
 --
 ALTER TABLE `dtb_rooms_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `dtb_users`
