@@ -4,7 +4,9 @@ $(document).on("click",".coomingcall .acceptcall",function(){
     let request_user_id = $(this).closest(".coomingcall").attr("data-request_user_id");
     socket.emit('joincall',user_id, callRoomId, request_user_id)
     $(".coomingcall").hide();
-    window.open(pageCall,'call');
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=${screen.width/3},height=${screen.height/3},left=-1000,top=-1000`;
+    window.open(pageCall, 'call', params);
 });
 
 $(document).on("click",".coomingcall .closecall",function(){
@@ -18,7 +20,9 @@ $(document).on("click",".coomingcall_group .acceptcall",function(){
     let pageCall   = $(this).closest(".coomingcall_group").attr("data-pagecall");
     let callRoomId = $(this).closest(".coomingcall_group").attr("data-callroom");
     $(".coomingcall_group").hide();
-    window.open(pageCall,'call');
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=${screen.width/3},height=${screen.height/3},left=-1000,top=-1000`;
+    window.open(pageCall, 'call', params);
 });
 
 

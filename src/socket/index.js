@@ -37,6 +37,7 @@ module.exports.callSocket =  function(server){
 
         // A YÊU CẦU GỌI TỚI B
         socket.on("request_call",async function (request_user_id, room_id){
+ 
             let tempUserId  = request_user_id.toString();
             let tempRoom_id = room_id.toString(); // room id của người cần gọi tới
 
@@ -46,9 +47,10 @@ module.exports.callSocket =  function(server){
             let getUserInroom = await roomsUsersModel.get({select: "*", where: `room_id = '${tempRoom_id}'`})
             let getUserDb     = await userModel.get({select: "*", where: `id = ${dataRooms.user_id}`})
                 getUserDb     = getUserDb.data[0]
-            socket.join(tempRoom_id)    
+            
            
             if(dataRooms.type == "CLIENT_ROOM"){ 
+                socket.join(tempRoom_id)    
                 io.to(socket.id).emit("data_call_group", dataRooms)
                 Globalclients[tempUserId].room_id = room_id
                 if(dataRooms.active == "OFF"){
@@ -85,7 +87,7 @@ module.exports.callSocket =  function(server){
                     if(getUserDb.busy == 1){ // Đang có cuộc gọi khác
                         io.to(socket.id).emit('user_busy', tempData[tempUserId])
                     }else{
-
+                        socket.join(tempRoom_id)    
                         Clients.updateRoomUserStatus(request_user_id, tempRoom_id, "ON", 1)
                         Clients.updateRoomUserStatus(dataRooms.user_id, '', '', 1)
                     
@@ -101,11 +103,14 @@ module.exports.callSocket =  function(server){
 
         // TẮT ACTIVE PHÒNG VÀ BUSY USER KHI KHÔNG CÓ AI THAM GIA
         socket.on("empty_room", async function (user_id, room_id) { 
+            socket.leave(room_id)
             Clients.updateRoomUserStatus(user_id, room_id, "OFF", 0)
         });
 
         // TẮT ACTIVE PHÒNG VÀ BUSY USER KHI NGƯỜI DÙNG HỦY CUỘC GỌI
         socket.on("user_request_cancel_call", async function (user_id, call_to_user_id, callroom) { 
+            socket.leave(callroom)
+
             Clients.updateRoomUserStatus(user_id, '', '', 0)      
             Clients.updateRoomUserStatus(call_to_user_id, '', '', 0)       
             Clients.updateRoomUserStatus('', callroom, 'OFF', 0)
@@ -284,6 +289,12 @@ module.exports.callSocket =  function(server){
                         let tempUser = {}
                             tempUser[dataUser.user.user_id] = dataUser.user
                         let usersInRoom = Clients.get_user_in_room(roomValue)
+                        let getRoom = await roomsModel.get({select: "*", where: ` room_id = '${roomValue}'`})
+                            getRoom = getRoom.data[0]
+                        if(getRoom.type == "PRIVATE_ROOM"){
+                            socket.broadcast.to(roomValue).emit("user_out_pending_call",tempUser, usersInRoom)
+                        }
+                        
                         socket.broadcast.to(roomValue).emit("user_leave_room",tempUser, usersInRoom)
                     })
                 }

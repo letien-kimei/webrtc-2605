@@ -2,11 +2,18 @@ socket.emit('user_login', user_id, peerId)
 socket.on("get_user_login",async function (user){
     console.log("============= DATA ===========")
     console.log(user)
-    bs4Toast.primary('Thông báo', `${user.fullname} vừa đăng nhập`,{delay: 200});
+    //bs4Toast.primary('Thông báo', `${user.fullname} vừa đăng nhập`,{delay: 200});
     let getState =  $(`div[data-userid="${user.user_id}"]`).find(".stateOnline");
         $(getState).removeClass("off");
         $(getState).addClass("onl");     
 });
+
+socket.on('user_out_pending_call', function(tempUser, usersInRoom){
+      $(".requestcall ").hide()
+      let firstKey2 = Object.keys(tempUser)[0]
+      let Objuser   = tempUser[firstKey2]
+      bs4Toast.primary('Thông báo', `${Objuser.fullname} đang bận`,{delay: 200});
+})
 
 // Thông báo người dùng đang có cuộc gọi khác
 socket.on('user_busy', function(user){
@@ -18,7 +25,7 @@ socket.on('get_list_user_online', function(addUsersOnl){
 })
 
 socket.on("user_disconnect",async function (data){
-    bs4Toast.primary('Thông báo', `${data.fullname} vừa đăng xuất`,{delay: 200});
+   // bs4Toast.primary('Thông báo', `${data.fullname} vừa đăng xuất`,{delay: 200});
     let getState =  $(`div[data-userid="${data.user_id}"]`).find(".stateOnline");
         $(getState).removeClass("onl");
         $(getState).addClass("off");     
@@ -59,6 +66,7 @@ socket.on('comming_call',  async (remoteClient, callroom) => {
     $(".coomingcall").attr("data-pagecall", `call/room/${callroom}`)
     $(".coomingcall").attr("data-callroom", callroom)
 })
+
 // Nhóm
 socket.on('comming_call_group',  async (remoteClient) => {
     $(".coomingcall_group").show();
@@ -70,7 +78,11 @@ socket.on('comming_call_group',  async (remoteClient) => {
 
 socket.on('go_to_room',  async (callroom) => {
     $(".requestcall").hide();
-    window.open(`/call/room/${callroom}`,'call');
+
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=${screen.width/3},height=${screen.height/3},left=-1000,top=-1000`;
+    window.open(`/call/room/${callroom}`, 'call', params);
+    //window.open(`/call/room/${callroom}`,'call');
 })
 
 
@@ -94,11 +106,14 @@ $(document).on("click",".phone",function(e){
     socket.emit('request_call', request_user_id, room_id);
     $(".requestcall").hide();
 });
+
 // gọi nhóm
 $(document).on("click",".phone_group",function(e){
     let remoteId = $(this).closest(".colRoom").attr("data-roomid"); // id của người muốn gọi
     socket.emit('request_call', user_id, remoteId);
-    window.open(`/call/room/${remoteId}`,'call');
+    let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+    width=${screen.width/3},height=${screen.height/3},left=-1000,top=-1000`;
+    window.open(`/call/room/${remoteId}`, 'call', params);
     $(".requestcallgroup").hide();
 });
 

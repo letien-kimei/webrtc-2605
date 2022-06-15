@@ -58,6 +58,7 @@ class Clients {
       //                                                        }
       //                                                    }
       //                        }
+      this.pending_request_call = {},
       this.defaulUsers     = {
                                     user_id: '',
                                     username: '',
@@ -67,7 +68,6 @@ class Clients {
                                     options: {camera: true, microphone: true}
                               }
    }
-
 
    async management(socket, mObj){
       return new Promise(async (resolve, reject) => {
@@ -118,7 +118,6 @@ class Clients {
             resolve(this.objUsers[tempAdd.user_id]) 
       });
    }
-
 
    async page_load_join_room(socket, mObj){
       // Các nhóm mà user tham gia
