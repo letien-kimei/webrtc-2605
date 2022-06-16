@@ -1,7 +1,5 @@
 socket.emit('user_login', user_id, peerId)
 socket.on("get_user_login",async function (user){
-    console.log("============= DATA ===========")
-    console.log(user)
     //bs4Toast.primary('Thông báo', `${user.fullname} vừa đăng nhập`,{delay: 200});
     let getState =  $(`div[data-userid="${user.user_id}"]`).find(".stateOnline");
         $(getState).removeClass("off");
@@ -13,6 +11,10 @@ socket.on('user_out_pending_call', function(tempUser, usersInRoom){
       let firstKey2 = Object.keys(tempUser)[0]
       let Objuser   = tempUser[firstKey2]
       bs4Toast.primary('Thông báo', `${Objuser.fullname} đang bận`,{delay: 200});
+})
+
+socket.on('my_room_pending_call', function(tempUser, usersInRoom){
+    $(".coomingcall ").hide()
 })
 
 // Thông báo người dùng đang có cuộc gọi khác

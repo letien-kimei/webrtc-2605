@@ -31,8 +31,10 @@ module.exports.callSocket =  function(server){
 
             io.to(socket.id).emit('get_list_user_online', Globalclients);
             socket.broadcast.emit('get_user_login', Globalclients[user_id]);
-            logger('data.log').info(`============ USER LOGIN =============`);
-            logger('data.log').info(Globalclients[user_id]);
+
+            let tempLogger = await logger('user_login.log')
+            tempLogger.info(Globalclients[user_id]);
+            Clients.overView()
         });
 
         // A YÊU CẦU GỌI TỚI B
@@ -48,7 +50,12 @@ module.exports.callSocket =  function(server){
             let getUserDb     = await userModel.get({select: "*", where: `id = ${dataRooms.user_id}`})
                 getUserDb     = getUserDb.data[0]
             
-           
+            let tempLogger = await logger('request_call.log')
+            tempLogger.info("================== \ REQUEST CALL =================");
+            tempLogger.info("request_user_id: " +  request_user_id);
+            tempLogger.info("room_id: " +  tempRoom_id);
+            tempLogger.info("================== / REQUEST CALL =================");
+
             if(dataRooms.type == "CLIENT_ROOM"){ 
                 socket.join(tempRoom_id)    
                 io.to(socket.id).emit("data_call_group", dataRooms)
@@ -79,21 +86,27 @@ module.exports.callSocket =  function(server){
                     let dataArr = rs.data[0];
                     io.to(socket.id).emit("user_is_offline", dataArr)
                 }else{ // USER B CHẤP NHẬN CUỘC GỌI
+                    let master_user_id = dataRooms.user_id
+                        master_user_id = master_user_id.toString()
                     let tempData = {}
-                        tempData[tempUserId] = Globalclients[dataRooms.user_id] // Thông tin của người cần gọi
+                        tempData[tempUserId] = Globalclients[master_user_id] // Thông tin của người cần gọi
 
-                    logger('busy_call.log').info(`============ CHECK BUSY CALL =============`);
-                    logger('busy_call.log').info(getUserDb);
+                    
                     if(getUserDb.busy == 1){ // Đang có cuộc gọi khác
                         io.to(socket.id).emit('user_busy', tempData[tempUserId])
                     }else{
-                        socket.join(tempRoom_id)    
+                        socket.join(tempRoom_id)   
+                        Clients.add_socket({socket_id: socket.id, user_id: request_user_id, room_id: room_id})
+                        Clients.overView()
+                        // Thêm người dùng request vào cuộc gọi chờ 
+                        Clients.pending_call({socket_id: socket.id, request_user_id: request_user_id, master_user_id: master_user_id, room_id: room_id})
+
                         Clients.updateRoomUserStatus(request_user_id, tempRoom_id, "ON", 1)
-                        Clients.updateRoomUserStatus(dataRooms.user_id, '', '', 1)
+                        Clients.updateRoomUserStatus(master_user_id, '', '', 1)
                     
-                        let callroom = Globalclients[dataRooms.user_id].private_room;
+                        let callroom = Globalclients[master_user_id].private_room;
                         // gửi thông tin của người B cho người A (A gọi tới B)
-                        io.to(socket.id).emit("data_call", Globalclients[dataRooms.user_id], callroom)
+                        io.to(socket.id).emit("data_call", Globalclients[master_user_id], callroom)
                         // gửi thông báo có cuộc gọi đến cho người B kèm thông tin của người A (A gọi tới B)
                         socket.to(tempRoom_id).emit('comming_call', Globalclients[tempUserId], callroom);
                     }
@@ -116,9 +129,6 @@ module.exports.callSocket =  function(server){
             Clients.updateRoomUserStatus('', callroom, 'OFF', 0)
 
             let tempUser = Clients.get_user(user_id)
-            logger('request_user_cancel.log').info(`============ REQUEST USER CANCEL =============`);
-            logger('request_user_cancel.log').info(tempUser);
-
             socket.leave(callroom)
             socket.broadcast.to(callroom).emit("user_request_call_is_cancel", tempUser)
         });
@@ -132,7 +142,13 @@ module.exports.callSocket =  function(server){
             // Cập nhật trạng thái off và busy cho phòng và user
             Clients.updateRoomUserStatus(user_id, '', '', 0)       
             Clients.updateRoomUserStatus('', roomId, 'OFF', 0)
+
             let getUserCancel = Clients.get_user(user_id)
+
+            let tempLogger = await logger('cancel_join_call.log')
+            tempLogger.info("================== \ CANCEL JOIN CALL (ROOM) =================");
+            tempLogger.info(dataRooms);
+            tempLogger.info("================== / CANCEL JOIN CALL (ROOM) =================");
 
             if(dataRooms.type == "PRIVATE_ROOM"){
                 Clients.updateRoomUserStatus(request_user_id, '', '', 0)
@@ -146,6 +162,11 @@ module.exports.callSocket =  function(server){
             let get_private_room_request = getUserRequestCall.private_room
             io.in(get_private_room_request).socketsJoin(roomId);
 
+            let tempLogger = await logger('join_call.log')
+            tempLogger.info("================== \ JOIN CALL (USER) =================");
+            tempLogger.info(getUserRequestCall);
+            tempLogger.info("================== / JOIN CALL (USER) =================");
+
             socket.broadcast.to(roomId).emit("go_to_room", roomId);
         });   
 
@@ -157,6 +178,7 @@ module.exports.callSocket =  function(server){
             
             // UPDATE USER A ĐANG TRONG CUỘC GỌI (callroom)
             let getUser =  Clients.get_user(user_id)
+
             Clients.update_user(user_id, 'callroom', roomId)
             Clients.add_private_room({socket_id: socket.id, private_room: getUser.private_room})
             Clients.add_socket({socket_id: socket.id, user_id: user_id, room_id: roomId, private_room: getUser.private_room})
@@ -182,8 +204,6 @@ module.exports.callSocket =  function(server){
             let tempData = {}
                 tempData[user_id] =  getUsers[user_id]
             let getObjPeers = Clients.get_peers()
-            logger('data.log').info(`========== ME JOIN ============`)
-            logger('data.log').info(getUsers)
             // Gửi thông tin của người gửi tới tất cả client trong room trừ người gửi 
             socket.broadcast.to(roomId).emit("new_user_join", tempData, getObjPeers);
         });
@@ -233,7 +253,7 @@ module.exports.callSocket =  function(server){
             if(type == "accept"){
                 await alertModel.update({accept: 1, waiting: 0}, `id = ${alertId}`)
                 let dataBeforeAccept = await roomsUsersModel.add({room_id: room_id, user_id: request_user_id})
-                let dataAfterAccept = await roomsModel.get({ 
+                let dataAfterAccept  = await roomsModel.get({ 
                     select:' dtb_rooms.room_id, dtb_rooms.user_id as room_master_user_id, dtb_rooms.room_name, temp_dru.user_id as room_join_user_id ',
                     join: [
                         {
@@ -252,52 +272,91 @@ module.exports.callSocket =  function(server){
 
         // DISCONNECT
         socket.on("disconnect",  async function (reason) {
-            console.log("================== DISCONNECT ===================");
-            console.log("Ngắt kết nối: "+ socket.id);
 
             let dataUser = await Clients.disconnectReset(socket.id)
-                logger('data.log').info(`============= DATA DISCONNECT TOP ============`)
-                logger('data.log').info(dataUser)
-                dataUser.user['fullname'] = Clients.get_user(dataUser.user.user_id)['fullname']
-            if(dataUser.private_room != undefined && dataUser.private_room != null) {
+            let user_id_disconnect = dataUser.user.user_id
+                dataUser.user['fullname'] = Clients.get_user(user_id_disconnect)['fullname']
+                
+                let tempLogger1 = await logger('disonnect.log')
+                tempLogger1.info("================== \ DISCONNECT =================");
+                tempLogger1.info(dataUser);
+                tempLogger1.info("================== / DISCONNECT =================");
+
+            if(dataUser.user.another_rooms != undefined && Array.isArray(dataUser.user.another_rooms)) {
                 // USER HOÀN TOÀN DISCONNECT (TẮT TẤT CẢ TAB)
                 if(Object.keys(dataUser.private_room).length == 0){
-                    Clients.delete_user(dataUser.user.user_id)
-
+                    Clients.delete_user(user_id_disconnect)
                     socket.broadcast.emit('user_disconnect', dataUser.user);
                 }         
                 
                 // user rời khỏi phòng 
-                if(dataUser.user.another_rooms != undefined && Array.isArray(dataUser.user.another_rooms)){
-                    let arrRooms = dataUser.user.another_rooms
-                    arrRooms.map(async function (roomValue, index, array) {  
+                let arrRooms = dataUser.user.another_rooms
+                arrRooms.map(async function (roomValue, index, array) {  
 
-                        let userInRoom = Clients.get_user_in_room(roomValue)
-                        logger('disconnect_leave_room.log').info(`=============\ DISCONNECT LEAVE ROOM ============`)
-                        logger('disconnect_leave_room.log').info(userInRoom)
-                        logger('disconnect_leave_room.log').info(`=== LENGTH ===`)
-                        logger('disconnect_leave_room.log').info(Object.keys(userInRoom).length)
-                        logger('disconnect_leave_room.log').info(`=============/ DISCONNECT LEAVE ROOM ============`)
-                        Clients.updateRoomUserStatus(dataUser.user.user_id, '', '', 0)
-                        // Nếu không còn user nào thì sẽ update trạng thái của phòng là OFF (không hoạt động)
-                        // Trạng thái chỉ ON nếu có 1 request call (yêu cầu gọi)
-                        if(Object.keys(userInRoom).length == 0 ){
-                            // Cập nhật trạng thái off và busy cho phòng và user (room đã được active từ request call)
-                            Clients.updateRoomUserStatus('', roomValue, 'OFF', '')
+                    let userInRoom = Clients.get_user_in_room(roomValue)
+                    Clients.updateRoomUserStatus(user_id_disconnect, '', '', 0)
+                    // Các room không phải là private room (room cá nhân)
+                    // Nếu không còn user nào thì sẽ update trạng thái của phòng là OFF (không hoạt động)
+                    // Trạng thái chỉ ON nếu có 1 request call (yêu cầu gọi)
+                    if(Object.keys(userInRoom).length == 0 ){
+                        // Cập nhật trạng thái off và busy cho phòng và user (room đã được active từ request call)
+                        Clients.updateRoomUserStatus('', roomValue, 'OFF', '')
+                    }
+                    
+                    let tempUser = {}
+                        tempUser[user_id_disconnect] = dataUser.user
+                    let usersInRoom = Clients.get_user_in_room(roomValue)
+                    let getRoom = await roomsModel.get({select: "*", where: ` room_id = '${roomValue}'`})
+                        getRoom = getRoom.data[0]
+
+                        let tempLogger4 = await logger('disconnect_get_room.log')
+                        tempLogger4.info(`=============\ DISCONNECT GET ROOM ============`)
+                        tempLogger4.info(getRoom)
+                        tempLogger4.info(`=============/ DISCONNECT GET ROOM ============`)
+
+                    if(getRoom.type == "PRIVATE_ROOM"){
+                       
+                        let pending_room = await Clients.get_pending_call_by_roomid(roomValue)
+
+                        if(pending_room != undefined && pending_room != null){
+
+                            let tempLogger9 = await logger('get_master_room.log')
+                            tempLogger9.info(`=============\ DISCONNECT ROOM USER_ID ============`)
+                            tempLogger9.info(getRoom.user_id)
+                            tempLogger9.info(user_id_disconnect)
+                            tempLogger9.info(`=============\ DISCONNECT PENDING ROOM ============`)
+
+                            if(getRoom.user_id == user_id_disconnect){
+                                socket.broadcast.to(roomValue).emit("user_out_pending_call",tempUser)
+                            }else{
+                                // gửi thông thông tới nguoi trong cuoc goi cho
+                                socket.broadcast.to(roomValue).emit("my_room_pending_call",tempUser)
+                            }
+
+                            let tempLogger2 = await logger('disconnect_get_pending_room.log')
+                            tempLogger2.info(`=============\ DISCONNECT PENDING ROOM ============`)
+                            tempLogger2.info(pending_room)
+                            tempLogger2.info(`=============\ DISCONNECT PENDING ROOM ============`)
+                            
+                            let temp_request_userid = pending_room.request_user_id
+                            let temp_master_user_id = pending_room.master_user_id
+
+                            // người request rời khỏi phòng chờ
+                            await io.in(pending_room.socket_id).socketsLeave(roomValue);
+
+                            // cập nhật trạng thái người request trong db
+                            Clients.updateRoomUserStatus(temp_request_userid, '', '', 0)
+                            // cập nhật trạng thái người nhận request trong db
+                            Clients.updateRoomUserStatus(temp_master_user_id, '', '', 0)
+                            // cập nhật trạng thái người nhận request trong db
+                            Clients.updateRoomUserStatus('', roomValue, 'OFF', 0)
+                            // xóa phòng chờ
+                            Clients.delete_pending_call_by_roomid(roomValue)
                         }
-                     
-                        let tempUser = {}
-                            tempUser[dataUser.user.user_id] = dataUser.user
-                        let usersInRoom = Clients.get_user_in_room(roomValue)
-                        let getRoom = await roomsModel.get({select: "*", where: ` room_id = '${roomValue}'`})
-                            getRoom = getRoom.data[0]
-                        if(getRoom.type == "PRIVATE_ROOM"){
-                            socket.broadcast.to(roomValue).emit("user_out_pending_call",tempUser, usersInRoom)
-                        }
-                        
-                        socket.broadcast.to(roomValue).emit("user_leave_room",tempUser, usersInRoom)
-                    })
-                }
+                    }
+                    
+                    socket.broadcast.to(roomValue).emit("user_leave_room",tempUser, usersInRoom)
+                })
             }
         });
 

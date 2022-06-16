@@ -65,9 +65,11 @@ const logger = require('../../helpers/logger');
                     return new Promise((resolve,reject)=>{
                         conn.getConnection(function (err,connection) { 
                                if (err) throw err;
-                                    connection.query(query, (err, res) => {
-                                        logger('data.log').info(`========== GET QUERY  ============`)
-                                        logger('data.log').info(query)
+                                    connection.query(query, async (err, res) => {
+                                        let tempLogger = await logger('data.log')
+                                        tempLogger.info(`========== \ GET QUERY  ============`)
+                                        tempLogger.info(query)
+                                        tempLogger.info(`========== / GET QUERY  ============`)
                                         if (err) {
                                             resolve({ type: "error", data: err });
                                         } else {

@@ -58,7 +58,17 @@ class Clients {
       //                                                        }
       //                                                    }
       //                        }
-      this.pending_request_call = {},
+      this.pending_request_call = {}, // check cho goi5 1:1
+      //                          {
+      //                             { 
+      //                                'RDAFAD3-DSFSD3-DF' :  // room id {
+      //                                                             socket_id_request: 'RDAFAD3-DSFSD3-DF'
+      //                                                             room_id: 'RQWERWF-SDAFEQWREAF',
+      //                                                             master_user_id : 2,     
+      //                                                             request_user_id: 1,                    
+      //                                                          }
+      //                              }
+      //                           }
       this.defaulUsers     = {
                                     user_id: '',
                                     username: '',
@@ -82,6 +92,52 @@ class Clients {
          this.page_load_join_room(socket, mObj)
          resolve(this.objUsers)
       });
+   }
+
+   // Chờ phản hồi cuộc gọi
+   async pending_call(obj){
+      if(this.pending_request_call[obj.room_id] == undefined){
+         this.pending_request_call[obj.room_id] = {}
+      }
+      if(obj.request_user_id != undefined){
+         this.pending_request_call[obj.room_id]['request_user_id'] = obj.request_user_id
+      }
+      if(obj.master_user_id != undefined){
+         this.pending_request_call[obj.room_id]['master_user_id'] = obj.master_user_id
+      }
+      if(obj.socket_id != undefined){
+         this.pending_request_call[obj.room_id]['socket_id']       = obj.socket_id
+      }
+      this.pending_request_call[obj.room_id]['room_id']            = obj.room_id
+
+      let tempLogger = await logger('pending_call.log')
+      tempLogger.info(`============= \ PENDING CALL ============`)
+      tempLogger.info(this.pending_request_call)
+      tempLogger.info(`============= / PENDING CALL ============`)
+   }
+
+   async get_pending_call_by_roomid(room_id){
+      let data = null
+      return new Promise(async (resolve, reject) => {
+         if(this.pending_request_call[room_id] != undefined){
+            data = this.pending_request_call[room_id]
+            let tempLogger = await logger('get_pending_call_by_roomid.log')
+            tempLogger.info(`============= \ GET PENDING CALL ============`)
+            tempLogger.info(data)
+            tempLogger.info(`============= / GET PENDING CALL ============`)
+         }
+         resolve(data)
+      });
+   }
+
+   async delete_pending_call_by_roomid(room_id){
+      if(this.pending_request_call[room_id] != undefined){
+         delete this.pending_request_call[room_id]
+         let tempLogger = await logger('delete_pending_call_by_roomid.log')
+         tempLogger.info(`============= \ GET PENDING CALL ============`)
+         tempLogger.info(this.pending_request_call)
+         tempLogger.info(`============= / GET PENDING CALL ============`)
+      }
    }
 
    // Lưu user 
@@ -164,13 +220,9 @@ class Clients {
    // Lưu thông tin user trong private room 
    add_private_room(obj = {socket_id: '', user_id: '', private_room: private_room}){
       if(Array.isArray(this.objPrivateRoom[obj.private_room])){
-         logger('data.log').info(`============= ADD PRIVATE ROOM OBJECT 1============`)
-         logger('data.log').info(this.objPrivateRoom)
          this.objPrivateRoom[obj.private_room].push(obj.socket_id)
      }else{
          this.objPrivateRoom[obj.private_room] = [obj.socket_id]
-         logger('data.log').info(`============= ADD PRIVATE ROOM OBJECT 2============`)
-         logger('data.log').info(this.objPrivateRoom)
      }
    }
 
@@ -265,7 +317,9 @@ class Clients {
       if(getSocket  != undefined){
          let roomId  =  "";
          let getUser = __this.get_user(getSocket.user_id)
-      
+         if(getUser != undefined){
+            getSocket['private_room'] = getUser.private_room
+         }
          if(typeof getSocket == "object"){
             if(getSocket.hasOwnProperty('private_room')){
                roomId = getSocket.private_room
@@ -283,16 +337,8 @@ class Clients {
                }
             }        
             // KIỂM TRA ROOM
-            logger('data.log').info(`============= GET SOCKET ============`)
-            logger('data.log').info(getSocket)
-
-            logger('data.log').info(`============= ROOM NAME ============`)
-            logger('data.log').info(roomId)
-
             let checkPrivateRoom = this.get_private_room(roomId)
 
-            logger('data.log').info(`======== CHECK PRIVATE ROOM =========`)
-            logger('data.log').info(checkPrivateRoom)
             // XÓA SOCKET ID KHỎI ROOM
             if(checkPrivateRoom != undefined){
                if(checkPrivateRoom.length > 0){
@@ -312,19 +358,21 @@ class Clients {
   }
 
 
-   overView(){
-      console.log(`==================== objUsers ==================`)
-      console.log(this.objUsers)
-      console.log(`==================== objSocket ==================`)
-      console.log(this.objSocket)
-      console.log(`==================== objPeers ==================`)
-      console.log(this.objPeers)
-      console.log(`==================== objRooms ==================`)
-      console.log(this.objRooms)
-      console.log(`==================== objPrivateRoom ==================`)
-      console.log(this.objPrivateRoom)
+   async overView(){
+      let overiew = await logger('overview.log') 
+      overiew.info(`=============== { START OVERVIEW } ==============`)
+      overiew.info(`=========== objUsers ============`)
+      overiew.info(this.objUsers)
+      overiew.info(`=========== objSocket ===========`)
+      overiew.info(this.objSocket)
+      overiew.info(`============ objPeers ===========`)
+      overiew.info(this.objPeers)
+      overiew.info(`============ objRooms ===========`)
+      overiew.info(this.objRooms)
+      overiew.info(`========= objPrivateRoom ========`)
+      overiew.info(this.objPrivateRoom)
+      overiew.info(`=============== { END OVERVIEW } ===============`)
    }
-
  }
 
  module.exports = new Clients;

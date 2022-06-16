@@ -1,0 +1,10 @@
+==================  CANCEL JOIN CALL (ROOM) =================
+{
+   "id": 49,
+   "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
+   "room_name": "Room B-3",
+   "user_id": 21,
+   "type": "CLIENT_ROOM",
+   "active": "ON"
+}
+================== / CANCEL JOIN CALL (ROOM) =================

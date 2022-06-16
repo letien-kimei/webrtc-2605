@@ -1,0 +1,143 @@
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
+}
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "cVCsvh76JerTfQGMAAAH"
+}
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
+}
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "uI_JQOohD_YYXmSnAAAL"
+}
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
+}
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "sQIryk5YxpumijaqAAAP"
+}
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
+}
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "WPCI-hGnZiNH0SFmAAAT"
+}
+{
+   "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+   "user_id": 23,
+   "username": "usm3",
+   "fullname": "Nguyễn Văn C",
+   "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "43Zj7UlBjYAX1CM5AAAb"
+}
+{
+   "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+   "user_id": 21,
+   "username": "usm2",
+   "fullname": "Nguyễn Văn B",
+   "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "Vrwd3Vc56F2pz_1LAAAd"
+}
+{
+   "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+   "user_id": 20,
+   "username": "usm1",
+   "fullname": "Nguyễn Văn A",
+   "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+   "options": {
+      "camera": true,
+      "microphone": true
+   },
+   "socket_id": "pdAh52si2cqDN3duAAAf"
+}
