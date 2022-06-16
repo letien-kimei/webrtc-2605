@@ -317,7 +317,7 @@ function btnOff(_this, type){
 }
 
 function openStream() {
-  const config = { audio: true, video: true };
+  const config = { audio: true, video: true, echoCancellation: false };
   return navigator.mediaDevices.getUserMedia(config);
 }
 
