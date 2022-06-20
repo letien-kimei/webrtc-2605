@@ -37,14 +37,12 @@ class homeController extends baseController {
                     condition: "dtb_alert.room_id = dtb_rooms_users.room_id"
                 }   
             ],
-            where: `  dtb_rooms.type != "PRIVATE_ROOM"  `,
+            where: `  dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP" `,
             groupby: `dtb_rooms.room_id`
         })
 
         // LẤY THÔNG BÁO
         let getRequest = await alertModel.get({select: "*", where: `request_user_id != '${user.id}'`})
-        console.log("========== GET REQUEST ===========")
-        console.log(rooms)
         res.render('home',{users: users['data'], rooms: rooms['data'], requestAlert: getRequest['data'] })
     }
 }

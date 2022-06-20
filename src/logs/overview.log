@@ -1,585 +1,6 @@
 =============== { START OVERVIEW } ==============
 =========== objUsers ============
 {
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
-   }
-}
-=========== objSocket ===========
-{
-   "P5UWuwJ9WFeuTgY7AAAF": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "P5UWuwJ9WFeuTgY7AAAF"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "cVCsvh76JerTfQGMAAAH"
-   }
-}
-=========== objSocket ===========
-{
-   "P5UWuwJ9WFeuTgY7AAAF": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   },
-   "cVCsvh76JerTfQGMAAAH": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "cVCsvh76JerTfQGMAAAH"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "P5UWuwJ9WFeuTgY7AAAF"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "cVCsvh76JerTfQGMAAAH"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "cVCsvh76JerTfQGMAAAH"
-   }
-}
-=========== objSocket ===========
-{
-   "P5UWuwJ9WFeuTgY7AAAF": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "cVCsvh76JerTfQGMAAAH": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "P5UWuwJ9WFeuTgY7AAAF"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "cVCsvh76JerTfQGMAAAH"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "P5UWuwJ9WFeuTgY7AAAF"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "cVCsvh76JerTfQGMAAAH"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "cVCsvh76JerTfQGMAAAH"
-   }
-}
-=========== objSocket ===========
-{
-   "cVCsvh76JerTfQGMAAAH": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "cVCsvh76JerTfQGMAAAH"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "cVCsvh76JerTfQGMAAAH"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "cVCsvh76JerTfQGMAAAH"
-   }
-}
-=========== objSocket ===========
-{
-   "cVCsvh76JerTfQGMAAAH": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "cVCsvh76JerTfQGMAAAH"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "cVCsvh76JerTfQGMAAAH"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "uI_JQOohD_YYXmSnAAAL"
-   }
-}
-=========== objSocket ===========
-{
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "uI_JQOohD_YYXmSnAAAL": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "uI_JQOohD_YYXmSnAAAL"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "uI_JQOohD_YYXmSnAAAL"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "uI_JQOohD_YYXmSnAAAL"
-   },
    "23": {
       "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
       "user_id": 23,
@@ -591,26 +12,12 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
+      "socket_id": "Nu0caBzRLPK8q_xUAAAJ"
    }
 }
 =========== objSocket ===========
 {
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "uI_JQOohD_YYXmSnAAAL": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "ZxDWoGQO4Z1tP58tAAAN": {
+   "Nu0caBzRLPK8q_xUAAAJ": {
       "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
       "user_id": 23,
       "another_rooms": [
@@ -620,48 +27,12 @@
 }
 ============ objPeers ===========
 {
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
    "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
       "user_id": 23
    }
 }
 ============ objRooms ===========
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "uI_JQOohD_YYXmSnAAAL"
-      }
-   },
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
       "23": {
          "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
@@ -674,20 +45,14 @@
             "camera": true,
             "microphone": true
          },
-         "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
+         "socket_id": "Nu0caBzRLPK8q_xUAAAJ"
       }
    }
 }
 ========= objPrivateRoom ========
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "uI_JQOohD_YYXmSnAAAL"
-   ],
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "ZxDWoGQO4Z1tP58tAAAN"
+      "Nu0caBzRLPK8q_xUAAAJ"
    ]
 }
 =============== { END OVERVIEW } ===============
@@ -705,20 +70,7 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "uI_JQOohD_YYXmSnAAAL"
+      "socket_id": "ciUQY-xtUmvgPEpJAAAL"
    },
    "23": {
       "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
@@ -731,27 +83,286 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
+      "socket_id": "Nu0caBzRLPK8q_xUAAAJ"
    }
 }
 =========== objSocket ===========
 {
-   "zyZ8pg_nccxI4wlCAAAJ": {
+   "Nu0caBzRLPK8q_xUAAAJ": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   },
+   "ciUQY-xtUmvgPEpJAAAL": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   }
+}
+============ objPeers ===========
+{
+   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
+      "user_id": 23
+   },
+   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
+      "user_id": 20
+   }
+}
+============ objRooms ===========
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
+      "23": {
+         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+         "user_id": 23,
+         "username": "usm3",
+         "fullname": "Nguyễn Văn C",
+         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "Nu0caBzRLPK8q_xUAAAJ"
+      }
+   },
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "ciUQY-xtUmvgPEpJAAAL"
+      }
+   }
+}
+========= objPrivateRoom ========
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Nu0caBzRLPK8q_xUAAAJ"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "ciUQY-xtUmvgPEpJAAAL"
+   ]
+}
+=============== { END OVERVIEW } ===============
+=============== { START OVERVIEW } ==============
+=========== objUsers ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "ciUQY-xtUmvgPEpJAAAL"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "x2xXdSR2SBazIHLTAAAN"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "Nu0caBzRLPK8q_xUAAAJ"
+   }
+}
+=========== objSocket ===========
+{
+   "Nu0caBzRLPK8q_xUAAAJ": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   },
+   "ciUQY-xtUmvgPEpJAAAL": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   },
+   "x2xXdSR2SBazIHLTAAAN": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+============ objPeers ===========
+{
+   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
+      "user_id": 23
+   },
+   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
+      "user_id": 20
+   },
+   "445a0866-1504-46b8-85d7-5981c6c1c459": {
+      "user_id": 21
+   }
+}
+============ objRooms ===========
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
+      "23": {
+         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+         "user_id": 23,
+         "username": "usm3",
+         "fullname": "Nguyễn Văn C",
+         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "Nu0caBzRLPK8q_xUAAAJ"
+      }
+   },
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "ciUQY-xtUmvgPEpJAAAL"
+      }
+   },
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
+      "21": {
+         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+         "user_id": 21,
+         "username": "usm2",
+         "fullname": "Nguyễn Văn B",
+         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "x2xXdSR2SBazIHLTAAAN"
+      }
+   }
+}
+========= objPrivateRoom ========
+{
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "Nu0caBzRLPK8q_xUAAAJ"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "ciUQY-xtUmvgPEpJAAAL"
+   ],
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "x2xXdSR2SBazIHLTAAAN"
+   ]
+}
+=============== { END OVERVIEW } ===============
+=============== { START OVERVIEW } ==============
+=========== objUsers ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "ciUQY-xtUmvgPEpJAAAL",
+      "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "x2xXdSR2SBazIHLTAAAN"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "SrFTFAL6NGTADPuDAAAR"
+   }
+}
+=========== objSocket ===========
+{
+   "ciUQY-xtUmvgPEpJAAAL": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   },
+   "x2xXdSR2SBazIHLTAAAN": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   },
+   "oho0iZ3EGiJK7Cl9AAAP": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
       "user_id": "20",
       "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       ]
    },
-   "uI_JQOohD_YYXmSnAAAL": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "ZxDWoGQO4Z1tP58tAAAN": {
+   "SrFTFAL6NGTADPuDAAAR": {
       "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
       "user_id": 23,
       "another_rooms": [
@@ -761,18 +372,33 @@
 }
 ============ objPeers ===========
 {
+   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
+      "user_id": 23
+   },
    "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
       "user_id": 20
    },
    "445a0866-1504-46b8-85d7-5981c6c1c459": {
       "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
    }
 }
 ============ objRooms ===========
 {
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
+      "23": {
+         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+         "user_id": 23,
+         "username": "usm3",
+         "fullname": "Nguyễn Văn C",
+         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "SrFTFAL6NGTADPuDAAAR"
+      }
+   },
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
       "20": {
          "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
@@ -780,12 +406,13 @@
          "username": "usm1",
          "fullname": "Nguyễn Văn A",
          "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
          "options": {
             "camera": true,
             "microphone": true
          },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
+         "socket_id": "ciUQY-xtUmvgPEpJAAAL",
+         "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       }
    },
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
@@ -800,35 +427,95 @@
             "camera": true,
             "microphone": true
          },
-         "socket_id": "uI_JQOohD_YYXmSnAAAL"
+         "socket_id": "x2xXdSR2SBazIHLTAAAN"
       }
    },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "e50fd0ed-253b-4f41-a597-1e461d26bee7": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
          "options": {
             "camera": true,
             "microphone": true
          },
-         "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
+         "socket_id": "ciUQY-xtUmvgPEpJAAAL",
+         "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       }
    }
 }
 ========= objPrivateRoom ========
 {
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "SrFTFAL6NGTADPuDAAAR"
+   ],
    "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
+      "ciUQY-xtUmvgPEpJAAAL",
+      "oho0iZ3EGiJK7Cl9AAAP"
    ],
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "uI_JQOohD_YYXmSnAAAL"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "ZxDWoGQO4Z1tP58tAAAN"
+      "x2xXdSR2SBazIHLTAAAN"
+   ]
+}
+=============== { END OVERVIEW } ===============
+=============== { START OVERVIEW } ==============
+=========== objUsers ============
+{
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+   }
+}
+=========== objSocket ===========
+{
+   "zA0vnFrk7-Rd8QViAAAJ": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   }
+}
+============ objPeers ===========
+{
+   "445a0866-1504-46b8-85d7-5981c6c1c459": {
+      "user_id": 21
+   }
+}
+============ objRooms ===========
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
+      "21": {
+         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+         "user_id": 21,
+         "username": "usm2",
+         "fullname": "Nguyễn Văn B",
+         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+      }
+   }
+}
+========= objPrivateRoom ========
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "zA0vnFrk7-Rd8QViAAAJ"
    ]
 }
 =============== { END OVERVIEW } ===============
@@ -846,7 +533,7 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
+      "socket_id": "zAj1PSAhfUKL1mhqAAAL"
    },
    "21": {
       "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
@@ -859,7 +546,106 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "sQIryk5YxpumijaqAAAP"
+      "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+   }
+}
+=========== objSocket ===========
+{
+   "zA0vnFrk7-Rd8QViAAAJ": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   },
+   "zAj1PSAhfUKL1mhqAAAL": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   }
+}
+============ objPeers ===========
+{
+   "445a0866-1504-46b8-85d7-5981c6c1c459": {
+      "user_id": 21
+   },
+   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
+      "user_id": 20
+   }
+}
+============ objRooms ===========
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
+      "21": {
+         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+         "user_id": 21,
+         "username": "usm2",
+         "fullname": "Nguyễn Văn B",
+         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+      }
+   },
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zAj1PSAhfUKL1mhqAAAL"
+      }
+   }
+}
+========= objPrivateRoom ========
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "zA0vnFrk7-Rd8QViAAAJ"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "zAj1PSAhfUKL1mhqAAAL"
+   ]
+}
+=============== { END OVERVIEW } ===============
+=============== { START OVERVIEW } ==============
+=========== objUsers ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "zAj1PSAhfUKL1mhqAAAL"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
    },
    "23": {
       "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
@@ -872,309 +658,182 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
+      "socket_id": "gMNBBErpz3JxBJ82AAAN"
    }
 }
 =========== objSocket ===========
 {
-   "zyZ8pg_nccxI4wlCAAAJ": {
+   "zA0vnFrk7-Rd8QViAAAJ": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   },
+   "zAj1PSAhfUKL1mhqAAAL": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   },
+   "gMNBBErpz3JxBJ82AAAN": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": 23,
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
+      ]
+   }
+}
+============ objPeers ===========
+{
+   "445a0866-1504-46b8-85d7-5981c6c1c459": {
+      "user_id": 21
+   },
+   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
+      "user_id": 20
+   },
+   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
+      "user_id": 23
+   }
+}
+============ objRooms ===========
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
+      "21": {
+         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+         "user_id": 21,
+         "username": "usm2",
+         "fullname": "Nguyễn Văn B",
+         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+      }
+   },
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zAj1PSAhfUKL1mhqAAAL"
+      }
+   },
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
+      "23": {
+         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+         "user_id": 23,
+         "username": "usm3",
+         "fullname": "Nguyễn Văn C",
+         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "gMNBBErpz3JxBJ82AAAN"
+      }
+   }
+}
+========= objPrivateRoom ========
+{
+   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
+      "zA0vnFrk7-Rd8QViAAAJ"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "zAj1PSAhfUKL1mhqAAAL"
+   ],
+   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
+      "gMNBBErpz3JxBJ82AAAN"
+   ]
+}
+=============== { END OVERVIEW } ===============
+=============== { START OVERVIEW } ==============
+=========== objUsers ============
+{
+   "20": {
+      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+      "user_id": 20,
+      "username": "usm1",
+      "fullname": "Nguyễn Văn A",
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "zAj1PSAhfUKL1mhqAAAL",
+      "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
+   },
+   "21": {
+      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
+      "user_id": 21,
+      "username": "usm2",
+      "fullname": "Nguyễn Văn B",
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+   },
+   "23": {
+      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
+      "user_id": 23,
+      "username": "usm3",
+      "fullname": "Nguyễn Văn C",
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "options": {
+         "camera": true,
+         "microphone": true
+      },
+      "socket_id": "1l9xhPzPAzSO6tMHAAAR"
+   }
+}
+=========== objSocket ===========
+{
+   "zA0vnFrk7-Rd8QViAAAJ": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ]
+   },
+   "zAj1PSAhfUKL1mhqAAAL": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ]
+   },
+   "undefined": {
+      "user_id": 23,
+      "another_rooms": [
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7"
+      ]
+   },
+   "QnPFcDeny2F-_mr9AAAP": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
       "user_id": "20",
       "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       ]
    },
-   "ZxDWoGQO4Z1tP58tAAAN": {
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "user_id": 23,
-      "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
-      ]
-   },
-   "sQIryk5YxpumijaqAAAP": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "sQIryk5YxpumijaqAAAP"
-      }
-   },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "sQIryk5YxpumijaqAAAP"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "ZxDWoGQO4Z1tP58tAAAN"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "sQIryk5YxpumijaqAAAP"
-   },
-   "23": {
-      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-      "user_id": 23,
-      "username": "usm3",
-      "fullname": "Nguyễn Văn C",
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
-   }
-}
-=========== objSocket ===========
-{
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "ZxDWoGQO4Z1tP58tAAAN": {
-      "user_id": "23",
-      "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   },
-   "sQIryk5YxpumijaqAAAP": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "sQIryk5YxpumijaqAAAP"
-      }
-   },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "ZxDWoGQO4Z1tP58tAAAN"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "sQIryk5YxpumijaqAAAP"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "ZxDWoGQO4Z1tP58tAAAN"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "sQIryk5YxpumijaqAAAP"
-   },
-   "23": {
-      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-      "user_id": 23,
-      "username": "usm3",
-      "fullname": "Nguyễn Văn C",
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
-   }
-}
-=========== objSocket ===========
-{
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "sQIryk5YxpumijaqAAAP": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "lV7RIr8QV-HQ-wJFAAAR": {
+   "1l9xhPzPAzSO6tMHAAAR": {
       "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
       "user_id": 23,
       "another_rooms": [
@@ -1184,11 +843,11 @@
 }
 ============ objPeers ===========
 {
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
    "445a0866-1504-46b8-85d7-5981c6c1c459": {
       "user_id": 21
+   },
+   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
+      "user_id": 20
    },
    "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
       "user_id": 23
@@ -1196,21 +855,6 @@
 }
 ============ objRooms ===========
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
       "21": {
          "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
@@ -1223,7 +867,23 @@
             "camera": true,
             "microphone": true
          },
-         "socket_id": "sQIryk5YxpumijaqAAAP"
+         "socket_id": "zA0vnFrk7-Rd8QViAAAJ"
+      }
+   },
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zAj1PSAhfUKL1mhqAAAL",
+         "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       }
    },
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
@@ -1238,20 +898,37 @@
             "camera": true,
             "microphone": true
          },
-         "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
+         "socket_id": "1l9xhPzPAzSO6tMHAAAR"
+      }
+   },
+   "e50fd0ed-253b-4f41-a597-1e461d26bee7": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zAj1PSAhfUKL1mhqAAAL",
+         "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       }
    }
 }
 ========= objPrivateRoom ========
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "sQIryk5YxpumijaqAAAP"
+      "zA0vnFrk7-Rd8QViAAAJ"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "zAj1PSAhfUKL1mhqAAAL",
+      "QnPFcDeny2F-_mr9AAAP"
    ],
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "lV7RIr8QV-HQ-wJFAAAR"
+      "1l9xhPzPAzSO6tMHAAAR"
    ]
 }
 =============== { END OVERVIEW } ===============
@@ -1264,12 +941,13 @@
       "username": "usm1",
       "fullname": "Nguyễn Văn A",
       "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
       "options": {
          "camera": true,
          "microphone": true
       },
-      "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
+      "socket_id": "zAj1PSAhfUKL1mhqAAAL",
+      "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
    },
    "21": {
       "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
@@ -1282,7 +960,7 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "sQIryk5YxpumijaqAAAP"
+      "socket_id": "dxrBMzD7HQ701pHkAAAT"
    },
    "23": {
       "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
@@ -1295,453 +973,34 @@
          "camera": true,
          "microphone": true
       },
-      "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
+      "socket_id": "1l9xhPzPAzSO6tMHAAAR"
    }
 }
 =========== objSocket ===========
 {
-   "zyZ8pg_nccxI4wlCAAAJ": {
-      "user_id": "20",
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "sQIryk5YxpumijaqAAAP": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "lV7RIr8QV-HQ-wJFAAAR": {
-      "user_id": "23",
-      "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "zyZ8pg_nccxI4wlCAAAJ"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "sQIryk5YxpumijaqAAAP"
-      }
-   },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "zyZ8pg_nccxI4wlCAAAJ"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "sQIryk5YxpumijaqAAAP"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "lV7RIr8QV-HQ-wJFAAAR"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "WPCI-hGnZiNH0SFmAAAT"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "sQIryk5YxpumijaqAAAP"
-   },
-   "23": {
-      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-      "user_id": 23,
-      "username": "usm3",
-      "fullname": "Nguyễn Văn C",
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
-   }
-}
-=========== objSocket ===========
-{
-   "sQIryk5YxpumijaqAAAP": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "lV7RIr8QV-HQ-wJFAAAR": {
-      "user_id": "23",
-      "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   },
-   "WPCI-hGnZiNH0SFmAAAT": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "WPCI-hGnZiNH0SFmAAAT"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "sQIryk5YxpumijaqAAAP"
-      }
-   },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "lV7RIr8QV-HQ-wJFAAAR"
-      }
-   }
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "WPCI-hGnZiNH0SFmAAAT"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "sQIryk5YxpumijaqAAAP"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "lV7RIr8QV-HQ-wJFAAAR"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "WPCI-hGnZiNH0SFmAAAT",
-      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "sQIryk5YxpumijaqAAAP",
-      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
-   },
-   "23": {
-      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-      "user_id": 23,
-      "username": "usm3",
-      "fullname": "Nguyễn Văn C",
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "43Zj7UlBjYAX1CM5AAAb"
-   }
-}
-=========== objSocket ===========
-{
-   "sQIryk5YxpumijaqAAAP": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "WPCI-hGnZiNH0SFmAAAT": {
+   "zAj1PSAhfUKL1mhqAAAL": {
       "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
       "user_id": 20,
       "another_rooms": [
          "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
       ]
    },
-   "43Zj7UlBjYAX1CM5AAAb": {
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+   "undefined": {
       "user_id": 23,
       "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "WPCI-hGnZiNH0SFmAAAT",
-         "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "sQIryk5YxpumijaqAAAP",
-         "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
-      }
-   },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "43Zj7UlBjYAX1CM5AAAb"
-      }
-   },
-   "663a5517-46da-42f8-9081-65efb1fb2b49": {}
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "WPCI-hGnZiNH0SFmAAAT"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "sQIryk5YxpumijaqAAAP"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "43Zj7UlBjYAX1CM5AAAb"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "WPCI-hGnZiNH0SFmAAAT",
-      "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "Vrwd3Vc56F2pz_1LAAAd"
-   },
-   "23": {
-      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-      "user_id": 23,
-      "username": "usm3",
-      "fullname": "Nguyễn Văn C",
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "43Zj7UlBjYAX1CM5AAAb"
-   }
-}
-=========== objSocket ===========
-{
-   "WPCI-hGnZiNH0SFmAAAT": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       ]
    },
-   "43Zj7UlBjYAX1CM5AAAb": {
+   "1l9xhPzPAzSO6tMHAAAR": {
       "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
       "user_id": 23,
       "another_rooms": [
          "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
       ]
    },
-   "Vrwd3Vc56F2pz_1LAAAd": {
+   "dxrBMzD7HQ701pHkAAAT": {
       "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
       "user_id": 21,
       "another_rooms": [
@@ -1751,11 +1010,11 @@
 }
 ============ objPeers ===========
 {
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
    "445a0866-1504-46b8-85d7-5981c6c1c459": {
       "user_id": 21
+   },
+   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
+      "user_id": 20
    },
    "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
       "user_id": 23
@@ -1763,22 +1022,6 @@
 }
 ============ objRooms ===========
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "663a5517-46da-42f8-9081-65efb1fb2b49",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "WPCI-hGnZiNH0SFmAAAT",
-         "callroom": "663a5517-46da-42f8-9081-65efb1fb2b49"
-      }
-   },
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
       "21": {
          "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
@@ -1791,7 +1034,23 @@
             "camera": true,
             "microphone": true
          },
-         "socket_id": "Vrwd3Vc56F2pz_1LAAAd"
+         "socket_id": "dxrBMzD7HQ701pHkAAAT"
+      }
+   },
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
+      "20": {
+         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
+         "user_id": 20,
+         "username": "usm1",
+         "fullname": "Nguyễn Văn A",
+         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "room_id": "e50fd0ed-253b-4f41-a597-1e461d26bee7",
+         "options": {
+            "camera": true,
+            "microphone": true
+         },
+         "socket_id": "zAj1PSAhfUKL1mhqAAAL",
+         "callroom": "e50fd0ed-253b-4f41-a597-1e461d26bee7"
       }
    },
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
@@ -1806,162 +1065,21 @@
             "camera": true,
             "microphone": true
          },
-         "socket_id": "43Zj7UlBjYAX1CM5AAAb"
+         "socket_id": "1l9xhPzPAzSO6tMHAAAR"
       }
    },
-   "663a5517-46da-42f8-9081-65efb1fb2b49": {}
+   "e50fd0ed-253b-4f41-a597-1e461d26bee7": {}
 }
 ========= objPrivateRoom ========
 {
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "WPCI-hGnZiNH0SFmAAAT"
-   ],
    "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "Vrwd3Vc56F2pz_1LAAAd"
+      "dxrBMzD7HQ701pHkAAAT"
+   ],
+   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
+      "zAj1PSAhfUKL1mhqAAAL"
    ],
    "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "43Zj7UlBjYAX1CM5AAAb"
-   ]
-}
-=============== { END OVERVIEW } ===============
-=============== { START OVERVIEW } ==============
-=========== objUsers ============
-{
-   "20": {
-      "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-      "user_id": 20,
-      "username": "usm1",
-      "fullname": "Nguyễn Văn A",
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "pdAh52si2cqDN3duAAAf"
-   },
-   "21": {
-      "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-      "user_id": 21,
-      "username": "usm2",
-      "fullname": "Nguyễn Văn B",
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "Vrwd3Vc56F2pz_1LAAAd"
-   },
-   "23": {
-      "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-      "user_id": 23,
-      "username": "usm3",
-      "fullname": "Nguyễn Văn C",
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "options": {
-         "camera": true,
-         "microphone": true
-      },
-      "socket_id": "43Zj7UlBjYAX1CM5AAAb"
-   }
-}
-=========== objSocket ===========
-{
-   "43Zj7UlBjYAX1CM5AAAb": {
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "user_id": 23,
-      "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
-      ]
-   },
-   "Vrwd3Vc56F2pz_1LAAAd": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ]
-   },
-   "pdAh52si2cqDN3duAAAf": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ]
-   }
-}
-============ objPeers ===========
-{
-   "a771d5a9-eacc-4800-99f7-24720bc11ecd": {
-      "user_id": 20
-   },
-   "445a0866-1504-46b8-85d7-5981c6c1c459": {
-      "user_id": 21
-   },
-   "896cc5e8-1d1d-4c47-9d07-2089de8503a2": {
-      "user_id": 23
-   }
-}
-============ objRooms ===========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": {
-      "20": {
-         "peer_id": "a771d5a9-eacc-4800-99f7-24720bc11ecd",
-         "user_id": 20,
-         "username": "usm1",
-         "fullname": "Nguyễn Văn A",
-         "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "room_id": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "pdAh52si2cqDN3duAAAf"
-      }
-   },
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": {
-      "21": {
-         "peer_id": "445a0866-1504-46b8-85d7-5981c6c1c459",
-         "user_id": 21,
-         "username": "usm2",
-         "fullname": "Nguyễn Văn B",
-         "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "room_id": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "Vrwd3Vc56F2pz_1LAAAd"
-      }
-   },
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": {
-      "23": {
-         "peer_id": "896cc5e8-1d1d-4c47-9d07-2089de8503a2",
-         "user_id": 23,
-         "username": "usm3",
-         "fullname": "Nguyễn Văn C",
-         "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "room_id": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-         "options": {
-            "camera": true,
-            "microphone": true
-         },
-         "socket_id": "43Zj7UlBjYAX1CM5AAAb"
-      }
-   },
-   "663a5517-46da-42f8-9081-65efb1fb2b49": {}
-}
-========= objPrivateRoom ========
-{
-   "14011d49-3d2a-4a3a-93be-5a5e7ec26efa": [
-      "pdAh52si2cqDN3duAAAf"
-   ],
-   "b25b69b2-f526-43e6-8c12-6bb0c9760ae8": [
-      "Vrwd3Vc56F2pz_1LAAAd"
-   ],
-   "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f": [
-      "43Zj7UlBjYAX1CM5AAAb"
+      "1l9xhPzPAzSO6tMHAAAR"
    ]
 }
 =============== { END OVERVIEW } ===============

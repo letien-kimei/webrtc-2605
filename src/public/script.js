@@ -69,8 +69,13 @@ $(document).ready(function(){
       
   });
 
-  socket.on('user_leave_room',  async (user, usersInRoom) => {
-    refreshListVideo(user, usersInRoom)
+  socket.on('user_leave_room',  async (user, usersInRoom, getRoom) => {
+      refreshListVideo(user, usersInRoom)
+      if(getRoom.type == "PRIVATE_ROOM_TEMP"){
+        setTimeout(function () {
+          window.top.close();
+        },2000)
+      }
   });
 
   // Người vào trước room sẽ nhận được
@@ -112,7 +117,6 @@ async function CreatePlayVideo(tempData, aClass = ''){
     let newVideo       = await createElVideo(tempClass, attributeData, fullname, userid)
     await playStream(newVideo, stream, tempData)      
 }
-
 
 function createElVideo(assignClass = '',attr = null, fullname = '', userid = ''){
   return new Promise(async (resolve, reject) => {
@@ -187,7 +191,6 @@ function createElVideo(assignClass = '',attr = null, fullname = '', userid = '')
 async function loopCreateVideo(tempObjuser) { 
   let firstKey2 = Object.keys(tempObjuser)[0]
   let Objuser = tempObjuser[firstKey2]
-  debugger;
    if(countKey() <= 2){
       $(`div[data-userid="${user_id}"]`).removeAttr('class').attr('class', 'default-col col-md-4 callone');
       if(Objuser.user_id != user_id){
@@ -346,7 +349,6 @@ socket.on('change_state_call',  function (userState) {
 })
 
 function playStream(video, stream, tempData) {
-  debugger;
   return new Promise((resolve, reject) => {
       try {
         let dfParent = $(`div[data-userid="${tempData.user_id}"]`)

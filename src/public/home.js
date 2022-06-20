@@ -6,15 +6,19 @@ socket.on("get_user_login",async function (user){
         $(getState).addClass("onl");     
 });
 
-socket.on('user_out_pending_call', function(tempUser, usersInRoom){
-      $(".requestcall ").hide()
+socket.on('user_out_pending_call', function(tempUser){
+      console.log("=========== user_out_pending_call ============")
+      console.log(tempUser)
+      $(".requestcall").hide()
       let firstKey2 = Object.keys(tempUser)[0]
       let Objuser   = tempUser[firstKey2]
       bs4Toast.primary('Thông báo', `${Objuser.fullname} đang bận`,{delay: 200});
 })
 
 socket.on('my_room_pending_call', function(tempUser, usersInRoom){
-    $(".coomingcall ").hide()
+    console.log("=========== my_room_pending_call ============")
+    console.log(tempUser)
+    $(".coomingcall").hide()
 })
 
 // Thông báo người dùng đang có cuộc gọi khác

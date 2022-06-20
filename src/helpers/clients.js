@@ -64,8 +64,9 @@ class Clients {
       //                                'RDAFAD3-DSFSD3-DF' :  // room id {
       //                                                             socket_id_request: 'RDAFAD3-DSFSD3-DF'
       //                                                             room_id: 'RQWERWF-SDAFEQWREAF',
-      //                                                             master_user_id : 2,     
-      //                                                             request_user_id: 1,                    
+      //                                                             receive_user_id : 2,     
+      //                                                             request_user_id: 1,       
+      //                                                             delete: 0,             
       //                                                          }
       //                              }
       //                           }
@@ -102,18 +103,23 @@ class Clients {
       if(obj.request_user_id != undefined){
          this.pending_request_call[obj.room_id]['request_user_id'] = obj.request_user_id
       }
-      if(obj.master_user_id != undefined){
-         this.pending_request_call[obj.room_id]['master_user_id'] = obj.master_user_id
+      if(obj.receive_user_id != undefined){
+         this.pending_request_call[obj.room_id]['receive_user_id'] = obj.receive_user_id
       }
       if(obj.socket_id != undefined){
          this.pending_request_call[obj.room_id]['socket_id']       = obj.socket_id
       }
       this.pending_request_call[obj.room_id]['room_id']            = obj.room_id
+      this.pending_request_call[obj.room_id]['delete']             = 0
 
       let tempLogger = await logger('pending_call.log')
       tempLogger.info(`============= \ PENDING CALL ============`)
       tempLogger.info(this.pending_request_call)
       tempLogger.info(`============= / PENDING CALL ============`)
+   }
+
+   update_pending_call(room_id, key, value){
+      this.pending_request_call[room_id][key] = value
    }
 
    async get_pending_call_by_roomid(room_id){
@@ -307,6 +313,10 @@ class Clients {
       }
    }
 
+   delete_room(room_id){
+      delete this.objRooms[room_id]
+   }
+
   // CHECK DISCONNECT
   disconnectReset(socket_id){
    return new Promise((resolve, reject) => {
@@ -329,10 +339,6 @@ class Clients {
                      arrRooms.map(function (roomValue, index, array) {  
                         // remove socket - user khỏi room đang gọi
                         __this.delete_user_in_room(roomValue,getSocket.user_id)
-                        // user không còn trong cuộc gọi
-                        if(getUser.callroom == roomValue){
-                           //__this.update_user(getSocket.user_id, 'callroom', '')
-                        }
                      })
                }
             }        
