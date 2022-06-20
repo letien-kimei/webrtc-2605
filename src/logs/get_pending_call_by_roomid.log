@@ -1,0 +1,54 @@
+=============  GET PENDING CALL ============
+{
+   "request_user_id": "20",
+   "receive_user_id": "21",
+   "socket_id": "aQlPganPA78kR3aZAAAL",
+   "room_id": "66428c70-e67d-4890-a6de-7b0491e80d96",
+   "delete": 0
+}
+============= / GET PENDING CALL ============
+=============  GET PENDING CALL ============
+{
+   "request_user_id": "20",
+   "receive_user_id": "21",
+   "socket_id": "aQlPganPA78kR3aZAAAL",
+   "room_id": "00fd6979-ca89-440a-a3a1-bc246d4896a6",
+   "delete": 0
+}
+============= / GET PENDING CALL ============
+=============  GET PENDING CALL ============
+{
+   "request_user_id": "23",
+   "receive_user_id": "20",
+   "socket_id": "xaBraHSjFdFQ_hoOAAAJ",
+   "room_id": "555a7937-42d3-4d31-8fe4-83fc9c007264",
+   "delete": 1
+}
+============= / GET PENDING CALL ============
+=============  GET PENDING CALL ============
+{
+   "request_user_id": "20",
+   "receive_user_id": "21",
+   "socket_id": "fkTykAU09ZX3QnZkAAAj",
+   "room_id": "6f21349e-bd98-4f6b-a394-532fa96fb09e",
+   "delete": 1
+}
+============= / GET PENDING CALL ============
+=============  GET PENDING CALL ============
+{
+   "request_user_id": "20",
+   "receive_user_id": "21",
+   "socket_id": "eWvPod4A7mj5L7QcAAAJ",
+   "room_id": "be7c20a3-43e8-4e19-bd99-7102640ba6fb",
+   "delete": 0
+}
+============= / GET PENDING CALL ============
+=============  GET PENDING CALL ============
+{
+   "request_user_id": "20",
+   "receive_user_id": "21",
+   "socket_id": "85KakudY3gprTIYfAAAN",
+   "room_id": "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1",
+   "delete": 1
+}
+============= / GET PENDING CALL ============

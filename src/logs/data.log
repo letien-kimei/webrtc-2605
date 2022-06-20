@@ -1,107 +1,4 @@
 ==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
-                     dtb_rooms_users.user_id as join_room_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
-                     dtb_rooms_users.user_id as join_room_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '20'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
-                     dtb_rooms_users.user_id as join_room_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '21'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'e50fd0ed-253b-4f41-a597-1e461d26bee7'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE room_id = 'e50fd0ed-253b-4f41-a597-1e461d26bee7'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_users  WHERE id = 20
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT user_id FROM dtb_rooms_users  WHERE room_id = "e50fd0ed-253b-4f41-a597-1e461d26bee7" AND user_id IN (20) 
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
-                     dtb_rooms_users.user_id as join_room_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
-========== / GET QUERY  ============
-==========  GET QUERY  ============
 SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
 ========== / GET QUERY  ============
 ==========  GET QUERY  ============
@@ -168,76 +65,1493 @@ SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id 
 SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
 ========== / GET QUERY  ============
 ==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'e50fd0ed-253b-4f41-a597-1e461d26bee7'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE room_id = 'e50fd0ed-253b-4f41-a597-1e461d26bee7'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_users  WHERE id = 20
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT user_id FROM dtb_rooms_users  WHERE room_id = "e50fd0ed-253b-4f41-a597-1e461d26bee7" AND user_id IN (20) 
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
-                     dtb_rooms_users.user_id as join_room_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'e50fd0ed-253b-4f41-a597-1e461d26bee7'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
 SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
 ========== / GET QUERY  ============
 ==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
 ========== / GET QUERY  ============
 ==========  GET QUERY  ============
-SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
-                     dtb_rooms_users.user_id as join_room_user_id,
-                     dtb_alert.request_user_id as alert_request_user_id, 
-                     dtb_alert.accept as alert_accept,
-                     dtb_alert.cancel as alert_cancel,
-                     dtb_alert.type as alert_type, 
-                     dtb_alert.active as alert_active,
-                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_alert  WHERE request_user_id != '21'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
-========== / GET QUERY  ============
-==========  GET QUERY  ============
-SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+SELECT * FROM dtb_users  WHERE id = 21
 ========== / GET QUERY  ============
 ==========  GET QUERY  ============
 SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname  FROM dtb_users  WHERE  id = e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname  FROM dtb_users  WHERE  id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '368feec6-d5cf-4e4d-950a-23e68606f01c'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '368feec6-d5cf-4e4d-950a-23e68606f01c'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 25
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname  FROM dtb_users  WHERE  id = 25
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '7dee781b-000c-4b3f-857c-ad3a5fd6ea46'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '7dee781b-000c-4b3f-857c-ad3a5fd6ea46'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 26
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname  FROM dtb_users  WHERE  id = 26
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '03c238ce-e815-4c0d-a914-13199a8b0f1d'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '08721f22-0c37-4939-a21d-289201fab148'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname  FROM dtb_users  WHERE  id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '7dee781b-000c-4b3f-857c-ad3a5fd6ea46'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '7dee781b-000c-4b3f-857c-ad3a5fd6ea46'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 26
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname  FROM dtb_users  WHERE  id = 26
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'a81126e0-017f-452a-99fe-7228fffe8e70'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE  room_id = 'c8c19935-88e8-4bed-bd1c-0130be522740' 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'a81126e0-017f-452a-99fe-7228fffe8e70'
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+SELECT * FROM dtb_rooms  WHERE room_id = 'c8c19935-88e8-4bed-bd1c-0130be522740'
+========== / GET QUERY  ============
+========== / GET QUERY  ============
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '66428c70-e67d-4890-a6de-7b0491e80d96'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'a81126e0-017f-452a-99fe-7228fffe8e70'
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '66428c70-e67d-4890-a6de-7b0491e80d96'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'c8c19935-88e8-4bed-bd1c-0130be522740'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '00fd6979-ca89-440a-a3a1-bc246d4896a6'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'f2bd0869-a181-4475-b078-f11aba4cb257'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "555a7937-42d3-4d31-8fe4-83fc9c007264" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "555a7937-42d3-4d31-8fe4-83fc9c007264" AND user_id IN (23) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "555a7937-42d3-4d31-8fe4-83fc9c007264" AND user_id IN (21) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+==========  GET QUERY  ============
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '555a7937-42d3-4d31-8fe4-83fc9c007264'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '555a7937-42d3-4d31-8fe4-83fc9c007264'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (21) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (23) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'f2bd0869-a181-4475-b078-f11aba4cb257'
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '555a7937-42d3-4d31-8fe4-83fc9c007264'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (21) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '00fd6979-ca89-440a-a3a1-bc246d4896a6'
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '555a7937-42d3-4d31-8fe4-83fc9c007264'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'f2bd0869-a181-4475-b078-f11aba4cb257'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "6f21349e-bd98-4f6b-a394-532fa96fb09e" AND user_id IN (21) 
+========== / GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "6f21349e-bd98-4f6b-a394-532fa96fb09e" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '6f21349e-bd98-4f6b-a394-532fa96fb09e'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '6f21349e-bd98-4f6b-a394-532fa96fb09e'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT id,username, fullname, peer_id FROM dtb_users  WHERE username = 'undefined' and password = 'undefined'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT id,username, fullname, peer_id FROM dtb_users  WHERE username = 'usm3' and password = '123'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT id,username, fullname, peer_id FROM dtb_users  WHERE username = 'undefined' and password = 'undefined'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT id,username, fullname, peer_id FROM dtb_users  WHERE username = 'khang' and password = '123'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 24 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'be7c20a3-43e8-4e19-bd99-7102640ba6fb'
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'be7c20a3-43e8-4e19-bd99-7102640ba6fb'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '44132700-fd20-4669-a514-0534145b1a95'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1" AND user_id IN (21) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '4b0d4333-b2a8-4fbd-844c-fd53ed611dd1'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '4b0d4333-b2a8-4fbd-844c-fd53ed611dd1'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 24 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id = '24' AND room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE id = '45'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  dtb_rooms.room_id, dtb_rooms.user_id as room_receive_user_id, dtb_rooms.room_name, temp_dru.user_id as room_join_user_id  FROM dtb_rooms  LEFT JOIN  dtb_rooms_users  AS temp_dru  ON temp_dru.room_id = dtb_rooms.room_id WHERE  dtb_rooms.user_id != 0  AND temp_dru.id = 89
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (24) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (23) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '44132700-fd20-4669-a514-0534145b1a95'
+========== / GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '4b0d4333-b2a8-4fbd-844c-fd53ed611dd1'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '44132700-fd20-4669-a514-0534145b1a95'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '4b0d4333-b2a8-4fbd-844c-fd53ed611dd1'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 24 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE id = 71
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id = '21' AND room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE id = '46'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id = '23' AND room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE id = '47'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  dtb_rooms.room_id, dtb_rooms.user_id as room_receive_user_id, dtb_rooms.room_name, temp_dru.user_id as room_join_user_id  FROM dtb_rooms  LEFT JOIN  dtb_rooms_users  AS temp_dru  ON temp_dru.room_id = dtb_rooms.room_id WHERE  dtb_rooms.user_id != 0  AND temp_dru.id = 91
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  dtb_rooms.room_id, dtb_rooms.user_id as room_receive_user_id, dtb_rooms.room_name, temp_dru.user_id as room_join_user_id  FROM dtb_rooms  LEFT JOIN  dtb_rooms_users  AS temp_dru  ON temp_dru.room_id = dtb_rooms.room_id WHERE  dtb_rooms.user_id != 0  AND temp_dru.id = 92
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "e53bf3f5-5491-4b68-8305-774e3dc7feaa" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "e53bf3f5-5491-4b68-8305-774e3dc7feaa" AND user_id IN (21) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "e53bf3f5-5491-4b68-8305-774e3dc7feaa" AND user_id IN (23) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "e53bf3f5-5491-4b68-8305-774e3dc7feaa" AND user_id IN (24) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 24 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '14011d49-3d2a-4a3a-93be-5a5e7ec26efa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = 'b25b69b2-f526-43e6-8c12-6bb0c9760ae8'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e53bf3f5-5491-4b68-8305-774e3dc7feaa'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 20
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 21 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '21'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 23 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '23'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 23
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 24 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = 'e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 24 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room FROM dtb_users  WHERE  id = '24'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE  user_id = 24
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms_users  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_users  WHERE id = 21
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "663a5517-46da-42f8-9081-65efb1fb2b49" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT user_id FROM dtb_rooms_users  WHERE room_id = "requestProvider.js.map" AND user_id IN (20) 
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT  id ,username, fullname, peer_id, private_room  FROM dtb_users  WHERE  id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT dtb_rooms.room_id, dtb_rooms.room_name, dtb_rooms.type as room_type, dtb_rooms.user_id as master_room_user_id,
+                     dtb_rooms_users.user_id as join_room_user_id,
+                     dtb_alert.request_user_id as alert_request_user_id, 
+                     dtb_alert.accept as alert_accept,
+                     dtb_alert.cancel as alert_cancel,
+                     dtb_alert.type as alert_type, 
+                     dtb_alert.active as alert_active,
+                     dtb_alert.waiting as alert_waiting  FROM dtb_rooms  LEFT JOIN dtb_rooms_users ON dtb_rooms_users.room_id = dtb_rooms.room_id AND dtb_rooms_users.user_id = 20 LEFT JOIN dtb_alert ON dtb_alert.room_id = dtb_rooms_users.room_id WHERE   dtb_rooms.type != "PRIVATE_ROOM" AND dtb_rooms.type != "PRIVATE_ROOM_TEMP"  GROUP BY dtb_rooms.room_id
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_alert  WHERE request_user_id != '20'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
+========== / GET QUERY  ============
+==========  GET QUERY  ============
+SELECT * FROM dtb_rooms  WHERE room_id = '663a5517-46da-42f8-9081-65efb1fb2b49'
 ========== / GET QUERY  ============

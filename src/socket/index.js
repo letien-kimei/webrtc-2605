@@ -80,10 +80,14 @@ module.exports.callSocket =  function(server){
                 if(Globalclients[dataRooms.user_id] == undefined){ // user offline
                     let object_us = {
                         select:' id ,username, fullname ',
-                        where:` id = ${room_id}`
+                        where:` id = ${dataRooms.user_id}`
                     }
                     let rs = await userModel.get(object_us)
                     let dataArr = rs.data[0];
+                    let tempLogger22 = await logger('request_call.log')
+                    tempLogger22.info("================== \ REQUEST CALL OFF =================");
+                    tempLogger22.info(dataArr);
+                    tempLogger22.info("================== / REQUEST CALL OFF =================");
                     io.to(socket.id).emit("user_is_offline", dataArr)
                 }else{ // USER B CHẤP NHẬN CUỘC GỌI
                     let receive_user_id = dataRooms.user_id
@@ -108,12 +112,9 @@ module.exports.callSocket =  function(server){
                         let getSocketPrivateRoom = Clients.get_private_room(tempRoom_id)
                         getSocketPrivateRoom.map(async function (key, index) { 
                             Clients.add_socket({socket_id: getSocketPrivateRoom, user_id: receive_user_id, room_id: createTempRoomid})
-                        })
-
-                        //Clients.add_socket({socket_id: socket.id, user_id: receive_user_id, room_id: createTempRoomid})
-                       
+                        })                       
                         // Thêm người dùng request vào cuộc gọi chờ 
-                        Clients.pending_call({socket_id: socket.id, request_user_id: request_user_id, receive_user_id: receive_user_id, room_id: createTempRoomid})
+                        Clients.pending_call({socket_id: socket.id, request_user_id: request_user_id, receive_user_id: receive_user_id, room_id: createTempRoomid, room_type: "PRIVATE_ROOM_TEMP"})
 
                         Clients.updateRoomUserStatus(request_user_id, '', "", 1)
                         Clients.updateRoomUserStatus(receive_user_id, '', '', 1)
@@ -170,6 +171,8 @@ module.exports.callSocket =  function(server){
 
                 Clients.updateRoomUserStatus(request_user_id, '', '', 0)
                 Clients.delete_pending_call_by_roomid(roomId)
+                await roomsModel.delete(`room_id = '${roomId}'`)
+                await roomsUsersModel.delete(`room_id = '${roomId}'`)
 
                 socket.broadcast.to(roomId).emit("cancel_call",getUserCancel)
             }else{

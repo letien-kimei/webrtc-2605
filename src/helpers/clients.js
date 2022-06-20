@@ -109,6 +109,8 @@ class Clients {
       if(obj.socket_id != undefined){
          this.pending_request_call[obj.room_id]['socket_id']       = obj.socket_id
       }
+     
+      this.pending_request_call[obj.room_id]['room_type']          = obj.room_type
       this.pending_request_call[obj.room_id]['room_id']            = obj.room_id
       this.pending_request_call[obj.room_id]['delete']             = 0
 

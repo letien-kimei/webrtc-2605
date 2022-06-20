@@ -15,6 +15,392 @@
 {
    "private_room": [],
    "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": 20,
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "a81126e0-017f-452a-99fe-7228fffe8e70",
+         "c8c19935-88e8-4bed-bd1c-0130be522740",
+         "66428c70-e67d-4890-a6de-7b0491e80d96"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "a81126e0-017f-452a-99fe-7228fffe8e70",
+         "c8c19935-88e8-4bed-bd1c-0130be522740",
+         "66428c70-e67d-4890-a6de-7b0491e80d96",
+         "00fd6979-ca89-440a-a3a1-bc246d4896a6"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "xaBraHSjFdFQ_hoOAAAJ"
+   ],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "555a7937-42d3-4d31-8fe4-83fc9c007264"
+      ],
+      "fullname": "Nguyễn Văn C"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "CdjRzzF5Knc0h7z3AAAR"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "555a7937-42d3-4d31-8fe4-83fc9c007264"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "xaBraHSjFdFQ_hoOAAAJ"
+   ],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "Nguyễn Văn C"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+         "f2bd0869-a181-4475-b078-f11aba4cb257",
+         "555a7937-42d3-4d31-8fe4-83fc9c007264"
+      ],
+      "fullname": "Nguyễn Văn C"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "pnmcEEwzOmrpRIfMAAAP",
+      "jY2zAbL1stLOKu__AAAX"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "pnmcEEwzOmrpRIfMAAAP",
+      "jY2zAbL1stLOKu__AAAX"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "pnmcEEwzOmrpRIfMAAAP"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": 21,
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "00fd6979-ca89-440a-a3a1-bc246d4896a6"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "CdjRzzF5Knc0h7z3AAAR"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "f2bd0869-a181-4475-b078-f11aba4cb257",
+         "555a7937-42d3-4d31-8fe4-83fc9c007264"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "cf9FXjom5JniGFFhAAAh"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "6f21349e-bd98-4f6b-a394-532fa96fb09e"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "fkTykAU09ZX3QnZkAAAj"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "6f21349e-bd98-4f6b-a394-532fa96fb09e"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "be7c20a3-43e8-4e19-bd99-7102640ba6fb"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "be7c20a3-43e8-4e19-bd99-7102640ba6fb"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "85KakudY3gprTIYfAAAN"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "E2X8JxgeFLQMJBKvAAAP"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "i94pzH_s7PD6flkcAAAV"
+   ],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "Nguyễn Văn C"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "85KakudY3gprTIYfAAAN"
+   ],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "hObxo_sgGN5C7c4CAAAX"
+   ],
+   "user": {
+      "private_room": "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3",
+      "user_id": "24",
+      "another_rooms": [
+         "663a5517-46da-42f8-9081-65efb1fb2b49"
+      ],
+      "fullname": "khang"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+      "user_id": "20",
+      "another_rooms": [
+         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
+         "44132700-fd20-4669-a514-0534145b1a95",
+         "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1"
+      ],
+      "fullname": "Nguyễn Văn A"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+         "44132700-fd20-4669-a514-0534145b1a95",
+         "4b0d4333-b2a8-4fbd-844c-fd53ed611dd1"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
+      "private_room": "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3",
+      "user_id": 24,
+      "another_rooms": [
+         "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3"
+      ],
+      "fullname": "khang"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [],
+   "user": {
       "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
       "user_id": 23,
       "another_rooms": [
@@ -27,13 +413,58 @@
 ==================  DISCONNECT =================
 {
    "private_room": [
-      "zAj1PSAhfUKL1mhqAAAL"
+      "LfJEgcejIejMgiS9AAAj"
+   ],
+   "user": {
+      "private_room": "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3",
+      "user_id": 24,
+      "another_rooms": [
+         "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3"
+      ],
+      "fullname": "khang"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "xU2zOkQLfMlRSnpxAAAl"
+   ],
+   "user": {
+      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
+      "user_id": "23",
+      "another_rooms": [
+         "e53bf3f5-5491-4b68-8305-774e3dc7feaa"
+      ],
+      "fullname": "Nguyễn Văn C"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "naRC-QoalsgesUWfAAAh"
+   ],
+   "user": {
+      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
+      "user_id": "21",
+      "another_rooms": [
+         "e53bf3f5-5491-4b68-8305-774e3dc7feaa"
+      ],
+      "fullname": "Nguyễn Văn B"
+   }
+}
+================== / DISCONNECT =================
+==================  DISCONNECT =================
+{
+   "private_room": [
+      "cUIvdNomoKR5TvWuAAAf"
    ],
    "user": {
       "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
       "user_id": "20",
       "another_rooms": [
-         "e50fd0ed-253b-4f41-a597-1e461d26bee7"
+         "e53bf3f5-5491-4b68-8305-774e3dc7feaa"
       ],
       "fullname": "Nguyễn Văn A"
    }
@@ -43,51 +474,12 @@
 {
    "private_room": [],
    "user": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
+      "private_room": "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3",
+      "user_id": 24,
       "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
+         "e5fbcf53-e6ba-447b-b1cc-e37213ad4cd3"
       ],
-      "fullname": "Nguyễn Văn B"
-   }
-}
-================== / DISCONNECT =================
-==================  DISCONNECT =================
-==================  DISCONNECT =================
-==================  DISCONNECT =================
-{
-   "private_room": [],
-   "user": {
-      "private_room": "b25b69b2-f526-43e6-8c12-6bb0c9760ae8",
-      "user_id": 21,
-      "another_rooms": [
-         "b25b69b2-f526-43e6-8c12-6bb0c9760ae8"
-      ],
-      "fullname": "Nguyễn Văn B"
-   }
-}
-================== / DISCONNECT =================
-{
-   "private_room": [],
-   "user": {
-      "private_room": "14011d49-3d2a-4a3a-93be-5a5e7ec26efa",
-      "user_id": 20,
-      "another_rooms": [
-         "14011d49-3d2a-4a3a-93be-5a5e7ec26efa"
-      ],
-      "fullname": "Nguyễn Văn A"
-   }
-}
-================== / DISCONNECT =================
-{
-   "private_room": [],
-   "user": {
-      "private_room": "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f",
-      "user_id": 23,
-      "another_rooms": [
-         "62c4eec7-ecfd-43e6-a2ac-fbb2ecce1e0f"
-      ],
-      "fullname": "Nguyễn Văn C"
+      "fullname": "khang"
    }
 }
 ================== / DISCONNECT =================

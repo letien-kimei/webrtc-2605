@@ -95,8 +95,6 @@ $(document).ready(function(){
           const call = peer.call(tempPeerId, stream);
           await peerCallOn(call,getUsers, 'new_user_join')
           // loop for video 
-          console.log("=========== NEW LOGIN =============")
-          console.log(getUsers)
           loopCreateVideo(getUsers)
           bs4Toast.primary('Thông báo', `${getUsers[firstKey].fullname} vừa tham gia cuộc gọi`,{delay: 0.5});
       });
